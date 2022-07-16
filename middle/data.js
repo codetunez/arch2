@@ -69,19 +69,55 @@ module.exports = {
                 [{
                     "id": "P1",
                     "title": "Homepage",
-                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell></row></grid>",
+                    "markup": `
+<section>
+    <grid>
+        <row>
+            <cell>
+                <content id='C1000'></content>
+            </cell>
+        </row>
+    </grid>
+</section>
+`,
                     "url": ""
                 },
                 {
                     "id": "P2",
                     "title": "Page One",
-                    "markup": "<section><grid><row><cell><content id='C2000'></content></cell><cell><content id='C3000'></content></cell></row></grid>",
+                    "markup": `
+<section>
+    <grid>
+        <row>
+            <cell>
+                <content id='C2000'></content>
+            </cell>
+            <cell>
+                <content id='C3000'></content>
+            </cell>
+        </row>
+    </grid>
+</section>
+                    `,
                     "url": "p2"
                 },
                 {
                     "id": "P3",
                     "title": "Auth Page",
-                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell><cell><content id='C6000'></content><content id='C2000'></content></cell></row></grid>",
+                    "markup": `
+<section>
+    <grid>
+        <row>
+            <cell>
+                <content id='C2000'></content>
+            </cell>
+            <cell>
+                <content id='C3000'></content>
+            </cell>
+        </row>
+    </grid>
+</section>
+                    `,
                     "url": "auth"
                 }]
         }, {
@@ -92,19 +128,55 @@ module.exports = {
                 [{
                     "id": "P1",
                     "title": "Homepage",
-                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell></row></grid>",
+                    "markup": `
+<section>
+    <grid>
+        <row>
+            <cell>
+                <content id='C1000'></content>
+            </cell>
+        </row>
+    </grid>
+</section>
+`,
                     "url": ""
                 },
                 {
                     "id": "P2",
                     "title": "Page One",
-                    "markup": "<section><grid><row><cell><content id='C2000'></content></cell><cell><content id='C3000'></content></cell></row></grid>",
+                    "markup": `
+<section>
+    <grid>
+        <row>
+            <cell>
+                <content id='C2000'></content>
+            </cell>
+            <cell>
+                <content id='C3000'></content>
+            </cell>
+        </row>
+    </grid>
+</section>
+                `,
                     "url": "p2"
                 },
                 {
                     "id": "P3",
                     "title": "Auth Page",
-                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell><cell><content id='C6000'></content><content id='C2000'></content></cell></row></grid>",
+                    "markup": `
+<section>
+    <grid>
+        <row>
+            <cell>
+                <content id='C2000'></content>
+            </cell>
+            <cell>
+                <content id='C3000'></content>
+            </cell>
+        </row>
+    </grid>
+</section>
+                `,
                     "url": "auth"
                 }]
         }
