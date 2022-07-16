@@ -2,59 +2,109 @@ module.exports = {
     sites: [
         {
             "id": "S1",
+            "name": "Site One",
             "engine": "bootstrap3",
             "pages":
                 [{
                     "id": "P1",
-                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell></row></grid>",
+                    "title": "Homepage",
+                    "markup": `
+<section>
+    <grid>
+        <row>
+            <cell>
+                <button class="btn btn-secondary">Inline Button</button>
+                <content id='C1000'></content>
+            </cell>
+        </row>
+    </grid>
+</section>
+`,
                     "url": ""
                 },
                 {
                     "id": "P2",
-                    "markup": "<section><grid><row><cell><content id='C2000'></content></cell><cell><content id='C3000'></content></cell></row></grid>",
+                    "title": "Page One",
+                    "markup": `
+<section>
+    <grid>
+        <row>
+            <cell>
+                <content id='C2000'></content>
+            </cell>
+            <cell>
+                <content id='C3000'></content>
+            </cell>
+        </row>
+    </grid>
+</section>
+`,
                     "url": "p2"
                 },
                 {
                     "id": "P3",
-                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell><cell><content id='C6000'></content><content id='C2000'></content></cell></row></grid>",
+                    "title": "Auth Page",
+                    "markup": `
+<section>
+    <grid>
+        <row>
+            <cell>
+                <content id='C1000'></content>
+            </cell>
+            <cell>
+                <content id='C6000'></content>
+                <content id='C2000'></content>
+            </cell>
+        </row>
+    </grid>
+</section>
+`,
                     "url": "auth"
                 }]
         }, {
             "id": "S2",
+            "name": "Site Two",
             "engine": "tailwind",
             "pages":
                 [{
                     "id": "P1",
+                    "title": "Homepage",
                     "markup": "<section><grid><row><cell><content id='C1000'></content></cell></row></grid>",
                     "url": ""
                 },
                 {
                     "id": "P2",
+                    "title": "Page One",
                     "markup": "<section><grid><row><cell><content id='C2000'></content></cell><cell><content id='C3000'></content></cell></row></grid>",
                     "url": "p2"
                 },
                 {
                     "id": "P3",
-                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell><cell><content id='C6000'></content></cell></row></grid>",
+                    "title": "Auth Page",
+                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell><cell><content id='C6000'></content><content id='C2000'></content></cell></row></grid>",
                     "url": "auth"
                 }]
         }, {
             "id": "S3",
+            "name": "Site Three",
             "engine": "skeleton",
             "pages":
                 [{
                     "id": "P1",
-                    "markup": "<section><grid><row><cell><content id='C4000'></content></cell></row></grid>",
+                    "title": "Homepage",
+                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell></row></grid>",
                     "url": ""
                 },
                 {
                     "id": "P2",
+                    "title": "Page One",
                     "markup": "<section><grid><row><cell><content id='C2000'></content></cell><cell><content id='C3000'></content></cell></row></grid>",
                     "url": "p2"
                 },
                 {
                     "id": "P3",
-                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell><cell><content id='C6000'></content></cell></row></grid>",
+                    "title": "Auth Page",
+                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell><cell><content id='C6000'></content><content id='C2000'></content></cell></row></grid>",
                     "url": "auth"
                 }]
         }

@@ -17,12 +17,31 @@ app.get('/api/sites', (req, res) => {
     res.send(data.sites);
 })
 
+app.get('/api/site/:siteId/:pageId', (req, res) => {
+    let s = data.sites.find((x) => x.id === req.params.siteId);
+    let p = s.pages.find((x) => x.id === req.params.pageId);
+    res.send(p).end();
+})
+
+app.post('/api/site/:siteId/:pageId', (req, res) => {
+    let s = data.sites.findIndex((x) => x.id === req.params.siteId);
+    if (s > -1) {
+        let p = data.sites[s].pages.findIndex((x) => x.id === req.params.pageId);
+        if (p > -1) {
+            data.sites[s].pages[p] = req.body;
+            res.send(data.sites[s].pages[p]).end();
+            return;
+        }
+    }
+    res.end();
+})
+
 app.post('/api/sites', (req, res) => {
     data.sites = req.body;
 });
 
 app.get('/api/content', (req, res) => {
-    res.send(data.content);
+    res.send(data.content).end();
 });
 
 app.post('/api/content', (req, res) => {

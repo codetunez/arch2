@@ -25,7 +25,10 @@ module.exports.engines = {
         })
 
         $("button").each(function (i, ele) {
-            $(this).replaceWith(`<button class="btn btn-primary">${$(ele).text()}</button>`)
+            // a very basic check. this should inspect for specific attributes
+            if (!$(this).attr("class")) {
+                $(this).replaceWith(`<button class="btn btn-primary">${$(ele).text()}</button>`)
+            }
         })
 
         $("row").replaceWith(`<div class="row">${$("row").html()}</div>`);

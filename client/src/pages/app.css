@@ -1,5 +1,8 @@
 .app {
-  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
 }
 
 .btn-bar {
@@ -31,7 +34,81 @@ button:hover {
   background-color: grey;
 }
 
-.editor {
+.btn-sm {
+  padding: 0.25rem 1rem;
+}
+
+.header {
+  height: 3rem;
+  background-color: black;
+}
+
+.header h1 {
+  margin: 0;
+  color: white;
+  padding: 0 0.5rem;
+}
+
+.workspace {
+  display: flex;
+  height: 100%;
+}
+
+.workspace .toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.workspace h5 {
+  margin: 1rem 0 .5rem 0;
+}
+
+.workspace .menu {
+  min-width: 200px;
+  max-width: 200px;
+  border-right: 1px solid black;
+}
+
+.workspace .menu .links {
+  text-align: center;
+  margin-top: 1rem;
+  height: calc(100vh - 4.1rem);
+}
+
+.workspace .menu .links button {
+  width: 90%;
+  margin-bottom: .5rem;
+}
+
+.workspace .editor {
+  width: calc(100% - 2rem);
+  height: 500px;
+  margin: 0 1rem;
+}
+
+.workspace .editor .monaco {
+  width: calc(100% - 4px);
+  height: 500px;
   border: 1px solid black;
-  height: 10rem;
+}
+
+.pageForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.pageForm div {
+  display: flex;
+  flex-direction: column;
+}
+
+.pageForm div label {
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.pageForm div:not(:last-child) {
+  margin-bottom: 1rem;
 }
