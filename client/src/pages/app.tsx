@@ -33,6 +33,9 @@ const reducer = (state: State, action: Action) => {
     case "save:content":
       axios.post("http://localhost:3001/api/content", state.data.content)
       return { ...state, data: newData }
+    case "update:runtime":
+      axios.post("http://localhost:3002/api/reload", {})
+      return { ...state, data: newData }
     default:
       return { ...state }
   }
@@ -61,7 +64,6 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Client</h1>
       <h2>Sites</h2>
       {!state.data.sites ? null : <>
         <div className="links">
@@ -76,12 +78,18 @@ function App() {
         <br />
         <h2>Sites - Pages/Layout</h2>
         <textarea onChange={(e) => dispatch({ type: 'update:sites', payload: e.target.value })}>{JSON.stringify(state.data.sites, null, 2)}</textarea>
-        <button onClick={() => dispatch({ type: 'save:sites', payload: null })}>Update</button>
+        <div className="btn-bar">
+          <button onClick={() => dispatch({ type: 'save:sites', payload: null })}>Update</button>
+          <button onClick={() => dispatch({ type: 'update:runtime', payload: null })}>Refresh Runtime</button>
+        </div>
       </>}
       <h2>Content</h2>
       {!state.data.content ? null : <>
         <textarea onChange={(e) => dispatch({ type: 'update:content', payload: e.target.value })}>{JSON.stringify(state.data.content, null, 2)}</textarea>
-        <button onClick={() => dispatch({ type: 'save:content', payload: null })}>Update</button>
+        <div className="btn-bar">
+          <button onClick={() => dispatch({ type: 'save:content', payload: null })}>Update</button>
+          <button onClick={() => dispatch({ type: 'update:runtime', payload: null })}>Refresh Runtime</button>
+        </div>
       </>}
     </div>
   );
