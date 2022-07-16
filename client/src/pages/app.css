@@ -30,3 +30,8 @@ button:hover {
   color: white;
   background-color: grey;
 }
+
+.editor {
+  border: 1px solid black;
+  height: 10rem;
+}

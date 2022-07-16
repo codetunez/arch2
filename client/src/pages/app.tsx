@@ -2,6 +2,8 @@
 import axios from 'axios';
 import { useEffect, useReducer } from 'react';
 import './app.css';
+import Editor from "@monaco-editor/react";
+import { Nav, INavLink, INavStyles, INavLinkGroup } from '@fluentui/react/lib/Nav';
 
 interface State {
   data: any,
@@ -62,6 +64,26 @@ function App() {
       })
   }, []);
 
+  const nav = [];
+  if (state.data.sites) {
+    state.data.sites.map((site) => {
+      const s = site.id;
+      const dom = site.pages.map((page) => {
+        return { name: page.id, url: page.url }
+      })
+      nav.push({ name: site.id, url: "", links: dom })
+    })
+  }
+  // }
+
+  // {
+  //   links: [
+  //     { name: "Sites", url: "" },
+  //     { name: "Content", url: "" }
+  //   ]
+  // }
+  //   ]
+
   return (
     <div className="app">
       <h2>Sites</h2>
@@ -76,8 +98,27 @@ function App() {
           })}
         </div>
         <br />
+
+        <Nav groups={nav} />
+
         <h2>Sites - Pages/Layout</h2>
-        <textarea onChange={(e) => dispatch({ type: 'update:sites', payload: e.target.value })}>{JSON.stringify(state.data.sites, null, 2)}</textarea>
+        <div className="editor">
+          <Editor options={{
+            renderLineHighlight: 'none',
+            wordWrap: 'off',
+            formatOnType: true,
+            lineNumbers: 'off',
+            minimap: { enabled: false },
+            glyphMargin: false,
+            disableLayerHinting: true,
+          }}
+            onChange={(value) => dispatch({ type: 'update:sites', payload: value })}
+            language="json"
+            defaultValue={JSON.stringify(state.data.sites, null, 2)}
+            value={JSON.stringify(state.data.sites, null, 2)}
+          />
+        </div>
+        {/* <textarea >{JSON.stringify(state.data.sites, null, 2)}</textarea> */}
         <div className="btn-bar">
           <button onClick={() => dispatch({ type: 'save:sites', payload: null })}>Update</button>
           <button onClick={() => dispatch({ type: 'update:runtime', payload: null })}>Refresh Runtime</button>
