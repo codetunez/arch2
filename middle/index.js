@@ -13,10 +13,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
 app.get('/api/sites', (req, res) => {
     res.send(data.sites);
 })
@@ -34,5 +30,5 @@ app.post('/api/content', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`Middle tier listening on port ${port}`);
 });

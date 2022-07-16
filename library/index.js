@@ -33,7 +33,15 @@ module.exports.engines = {
         $("section").replaceWith(`<div class="section">${$("section").html()}</div>`);
 
         return $.html();
-    }
+    },
+    "tailwind": (markup) => {
+        let $ = cheerio.load(markup, null, false);
+        return $.html();
+    },
+    "skeleton": (markup) => {
+        let $ = cheerio.load(markup, null, false);
+        return $.html();
+    },
 }
 
 module.exports.templates = {

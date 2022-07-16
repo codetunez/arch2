@@ -51,7 +51,7 @@ app.get('*', (req, res) => {
 
 // start the server
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`Server listening on port ${port}`);
 });
 
 // this is async to express starting
