@@ -8,7 +8,8 @@ app.use(express.json());
 
 // setup data
 const sites = {};
-loadSites();
+const content = {};
+loadData();
 
 // not production code
 app.use(function (req, res, next) {
@@ -21,7 +22,7 @@ app.use(function (req, res, next) {
 
 // this is the signal that the content has changed
 app.post('/api/reload', (req, res) => {
-    loadSites();
+    loadData();
     res.end();
 });
 
@@ -37,7 +38,13 @@ app.get('*', (req, res) => {
 
     if (!page) { res.status(404).end(); return; }
 
-    const render = library.templates[sites[segments[1]].engine](page.markup);
+    const eng = sites[segments[1]].engine;
+
+    // resolve all the content, transform the markup, render the html
+    const markup = library.content.resolve(page.markup, content);
+    const contentMarkup = library.engines[eng](markup);
+    const render = library.templates[eng](contentMarkup);
+
     res.type('html');
     res.send(render).end();
 });
@@ -48,12 +55,17 @@ app.listen(port, () => {
 });
 
 // this is async to express starting
-function loadSites() {
+function loadData() {
+    let sitesRes = null;
     axios("http://localhost:3001/api/sites")
         .then((res) => {
-            res.data.map((ele) => {
-                sites[ele.id] = ele;
-            })
+            sitesRes = res.data;
+            return axios("http://localhost:3001/api/content")
+        })
+        .then((res) => {
+            console.log("Data reloading");
+            sitesRes.map((ele) => { sites[ele.id] = ele; })
+            res.data.map((ele) => { content[ele.id] = ele; })
         })
 }
 

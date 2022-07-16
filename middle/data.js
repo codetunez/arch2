@@ -16,7 +16,7 @@ module.exports = {
                 },
                 {
                     "id": "P3",
-                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell><cell><content id='C6000'></content></cell></row></grid>",
+                    "markup": "<section><grid><row><cell><content id='C1000'></content></cell><cell><content id='C6000'></content><content id='C2000'></content></cell></row></grid>",
                     "url": "auth"
                 }]
         }, {
@@ -60,32 +60,30 @@ module.exports = {
         }
     ],
     content: [
-        [
-            {
-                "id": "C1000",
-                "content": "<div class='text'><h1>Hello Worlssssd</h1></div>"
-            },
-            {
-                "id": "C2000",
-                "content": "<button onClick=''>Click Here</button>"
-            },
-            {
-                "id": "C3000",
-                "content": "<p>Lorem Ipsom</p>"
-            },
-            {
-                "id": "C4000",
-                "content": "<server:time></server:time>"
-            },
-            {
-                "id": "C5000",
-                "content": "<ul role=\"list\"><li>One</li><li>Two</li><li>Three</li></ul>"
-            },
-            {
-                "id": "C6000",
-                "content": "<label>Username</label><input type='text'></input><br/><label>Password</label><input type='text'></input>"
-            }
-        ]
+        {
+            "id": "C1000",
+            "content": "<div class='text'><h1>Hello Worlssssd</h1></div>"
+        },
+        {
+            "id": "C2000",
+            "content": "<button onClick=''>Click Here</button>"
+        },
+        {
+            "id": "C3000",
+            "content": "<p>Lorem Ipsom</p>"
+        },
+        {
+            "id": "C4000",
+            "content": "<server:time></server:time>"
+        },
+        {
+            "id": "C5000",
+            "content": "<ul role=\"list\"><li>One</li><li>Two</li><li>Three</li></ul>"
+        },
+        {
+            "id": "C6000",
+            "content": "<label>Username</label><input type='text'></input><br/><label>Password</label><input type='text'></input>"
+        }
     ]
 
 }
