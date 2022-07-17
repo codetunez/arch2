@@ -12,7 +12,7 @@
         {
           "id": "P1",
           "title": "Homepage",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <button class=\"btn btn-secondary\">\r\n                    Inline Button\r\n                </button>\r\n                <content id=\"C1000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <button class=\"btn btn-secondary\">\r\n                    Inline Button\r\n                </button>\r\n                <content id=\"C1000\"></content>\r\n                <content id=\"C7000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
           "url": ""
         },
         {
@@ -115,10 +115,6 @@
     {
       "id": "C7000",
       "markup": "<img src=\"https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4QWs8?ver=95ec&q=90&m=6&h=270&w=270&b=%23FFFFFFFF&f=jpg&o=f&aim=true\" alt=\"image\"></img>"
-    },
-    {
-      "id": "STUwPsEXv",
-      "markup": ""
     }
   ]
 }
