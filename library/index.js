@@ -6,7 +6,7 @@ module.exports.content = {
         $("content").each(function (i, ele) {
             const id = $(this).attr("id");
             const c = data[id];
-            $(this).replaceWith(c.markup);
+            if (c) { $(this).replaceWith(c.markup); } else { $(this).replaceWith(`<!-- Unresolved content missing: ${id} -->`) }
         })
         return $.html();
     }

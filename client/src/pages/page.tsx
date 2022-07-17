@@ -1,7 +1,7 @@
 import './page.css';
 import format from 'xml-formatter';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useReducer, useContext } from 'react';
 
 import axios from 'axios';
@@ -50,6 +50,8 @@ const reducer = (state: State, action: Action) => {
 const Page = () => {
 
   const location = useLocation();
+  const navigate = useNavigate();
+
   const paths = location.pathname.split('/');
   const appContext: any = useContext(AppContext);
 
@@ -77,6 +79,11 @@ const Page = () => {
     dispatch({ type: 'dirty:clear', payload: null })
   }
 
+  const deletePage = () => {
+    appContext.deletePage(paths[2], paths[3]);
+    navigate("/root/data");
+  }
+
   const url = Object.keys(state.data).length > 0 ? `${paths[2]}/${state.data.url}` : null;
 
   return (
@@ -85,7 +92,10 @@ const Page = () => {
         <>
           <div className="toolbar">
             <h5>Edit the page meta</h5>
-            <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updatePage() }}>Update</button>
+            <div className="btn-bar">
+              <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updatePage() }}>Update</button>
+              <button className={"btn-sm btn-danger"} onClick={() => { deletePage() }}>Delete</button>
+            </div>
           </div>
           <div className="form">
             <div>

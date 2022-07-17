@@ -8,6 +8,7 @@
 
 .shell .navigation {
     width: 200px;
+    overflow: hidden;
 }
 
 .shell .content {

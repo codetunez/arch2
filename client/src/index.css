@@ -40,6 +40,16 @@ button:hover {
   color: white;
 }
 
+.btn-danger {
+  background-color: red;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: rgb(144, 2, 2);
+  color: white;
+}
+
 /* app wide button layouts */
 
 .btn-bar {

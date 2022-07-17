@@ -10,8 +10,8 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 // setup data
-const sites = {};
-const content = {};
+let sites = {};
+let content = {};
 loadData();
 
 // not production code
@@ -35,10 +35,15 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 // this will match any url. this allows us to handle the page request
 app.get('*', (req, res) => {
 
+    // code assumes path starts with a slash and root segment is empty string
     const segments = req.url.split('/');
-    // code assumes path starts with a slash and root page is empty string
+
+    // site not found
+    if (!sites[segments[1]]) { res.status(404).end(); return; }
+
     const page = sites[segments[1]].pages.find((x) => x.url === (segments[2] || ""));
 
+    // page not found
     if (!page) { res.status(404).end(); return; }
 
     const eng = sites[segments[1]].engine;
@@ -66,9 +71,12 @@ function loadData() {
             return axios("http://localhost:3001/api/content")
         })
         .then((res) => {
-            console.log("Data loading");
+            // because the is an associative array, we have to re-init before re-creating to clear deleted enteries
+            sites = {};
+            content = {};
             sitesRes.map((ele) => { sites[ele.id] = ele; })
             res.data.map((ele) => { content[ele.id] = ele; })
+            console.log("Data loading");
         })
 }
 

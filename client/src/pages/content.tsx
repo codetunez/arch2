@@ -1,7 +1,7 @@
 import './content.css';
 import format from 'xml-formatter';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useReducer, useContext } from 'react';
 
 import axios from 'axios';
@@ -44,6 +44,8 @@ const reducer = (state: State, action: Action) => {
 const Content = () => {
 
   const location = useLocation();
+  const navigate = useNavigate();
+
   const paths = location.pathname.split('/');
   const appContext: any = useContext(AppContext);
 
@@ -69,13 +71,21 @@ const Content = () => {
     dispatch({ type: 'dirty:clear', payload: null })
   }
 
+  const deleteContent = () => {
+    appContext.deleteContent(paths[2]);
+    navigate("/root/data");
+  }
+
   return (
     <div className="content-workspace">
       {Object.keys(state.data).length > 0 ?
         <>
           <div className="toolbar">
             <h5>Edit the content meta</h5>
-            <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updateContent() }}>Update</button>
+            <div className="btn-bar">              
+              <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updateContent() }}>Update</button>
+              <button className={"btn-sm btn-danger"} onClick={() => { deleteContent() }}>Delete</button>
+            </div>
           </div>
           <div className="form">
             <div>

@@ -39,6 +39,11 @@ export class AppProvider extends React.PureComponent<any, any> {
         this.setState({ sites: res.data.sites, refreshRuntime: true })
     }
 
+    deletePage = async (site, page) => {
+        const res: any = await axios.delete(`http://localhost:3001/api/page/${site}/${page}`, {});
+        this.setState({ sites: res.data.sites, content: res.data.content, refreshRuntime: true })
+    }
+
     updateContent = async (content, payload) => {
         const res: any = await axios.post(`http://localhost:3001/api/content/${content}`, payload);
         this.setState({ sites: res.data.sites, refreshRuntime: true })
@@ -49,14 +54,24 @@ export class AppProvider extends React.PureComponent<any, any> {
         this.setState({ content: res.data.content, refreshRuntime: true })
     }
 
-    addSite = async (engine) => {
-        const res: any = await axios.post(`http://localhost:3001/api/site/new`, { engine: engine });
-        this.setState({ sites: res.data.sites, refreshRuntime: true })
+    deleteContent = async (content) => {
+        const res: any = await axios.delete(`http://localhost:3001/api/content/${content}`, {});
+        this.setState({ sites: res.data.sites, content: res.data.content, refreshRuntime: true })
     }
 
     updateSite = async (site, payload) => {
         const res: any = await axios.post(`http://localhost:3001/api/site/${site}`, payload);
         this.setState({ sites: res.data.sites, refreshRuntime: true })
+    }
+
+    addSite = async (engine) => {
+        const res: any = await axios.post(`http://localhost:3001/api/site/new`, { engine: engine });
+        this.setState({ sites: res.data.sites, refreshRuntime: true })
+    }
+
+    deleteSite = async (site) => {
+        const res: any = await axios.delete(`http://localhost:3001/api/site/${site}`, {});
+        this.setState({ sites: res.data.sites, content: res.data.content, refreshRuntime: true })
     }
 
     persist = async () => {
@@ -72,10 +87,13 @@ export class AppProvider extends React.PureComponent<any, any> {
         runtimeRefresh: this.runtimeRefresh,
         updatePage: this.updatePage,
         addPage: this.addPage,
+        deletePage: this.deletePage,
         updateContent: this.updateContent,
         addContent: this.addContent,
+        deleteContent: this.deleteContent,
         updateSite: this.updateSite,
         addSite: this.addSite,
+        deleteSite: this.deleteSite,
         persist: this.persist
     };
 

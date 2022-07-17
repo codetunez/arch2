@@ -1,6 +1,6 @@
 import './site.css';
 
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useReducer, useContext } from 'react';
 
 import axios from 'axios';
@@ -54,6 +54,8 @@ const reducer = (state: State, action: Action) => {
 const Site = () => {
 
   const location = useLocation();
+  const navigate = useNavigate();
+
   const paths = location.pathname.split('/');
   const appContext: any = useContext(AppContext);
 
@@ -87,6 +89,11 @@ const Site = () => {
     appContext.addPage(paths[2]);
   }
 
+  const deleteSite = () => {
+    appContext.deleteSite(paths[2]);
+    navigate("/root/data");
+  }
+
   const url = Object.keys(state.data).length > 0 ? `${paths[2]}` : null;
 
   return (
@@ -95,7 +102,10 @@ const Site = () => {
         <>
           <div className="toolbar">
             <h5>Edit the Site meta</h5>
-            <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updateSite() }}>Update</button>
+            <div className="btn-bar">
+              <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updateSite() }}>Update</button>
+              <button className={"btn-sm btn-danger"} onClick={() => { deleteSite() }}>Delete</button>
+            </div>
           </div>
           <div className="form">
             <div>

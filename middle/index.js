@@ -48,8 +48,16 @@ app.post('/api/site/:siteId', (req, res) => {
     let s = data.sites.findIndex((x) => x.id === req.params.siteId);
     if (s > -1) {
         data.sites[s] = req.body;
-        res.send({ sites: data.sites, site: data.sites[s] }).end();
-        return;
+        res.send({ sites: data.sites, site: data.sites[s] });
+    }
+    res.end();
+})
+
+app.delete('/api/site/:siteId', (req, res) => {
+    let s = data.sites.findIndex((x) => x.id === req.params.siteId);
+    if (s > -1) {
+        data.sites.splice(s, 1);
+        res.send({ sites: data.sites, content: data.content });
     }
     res.end();
 })
@@ -67,7 +75,7 @@ app.post('/api/page/new', (req, res) => {
     data.sites[i].pages.push({
         "id": id,
         "title": "New Page",
-        "markup": "",
+        "markup": "<div></div>",
         "url": id
     })
     res.send({ sites: data.sites }).end();
@@ -79,8 +87,19 @@ app.post('/api/page/:siteId/:pageId', (req, res) => {
         let p = data.sites[s].pages.findIndex((x) => x.id === req.params.pageId);
         if (p > -1) {
             data.sites[s].pages[p] = req.body;
-            res.send({ sites: data.sites, page: data.sites[s].pages[p] }).end();
-            return;
+            res.send({ sites: data.sites, page: data.sites[s].pages[p] });
+        }
+    }
+    res.end();
+})
+
+app.delete('/api/page/:siteId/:pageId', (req, res) => {
+    let s = data.sites.findIndex((x) => x.id === req.params.siteId);
+    if (s > -1) {
+        let p = data.sites[s].pages.findIndex((x) => x.id === req.params.pageId);
+        if (p > -1) {
+            data.sites[s].pages.splice(p, 1);
+            res.send({ sites: data.sites, content: data.content });
         }
     }
     res.end();
@@ -89,7 +108,7 @@ app.post('/api/page/:siteId/:pageId', (req, res) => {
 app.post('/api/content/new', (req, res) => {
     data.content.push({
         "id": shortid.generate().replace(/-/g, ""),
-        "markup": "",
+        "markup": "<div></div>",
     })
     res.send({ content: data.content }).end();
 })
@@ -103,8 +122,16 @@ app.post('/api/content/:contentId', (req, res) => {
     let c = data.content.findIndex((x) => x.id === req.params.contentId);
     if (c > -1) {
         data.content[c] = req.body;
-        res.send({ sites: data.sites, content: data.content[c] }).end();
-        return;
+        res.send({ sites: data.sites, content: data.content[c] });
+    }
+    res.end();
+})
+
+app.delete('/api/content/:contentId', (req, res) => {
+    let c = data.content.findIndex((x) => x.id === req.params.contentId);
+    if (c > -1) {
+        data.content.splice(c, 1);
+        res.send({ sites: data.sites, content: data.content });
     }
     res.end();
 })
@@ -112,7 +139,7 @@ app.post('/api/content/:contentId', (req, res) => {
 /* APIs for full current state */
 
 app.get('/api/sites', (req, res) => {
-    res.send(data.sites);
+    res.send(data.sites).end();
 })
 
 app.get('/api/content', (req, res) => {
