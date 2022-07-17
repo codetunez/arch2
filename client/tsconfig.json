@@ -26,8 +26,9 @@
     "noEmit": true
   },
   "include": [
-    "src/**/*"
-, "../shell.tsx"  ],
+    "src/**/*",
+    "../shell.tsx"
+  ],
   "types": [
     "react"
   ],

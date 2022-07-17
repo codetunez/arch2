@@ -1,4 +1,5 @@
 import './content.css';
+import format from 'xml-formatter';
 
 import { useLocation } from 'react-router-dom';
 import { useEffect, useReducer, useContext } from 'react';
@@ -25,6 +26,7 @@ const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "load:data":
       newData = action.payload;
+      newData.markup = format(newData.markup);
       return { ...state, data: newData, dirty: false }
     case "update:id":
       newData.id = action.payload;
