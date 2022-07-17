@@ -123,8 +123,8 @@ const Site = () => {
                   <label>Current Pages</label>
                   <label>Page in Site Nav</label></div>
               </div>
-              {state.data.pages.map((ele) => {
-                return <div className="pages-list">
+              {state.data.pages.map((ele,i) => {
+                return <div key={i} className="pages-list">
                   <div className="item">
                     <Link to={`/page/${url}/${ele.id}`}>{ele.title}</Link>
                     <div><input type="checkbox" checked={state.data.sitenav.indexOf(ele.id) > -1} onChange={(e) => dispatch({ type: 'update:sitenav', payload: { key: ele.id, value: e.target.checked } })} /></div>

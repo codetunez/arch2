@@ -6,17 +6,17 @@
   padding: 1rem;
 }
 
-h5 {
+.page-workspace h5 {
   margin: 0 0 0.5rem 0;
 }
 
-.toolbar {
+.page-workspace .toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.monaco {  
+.page-workspace .monaco {  
   height: calc(100% - 350px);
   border: 1px solid silver;
   border-radius: 2px;

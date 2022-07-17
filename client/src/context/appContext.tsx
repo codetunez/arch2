@@ -43,6 +43,16 @@ export class AppProvider extends React.PureComponent<any, any> {
         this.setState({ sites: res.data.sites, refreshRuntime: true })
     }
 
+    addContent = async (site) => {
+        const res: any = await axios.post(`http://localhost:3001/api/content/new`, { siteId: site });
+        this.setState({ content: res.data.content, refreshRuntime: true })
+    }
+
+    addSite = async (engine) => {
+        const res: any = await axios.post(`http://localhost:3001/api/site/new`, { engine: engine });
+        this.setState({ sites: res.data.sites, refreshRuntime: true })
+    }
+
     updateSite = async (site, payload) => {
         const res: any = await axios.post(`http://localhost:3001/api/site/${site}`, payload);
         this.setState({ sites: res.data.sites, refreshRuntime: true })
@@ -54,9 +64,11 @@ export class AppProvider extends React.PureComponent<any, any> {
         refreshRuntime: false,
         runtimeRefresh: this.runtimeRefresh,
         updatePage: this.updatePage,
+        addPage: this.addPage,
         updateContent: this.updateContent,
+        addContent: this.addContent,
         updateSite: this.updateSite,
-        addPage: this.addPage
+        addSite: this.addSite
     };
 
     render() {

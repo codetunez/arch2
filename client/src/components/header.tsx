@@ -9,7 +9,7 @@ const Header = () => {
 
     return (
         <div className="header">
-            <h1>Arch II</h1>
+            <a href="http://localhost:3000/"><h1>Arch II</h1></a>
             <button className={appContext.refreshRuntime ? "btn-sm btn-warning" : "btn-sm"} onClick={() => appContext.runtimeRefresh()}>Refresh Runtime</button>
         </div>
     )

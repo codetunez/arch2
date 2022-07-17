@@ -10,6 +10,7 @@ import Header from './components/header';
 import Page from './pages/page';
 import Content from './pages/content';
 import Site from './pages/site';
+import Root from './pages/root';
 
 const Shell = () => {
 
@@ -25,6 +26,7 @@ const Shell = () => {
                         <Route path="/site/*" element={<Site />}></Route>
                         <Route path="/content/*" element={<Content />}></Route>
                         <Route path="/page/*" element={<Page />}></Route>
+                        <Route path="/root/*" element={<Root />}></Route>
                     </Routes>
                 </div>
             </div>

@@ -17,9 +17,28 @@ app.use(function (req, res, next) {
     next();
 });
 
+/* APIs for discrete operations */
+
 app.get('/api/site/:siteId', (req, res) => {
     let s = data.sites.find((x) => x.id === req.params.siteId);
     res.send(s).end();
+})
+
+app.post('/api/site/new', (req, res) => {
+    const { engine } = req.body;
+    data.sites.push({
+        "id": shortid.generate().replace(/-/g, ""),
+        "name": "New Site",
+        "engine": engine,
+        "sitenav": [],
+        "pages": [{
+            "id": shortid.generate().replace(/-/g, ""),
+            "title": "Homepage",
+            "markup": "",
+            "url": ""
+        }]
+    })
+    res.send({ sites: data.sites }).end();
 })
 
 app.post('/api/site/:siteId', (req, res) => {
@@ -69,7 +88,7 @@ app.post('/api/content/new', (req, res) => {
         "id": shortid.generate().replace(/-/g, ""),
         "markup": "",
     })
-    res.send({ sites: data.sites }).end();
+    res.send({ content: data.content }).end();
 })
 
 app.get('/api/content/:contentId', (req, res) => {
@@ -86,6 +105,8 @@ app.post('/api/content/:contentId', (req, res) => {
     }
     res.end();
 })
+
+/* APIs for full current state */
 
 app.get('/api/sites', (req, res) => {
     res.send(data.sites);
