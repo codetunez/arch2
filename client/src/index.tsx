@@ -1,11 +1,15 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './pages/app';
 
-import { initializeIcons } from '@fluentui/font-icons-mdl2';
-initializeIcons();
+import { BrowserRouter as Router } from 'react-router-dom'
+import { AppProvider } from './context/appContext';
+import Shell from './shell'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <App />
+  <AppProvider>
+    <Router>
+      <Shell />
+    </Router>
+  </AppProvider>
 );

@@ -1,0 +1,20 @@
+.shell {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%
+}
+
+.shell .navigation {
+    width: 200px;
+}
+
+.shell .content {
+    height: 100%;
+    display: flex;
+}
+
+.shell .workspace {
+    width: calc(100% - 200px);
+}

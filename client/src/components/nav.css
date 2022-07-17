@@ -1,0 +1,6 @@
+.nav {
+    height: 100%;
+    overflow-y: auto;
+    border-right: 1px solid silver;
+    padding: 0.5rem;
+}

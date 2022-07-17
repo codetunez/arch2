@@ -6,7 +6,7 @@ module.exports.content = {
         $("content").each(function (i, ele) {
             const id = $(this).attr("id");
             const c = data[id];
-            $(this).replaceWith(c.content);
+            $(this).replaceWith(c.markup);
         })
         return $.html();
     }

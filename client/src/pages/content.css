@@ -1,0 +1,23 @@
+.content-workspace {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+  padding: 1rem;
+}
+
+h5 {
+  margin: 0 0 0.5rem 0;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.monaco {  
+  height: calc(100% - 350px);
+  border: 1px solid silver;
+  border-radius: 2px;
+}

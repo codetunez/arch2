@@ -5,10 +5,77 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* app wide button format */
+
+button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  border: 0;
+}
+
+button:hover {
+  color: white;
+  background-color: grey;
+}
+
+.btn-sm {
+  padding: 0.25rem 1rem;
+}
+
+.btn-warning {
+  background-color: orange;
+}
+
+.btn-warning:hover {
+  background-color: rgb(177, 97, 0);
+  color: white;
+}
+
+/* app wide button layouts */
+
+.btn-bar {
+  display: flex;
+}
+
+.btn-bar>button:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+/* app wide form layouts */
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.form div label {
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding-bottom: 0.25rem;
+}
+
+.form div:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+a {
+  width: fit-content;
+}
+
+input[type="text"] {
+  border-color: silver 1px solid;
+  padding: 0.25rem;
 }
