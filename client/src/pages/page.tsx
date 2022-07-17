@@ -26,7 +26,7 @@ const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "load:data":
       newData = action.payload;
-      newData.markup = format(newData.markup);
+      if (newData.markup !== "") { newData.markup = format(newData.markup); }
       return { ...state, data: newData, dirty: false }
     case "update:id":
       newData.id = action.payload;

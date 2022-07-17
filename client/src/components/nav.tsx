@@ -1,6 +1,6 @@
 import './nav.css';
 import "rc-tree/assets/index.css"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import * as React from 'react';
 import Tree from 'rc-tree';
@@ -11,6 +11,7 @@ const Nav = ({ sites, content }) => {
 
     const appContext: any = React.useContext(AppContext);
 
+    const location = useLocation();
     const navigate = useNavigate();
     const [treeData, setTreeData] = React.useState<any>();
 
@@ -58,13 +59,13 @@ const Nav = ({ sites, content }) => {
                 showLine={true}
                 checkable={false}
                 selectable={true}
-                defaultExpandAll={true}
                 onSelect={onSelect}
-                treeData={treeData}
+                treeData={treeData || []}
+                selectedKeys={[location.pathname]}
             />
         </div>
         <div className="save-button">
-            <button onClick={()=> appContext.persist()}>Persist to disk</button>
+            <button onClick={() => appContext.persist()}>Persist to disk</button>
         </div>
     </div>
     )
