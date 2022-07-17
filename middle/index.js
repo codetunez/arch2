@@ -148,7 +148,7 @@ app.get('/api/content', (req, res) => {
 
 app.post('/api/persist', (req, res) => {
     try {
-        fs.writeFileSync(path.resolve(__dirname, 'data.json'), JSON.stringify({ sites: data.sites, content: data.content }));
+        fs.writeFileSync(path.resolve(__dirname, 'data.json'), JSON.stringify({ sites: data.sites, content: data.content }, null, 2));
     }
     catch (err) {
         console.log("Error writing data to disk")
