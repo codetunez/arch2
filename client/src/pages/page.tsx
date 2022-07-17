@@ -52,10 +52,12 @@ const Page = () => {
   const appContext: any = useContext(AppContext);
 
   const [state, dispatch] = useReducer(reducer, { data: {}, dirty: false });
+  // eslint-disable-next-line
   const [loading, payload, error, loadPayload] = usePromise({ promiseFn: () => axios.get(`http://localhost:3001/api/page/${paths[2]}/${paths[3]}`) });
 
   useEffect(() => {
     loadPayload();
+    // eslint-disable-next-line
   }, [location])
 
   useEffect(() => {
@@ -69,9 +71,8 @@ const Page = () => {
       title: state.data.title,
       markup: state.data.markup,
       url: state.data.url,
-    }).then(() => {
-      dispatch({ type: 'dirty:clear', payload: null })
     })
+    dispatch({ type: 'dirty:clear', payload: null })
   }
 
   const url = Object.keys(state.data).length > 0 ? `${paths[2]}/${state.data.url}` : null;

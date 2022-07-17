@@ -189,7 +189,7 @@ module.exports = {
             "id": "C1000",
             "markup": `
 <div class="text">
-    <h1>Hello Worlssssd</h1>
+    <h1>Hello World</h1>
 </div>
             `
         },
@@ -221,7 +221,7 @@ module.exports = {
         {
             "id": "C6000",
             "markup": `
-<div class="form>
+<div class="form">
     <form>
         <label>Username</label>
         <input type="text"></input>

@@ -24,12 +24,17 @@ export class AppProvider extends React.PureComponent<any, any> {
     }
 
     runtimeRefresh = async () => {
-        const res: any = await axios.post('http://localhost:3002/api/reload', {});
+        await axios.post('http://localhost:3002/api/reload', {});
         this.setState({ refreshRuntime: false });
     }
 
     updatePage = async (site, page, payload) => {
         const res: any = await axios.post(`http://localhost:3001/api/page/${site}/${page}`, payload);
+        this.setState({ sites: res.data.sites, refreshRuntime: true })
+    }
+
+    addPage = async (site) => {
+        const res: any = await axios.post(`http://localhost:3001/api/page/new`, { siteId: site });
         this.setState({ sites: res.data.sites, refreshRuntime: true })
     }
 
@@ -50,7 +55,8 @@ export class AppProvider extends React.PureComponent<any, any> {
         runtimeRefresh: this.runtimeRefresh,
         updatePage: this.updatePage,
         updateContent: this.updateContent,
-        updateSite: this.updateSite
+        updateSite: this.updateSite,
+        addPage: this.addPage
     };
 
     render() {

@@ -21,4 +21,5 @@ h5 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 0.5rem;
 }

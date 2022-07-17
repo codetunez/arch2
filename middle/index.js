@@ -1,9 +1,13 @@
+const shortid = require('shortid');
+const morgan = require('morgan');
+
 const port = 3001;
 
 const data = require('./data');
 const express = require('express');
 const app = express();
 app.use(express.json());
+app.use(morgan('tiny'));
 
 app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -34,6 +38,19 @@ app.get('/api/page/:siteId/:pageId', (req, res) => {
     res.send(p).end();
 })
 
+app.post('/api/page/new', (req, res) => {
+    const { siteId } = req.body;
+    const i = data.sites.findIndex((x) => x.id === siteId);
+    const id = shortid.generate().replace(/-/g, "");
+    data.sites[i].pages.push({
+        "id": id,
+        "title": "New Page",
+        "markup": "",
+        "url": id
+    })
+    res.send({ sites: data.sites }).end();
+})
+
 app.post('/api/page/:siteId/:pageId', (req, res) => {
     let s = data.sites.findIndex((x) => x.id === req.params.siteId);
     if (s > -1) {
@@ -45,6 +62,14 @@ app.post('/api/page/:siteId/:pageId', (req, res) => {
         }
     }
     res.end();
+})
+
+app.post('/api/content/new', (req, res) => {
+    data.content.push({
+        "id": shortid.generate().replace(/-/g, ""),
+        "markup": "",
+    })
+    res.send({ sites: data.sites }).end();
 })
 
 app.get('/api/content/:contentId', (req, res) => {

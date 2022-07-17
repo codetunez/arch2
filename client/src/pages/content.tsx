@@ -46,10 +46,12 @@ const Content = () => {
   const appContext: any = useContext(AppContext);
 
   const [state, dispatch] = useReducer(reducer, { data: {}, dirty: true });
+  // eslint-disable-next-line
   const [loading, payload, error, loadPayload] = usePromise({ promiseFn: () => axios.get(`http://localhost:3001/api/content/${paths[2]}`) });
 
   useEffect(() => {
     loadPayload();
+    // eslint-disable-next-line
   }, [location])
 
   useEffect(() => {
@@ -61,9 +63,8 @@ const Content = () => {
     appContext.updateContent(paths[2], {
       id: state.data.id,
       markup: state.data.markup
-    }).then(() => {
-      dispatch({ type: 'dirty:clear', payload: null })
     })
+    dispatch({ type: 'dirty:clear', payload: null })
   }
 
   return (

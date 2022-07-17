@@ -19,6 +19,7 @@ button {
   padding: 0.5rem 1rem;
   border-radius: 2px;
   border: 0;
+  width: fit-content;
 }
 
 button:hover {

@@ -3,7 +3,7 @@ import "rc-tree/assets/index.css"
 import { useNavigate } from "react-router-dom";
 
 import * as React from 'react';
-import Tree, { TreeNode } from 'rc-tree';
+import Tree from 'rc-tree';
 
 const Nav = ({ sites, content }) => {
 
@@ -25,15 +25,15 @@ const Nav = ({ sites, content }) => {
         })
 
         const tree = [{
-            key: "root/0",
+            key: "root/data",
             title: "Data",
             children: [{
-                key: "root/1",
+                key: "root/site",
                 title: "Sites",
                 children: siteTree
             },
             {
-                key: "root/2",
+                key: "root/content",
                 title: "Content",
                 children: contentTree
             }]

@@ -4,7 +4,6 @@ import { useLocation, Link } from 'react-router-dom';
 import { useEffect, useReducer, useContext } from 'react';
 
 import axios from 'axios';
-import Editor from "@monaco-editor/react";
 import usePromise from '../hooks/usePromise';
 import { AppContext } from '../context/appContext';
 
@@ -57,15 +56,18 @@ const Site = () => {
   const appContext: any = useContext(AppContext);
 
   const [state, dispatch] = useReducer(reducer, { data: {}, dirty: false });
+  // eslint-disable-next-line
   const [loading, payload, error, loadPayload] = usePromise({ promiseFn: () => axios.get(`http://localhost:3001/api/site/${paths[2]}`) });
 
   useEffect(() => {
     loadPayload();
+    // eslint-disable-next-line
   }, [location])
 
   useEffect(() => {
     if (!payload) { return; }
     dispatch({ type: 'load:data', payload: payload.data })
+    // eslint-disable-next-line
   }, [payload])
 
   const updateSite = () => {
@@ -75,9 +77,12 @@ const Site = () => {
       engine: state.data.engine,
       pages: state.data.pages,
       sitenav: state.data.sitenav,
-    }).then(() => {
-      dispatch({ type: 'dirty:clear', payload: null })
-    })
+    });
+    dispatch({ type: 'dirty:clear', payload: null })
+  }
+
+  const addPage = () => {
+    appContext.addPage(paths[2]);
   }
 
   const url = Object.keys(state.data).length > 0 ? `${paths[2]}` : null;
@@ -108,10 +113,15 @@ const Site = () => {
               <input type='text' value={state.data.engine} onChange={(e) => dispatch({ type: 'update:engine', payload: e.target.value })} />
             </div>
             <div>
+              <label>Add a new Page</label>
+              <button onClick={() => addPage()}>+</button>
+            </div>
+            <br />
+            <div>
               <div className="pages-list">
                 <div className="item">
-                  <label>Pages</label>
-                  <label>In Site Nav</label></div>
+                  <label>Current Pages</label>
+                  <label>Page in Site Nav</label></div>
               </div>
               {state.data.pages.map((ele) => {
                 return <div className="pages-list">
@@ -122,7 +132,6 @@ const Site = () => {
                 </div>
               })}
             </div>
-
           </div>
         </>
         : "No site data"}

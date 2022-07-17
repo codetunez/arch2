@@ -1,10 +1,13 @@
 const axios = require('axios');
+const morgan = require('morgan');
+
 const library = require('../library');
 
 const port = 3002;
 const express = require('express');
 const app = express();
 app.use(express.json());
+app.use(morgan('tiny'));
 
 // setup data
 const sites = {};
@@ -63,7 +66,7 @@ function loadData() {
             return axios("http://localhost:3001/api/content")
         })
         .then((res) => {
-            console.log("Data reloading");
+            console.log("Data loading");
             sitesRes.map((ele) => { sites[ele.id] = ele; })
             res.data.map((ele) => { content[ele.id] = ele; })
         })
