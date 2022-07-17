@@ -31,6 +31,10 @@ module.exports.engines = {
             }
         })
 
+        $("input").each(function (i, ele) {
+            $(this).addClass("form-control");
+        })
+
         $("row").replaceWith(`<div class="row">${$("row").html()}</div>`);
         $("grid").replaceWith(`<div class="container">${$("grid").html()}</div>`);
         $("section").replaceWith(`<div class="section">${$("section").html()}</div>`);
