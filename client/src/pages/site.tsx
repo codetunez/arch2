@@ -7,6 +7,8 @@ import axios from 'axios';
 import usePromise from '../hooks/usePromise';
 import { AppContext } from '../context/appContext';
 
+import { Combo } from '../controls/combo';
+
 interface State {
   data: any,
   dirty: boolean
@@ -110,7 +112,7 @@ const Site = () => {
             </div>
             <div>
               <label>Engine</label>
-              <input type='text' value={state.data.engine} onChange={(e) => dispatch({ type: 'update:engine', payload: e.target.value })} />
+              <Combo name="engine" items={appContext.engines} value={state.data.engine} onChange={(e) => dispatch({ type: 'update:engine', payload: e.target.value })} />
             </div>
             <div>
               <label>Add a new Page</label>
@@ -123,7 +125,7 @@ const Site = () => {
                   <label>Current Pages</label>
                   <label>Page in Site Nav</label></div>
               </div>
-              {state.data.pages.map((ele,i) => {
+              {state.data.pages.map((ele, i) => {
                 return <div key={i} className="pages-list">
                   <div className="item">
                     <Link to={`/page/${url}/${ele.id}`}>{ele.title}</Link>

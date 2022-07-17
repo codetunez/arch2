@@ -18,6 +18,7 @@ export class AppProvider extends React.PureComponent<any, any> {
                 this.setState({
                     sites: siteData,
                     content: res.data,
+                    engines: [{ name: 'Bootstrap 3', value: 'bootstrap3' }, { name: 'Tailwind CSS', value: 'tailwind' }, { name: 'Skeleton CSS', value: 'skeleton' }],
                     refreshRuntime: false
                 });
             })
@@ -66,6 +67,7 @@ export class AppProvider extends React.PureComponent<any, any> {
     state = {
         sites: [],
         content: [],
+        engines: [],
         refreshRuntime: false,
         runtimeRefresh: this.runtimeRefresh,
         updatePage: this.updatePage,

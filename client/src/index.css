@@ -78,5 +78,9 @@ a {
 
 input[type="text"] {
   border-color: silver 1px solid;
+  padding: 0.25rem 0.4rem;
+}
+
+.combo {
   padding: 0.25rem;
 }
