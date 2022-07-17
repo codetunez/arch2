@@ -41,11 +41,33 @@ module.exports.engines = {
 
         return $.html();
     },
-    "tailwind": (markup) => {
+    "skeleton": (markup) => {
+
+        const gridMap = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
+
         let $ = cheerio.load(markup, null, false);
+
+        $("section").find("grid").each(function (i, grids) {
+            $(this).find("row").each(function (i, rows) {
+                const cells = $(this).find("cell");
+                const gridCol = cells.length === 1 ? gridMap[gridMap.length - 1] : gridMap[Math.round(12 / cells.length) - 1];
+                cells.each(function (i, cell) {
+                    $(this).replaceWith(`<div class="${gridCol} columns">${$(cell).html()}</div>`);
+                });
+            })
+        })
+
+        $("button").each(function (i, ele) {
+            $(this).addClass("button-primary");
+        })
+
+        $("row").replaceWith(`<div class="row">${$("row").html()}</div>`);
+        $("grid").replaceWith(`<div class="container">${$("grid").html()}</div>`);
+        $("section").replaceWith(`<div class="section">${$("section").html()}</div>`);
+
         return $.html();
     },
-    "skeleton": (markup) => {
+    "tailwind": (markup) => {
         let $ = cheerio.load(markup, null, false);
         return $.html();
     },
