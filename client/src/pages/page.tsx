@@ -10,6 +10,7 @@ import { AppContext } from '../context/appContext';
 
 interface State {
   data: any,
+  dirty: boolean
 }
 
 interface Action {
@@ -24,19 +25,21 @@ const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "load:data":
       newData = action.payload;
-      return { ...state, data: newData }
+      return { ...state, data: newData, dirty: false }
     case "update:id":
       newData.id = action.payload;
-      return { ...state, data: newData }
+      return { ...state, data: newData, dirty: true }
     case "update:title":
       newData.title = action.payload;
-      return { ...state, data: newData }
+      return { ...state, data: newData, dirty: true }
     case "update:url":
       newData.url = action.payload;
-      return { ...state, data: newData }
+      return { ...state, data: newData, dirty: true }
     case "update:markup":
       newData.markup = action.payload;
-      return { ...state, data: newData }
+      return { ...state, data: newData, dirty: true }
+    case "dirty:clear":
+      return { ...state, dirty: false }
     default:
       return { ...state }
   }
@@ -48,7 +51,7 @@ const Page = () => {
   const paths = location.pathname.split('/');
   const appContext: any = useContext(AppContext);
 
-  const [state, dispatch] = useReducer(reducer, { data: {} });
+  const [state, dispatch] = useReducer(reducer, { data: {}, dirty: false });
   const [loading, payload, error, loadPayload] = usePromise({ promiseFn: () => axios.get(`http://localhost:3001/api/page/${paths[2]}/${paths[3]}`) });
 
   useEffect(() => {
@@ -66,6 +69,8 @@ const Page = () => {
       title: state.data.title,
       markup: state.data.markup,
       url: state.data.url,
+    }).then(() => {
+      dispatch({ type: 'dirty:clear', payload: null })
     })
   }
 
@@ -77,7 +82,7 @@ const Page = () => {
         <>
           <div className="toolbar">
             <h5>Edit the page meta</h5>
-            <button className="btn-sm" onClick={() => { updatePage() }}>Update</button>
+            <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updatePage() }}>Update</button>
           </div>
           <div className="form">
             <div>

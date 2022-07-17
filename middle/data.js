@@ -4,6 +4,7 @@ module.exports = {
             "id": "S1",
             "name": "Site One",
             "engine": "bootstrap3",
+            "sitenav": ["P1", "P2"],
             "pages":
                 [{
                     "id": "P1",
@@ -14,7 +15,7 @@ module.exports = {
         <row>
             <cell>
                 <button class="btn btn-secondary">Inline Button</button>
-                <content id='C1000'></content>
+                <content id="C1000"></content>
             </cell>
         </row>
     </grid>
@@ -30,10 +31,10 @@ module.exports = {
     <grid>
         <row>
             <cell>
-                <content id='C2000'></content>
+                <content id="C2000"></content>
             </cell>
             <cell>
-                <content id='C3000'></content>
+                <content id="C3000"></content>
             </cell>
         </row>
     </grid>
@@ -49,11 +50,11 @@ module.exports = {
     <grid>
         <row>
             <cell>
-                <content id='C1000'></content>
+                <content id="C1000"></content>
             </cell>
             <cell>
-                <content id='C6000'></content>
-                <content id='C2000'></content>
+                <content id="C6000"></content>
+                <content id="C2000"></content>
             </cell>
         </row>
     </grid>
@@ -65,6 +66,7 @@ module.exports = {
             "id": "S2",
             "name": "Site Two",
             "engine": "tailwind",
+            "sitenav": ["P1", "P2"],
             "pages":
                 [{
                     "id": "P1",
@@ -74,7 +76,7 @@ module.exports = {
     <grid>
         <row>
             <cell>
-                <content id='C1000'></content>
+                <content id="C1000"></content>
             </cell>
         </row>
     </grid>
@@ -90,10 +92,10 @@ module.exports = {
     <grid>
         <row>
             <cell>
-                <content id='C2000'></content>
+                <content id="C2000"></content>
             </cell>
             <cell>
-                <content id='C3000'></content>
+                <content id="C3000"></content>
             </cell>
         </row>
     </grid>
@@ -109,10 +111,10 @@ module.exports = {
     <grid>
         <row>
             <cell>
-                <content id='C2000'></content>
+                <content id="C2000"></content>
             </cell>
             <cell>
-                <content id='C3000'></content>
+                <content id="C3000"></content>
             </cell>
         </row>
     </grid>
@@ -124,6 +126,7 @@ module.exports = {
             "id": "S3",
             "name": "Site Three",
             "engine": "skeleton",
+            "sitenav": ["P1", "P2"],
             "pages":
                 [{
                     "id": "P1",
@@ -133,7 +136,7 @@ module.exports = {
     <grid>
         <row>
             <cell>
-                <content id='C1000'></content>
+                <content id="C1000"></content>
             </cell>
         </row>
     </grid>
@@ -149,10 +152,10 @@ module.exports = {
     <grid>
         <row>
             <cell>
-                <content id='C2000'></content>
+                <content id="C2000"></content>
             </cell>
             <cell>
-                <content id='C3000'></content>
+                <content id="C3000"></content>
             </cell>
         </row>
     </grid>
@@ -168,10 +171,10 @@ module.exports = {
     <grid>
         <row>
             <cell>
-                <content id='C2000'></content>
+                <content id="C2000"></content>
             </cell>
             <cell>
-                <content id='C3000'></content>
+                <content id="C3000"></content>
             </cell>
         </row>
     </grid>
@@ -185,7 +188,7 @@ module.exports = {
         {
             "id": "C1000",
             "markup": `
-<div class='text'>
+<div class="text">
     <h1>Hello Worlssssd</h1>
 </div>
             `
@@ -193,7 +196,7 @@ module.exports = {
         {
             "id": "C2000",
             "markup": `
-<button onClick=''>Click Here</button>`
+<button onClick="">Click Here</button>`
         },
         {
             "id": "C3000",
@@ -221,10 +224,10 @@ module.exports = {
 <div class="form>
     <form>
         <label>Username</label>
-        <input type='text'></input>
+        <input type="text"></input>
         <br/>
         <label>Password</label>
-        <input type='text'></input>
+        <input type="text"></input>
     </form>
 </div>
 `

@@ -10,6 +10,7 @@ import { AppContext } from '../context/appContext';
 
 interface State {
   data: any,
+  dirty: boolean
 }
 
 interface Action {
@@ -24,13 +25,15 @@ const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "load:data":
       newData = action.payload;
-      return { ...state, data: newData }
+      return { ...state, data: newData, dirty: false }
     case "update:id":
       newData.id = action.payload;
-      return { ...state, data: newData }
+      return { ...state, data: newData, dirty: true }
     case "update:markup":
       newData.markup = action.payload;
-      return { ...state, data: newData }
+      return { ...state, data: newData, dirty: true }
+    case "dirty:clear":
+      return { ...state, dirty: false }
     default:
       return { ...state }
   }
@@ -42,7 +45,7 @@ const Content = () => {
   const paths = location.pathname.split('/');
   const appContext: any = useContext(AppContext);
 
-  const [state, dispatch] = useReducer(reducer, { data: {} });
+  const [state, dispatch] = useReducer(reducer, { data: {}, dirty: true });
   const [loading, payload, error, loadPayload] = usePromise({ promiseFn: () => axios.get(`http://localhost:3001/api/content/${paths[2]}`) });
 
   useEffect(() => {
@@ -54,10 +57,12 @@ const Content = () => {
     dispatch({ type: 'load:data', payload: payload.data })
   }, [payload])
 
-  const updatePage = () => {
+  const updateContent = () => {
     appContext.updateContent(paths[2], {
       id: state.data.id,
       markup: state.data.markup
+    }).then(() => {
+      dispatch({ type: 'dirty:clear', payload: null })
     })
   }
 
@@ -67,7 +72,7 @@ const Content = () => {
         <>
           <div className="toolbar">
             <h5>Edit the content meta</h5>
-            <button className="btn-sm" onClick={() => { updatePage() }}>Update</button>
+            <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updateContent() }}>Update</button>
           </div>
           <div className="form">
             <div>
