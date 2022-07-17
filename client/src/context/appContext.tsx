@@ -58,6 +58,11 @@ export class AppProvider extends React.PureComponent<any, any> {
         this.setState({ sites: res.data.sites, refreshRuntime: true })
     }
 
+    persist = async () => {
+        const res: any = await axios.post(`http://localhost:3001/api/persist`, {});
+        this.setState({ sites: res.data.sites, content: res.data.content, refreshRuntime: true })
+    }
+
     state = {
         sites: [],
         content: [],
@@ -68,7 +73,8 @@ export class AppProvider extends React.PureComponent<any, any> {
         updateContent: this.updateContent,
         addContent: this.addContent,
         updateSite: this.updateSite,
-        addSite: this.addSite
+        addSite: this.addSite,
+        persist: this.persist
     };
 
     render() {

@@ -5,7 +5,11 @@ import { useNavigate } from "react-router-dom";
 import * as React from 'react';
 import Tree from 'rc-tree';
 
+import { AppContext } from '../context/appContext';
+
 const Nav = ({ sites, content }) => {
+
+    const appContext: any = React.useContext(AppContext);
 
     const navigate = useNavigate();
     const [treeData, setTreeData] = React.useState<any>();
@@ -47,7 +51,7 @@ const Nav = ({ sites, content }) => {
         navigate(value[0], { replace: true });
     }
 
-    return (
+    return (<div className="nav-container">
         <div className="nav">
             <Tree
                 className="nav-tree"
@@ -59,6 +63,10 @@ const Nav = ({ sites, content }) => {
                 treeData={treeData}
             />
         </div>
+        <div className="save-button">
+            <button onClick={()=> appContext.persist()}>Persist to disk</button>
+        </div>
+    </div>
     )
 }
 

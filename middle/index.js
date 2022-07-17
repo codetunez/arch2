@@ -1,9 +1,12 @@
+const fs = require('fs');
+const path = require('path');
+
 const shortid = require('shortid');
 const morgan = require('morgan');
 
 const port = 3001;
 
-const data = require('./data');
+const data = require('./data.json');
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -114,6 +117,17 @@ app.get('/api/sites', (req, res) => {
 
 app.get('/api/content', (req, res) => {
     res.send(data.content).end();
+});
+
+app.post('/api/persist', (req, res) => {
+    try {
+        fs.writeFileSync(path.resolve(__dirname, 'data.json'), JSON.stringify({ sites: data.sites, content: data.content }));
+    }
+    catch (err) {
+        console.log("Error writing data to disk")
+    }
+    console.log("Persisted to disk")
+    res.send({ sites: data.sites, content: data.content }).end();
 });
 
 app.listen(port, () => {
