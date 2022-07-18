@@ -21,7 +21,7 @@ module.exports.content = {
             const ux = $(this).attr("ux");
             const d = data[id];
             if (d) {
-                const u = serverForms[ux] || serverForms["default"];
+                const u = module.exports.serverForms[ux] || module.exports.serverForms["default"];
                 const markup = u(d);
                 $(this).replaceWith(markup);
             } else {

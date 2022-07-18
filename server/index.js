@@ -1,5 +1,3 @@
-const cheerio = require('cheerio');
-
 const axios = require('axios');
 const morgan = require('morgan');
 
@@ -53,7 +51,7 @@ app.get('*', (req, res) => {
     const eng = sites[segments[1]].engine;
 
     // resolve all the content fragments, resolve server controls, transform the markup, render the html
-    const markup = page.markup;
+    let markup = page.markup;
     markup = library.content.resolve(markup, content);
     markup = library.content.resolveServer(markup, data);
     markup = library.engines[eng](markup);
