@@ -22,6 +22,8 @@ app.use(function (req, res, next) {
 
 /* APIs for discrete operations */
 
+// site
+
 app.get('/api/site/:siteId', (req, res) => {
     let s = data.sites.find((x) => x.id === req.params.siteId);
     res.send(s).end();
@@ -61,6 +63,8 @@ app.delete('/api/site/:siteId', (req, res) => {
     }
     res.end();
 })
+
+// page
 
 app.get('/api/page/:siteId/:pageId', (req, res) => {
     let s = data.sites.find((x) => x.id === req.params.siteId);
@@ -105,6 +109,8 @@ app.delete('/api/page/:siteId/:pageId', (req, res) => {
     res.end();
 })
 
+// content
+
 app.post('/api/content/new', (req, res) => {
     data.content.push({
         "id": shortid.generate().replace(/-/g, ""),
@@ -122,7 +128,7 @@ app.post('/api/content/:contentId', (req, res) => {
     let c = data.content.findIndex((x) => x.id === req.params.contentId);
     if (c > -1) {
         data.content[c] = req.body;
-        res.send({ sites: data.sites, content: data.content[c] });
+        res.send({ sites: data.sites, content: data.content });
     }
     res.end();
 })
@@ -136,6 +142,39 @@ app.delete('/api/content/:contentId', (req, res) => {
     res.end();
 })
 
+// data
+
+app.post('/api/data/new', (req, res) => {
+    data.data.push({
+        "id": shortid.generate().replace(/-/g, ""),
+        "fields": [{ "name": "name", "type": "string" }],
+    })
+    res.send({ data: data.data }).end();
+})
+
+app.get('/api/data/:dataId', (req, res) => {
+    let d = data.data.find((x) => x.id === req.params.dataId);
+    res.send(d).end();
+})
+
+app.post('/api/data/:dataId', (req, res) => {
+    let d = data.data.findIndex((x) => x.id === req.params.dataId);
+    if (d > -1) {
+        data.data[d] = req.body;
+        res.send({ data: data.data });
+    }
+    res.end();
+})
+
+app.delete('/api/data/:dataId', (req, res) => {
+    let d = data.data.findIndex((x) => x.id === req.params.dataId);
+    if (d > -1) {
+        data.data.splice(d, 1);
+        res.send({ sites: data.sites, data: data.data });
+    }
+    res.end();
+})
+
 /* APIs for full current state */
 
 app.get('/api/sites', (req, res) => {
@@ -144,6 +183,10 @@ app.get('/api/sites', (req, res) => {
 
 app.get('/api/content', (req, res) => {
     res.send(data.content).end();
+});
+
+app.get('/api/data', (req, res) => {
+    res.send(data.data).end();
 });
 
 app.post('/api/persist', (req, res) => {

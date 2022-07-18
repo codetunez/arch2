@@ -14,13 +14,13 @@ const Root = () => {
 
   const [engine, setEngine] = useState<string>("bootstrap3");
 
-  const addContent = () => { appContext.addContent(paths[2]); }
-
+  const addContent = () => { appContext.addContent(); }
+  const addData = () => { appContext.addData(); }
   const addSite = () => { appContext.addSite(engine); }
 
   return (
     <div className="root-workspace">
-      {paths[2] === 'data' ? <h4>Expand tree or select Site or Content</h4> : null}
+      {paths[2] === 'env' ? <h4>Expand tree or select Site or Content</h4> : null}
 
       {paths[2] === 'site' ? <>
         <h4>Add a new Site</h4>
@@ -42,6 +42,17 @@ const Root = () => {
           <div>
             <label>Create Content item</label>
             <button onClick={() => addContent()}>+</button>
+          </div>
+        </div>
+      </>
+        : null}
+
+      {paths[2] === 'data' ? <>
+        <h4>Add a Data item</h4>
+        <div className="form">
+          <div>
+            <label>Create Data item</label>
+            <button onClick={() => addData()}>+</button>
           </div>
         </div>
       </>

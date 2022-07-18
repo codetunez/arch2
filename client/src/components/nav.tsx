@@ -7,7 +7,7 @@ import Tree from 'rc-tree';
 
 import { AppContext } from '../context/appContext';
 
-const Nav = ({ sites, content }) => {
+const Nav = ({ sites, content, data }) => {
 
     const appContext: any = React.useContext(AppContext);
 
@@ -29,9 +29,13 @@ const Nav = ({ sites, content }) => {
             return { key: `/content/${content.id}`, title: content.id }
         })
 
+        const dataTree = data.map((data) => {
+            return { key: `/data/${data.id}`, title: data.id }
+        })
+
         const tree = [{
-            key: "root/data",
-            title: "Data",
+            key: "root/env",
+            title: "Environment",
             children: [{
                 key: "root/site",
                 title: "Sites",
@@ -41,12 +45,17 @@ const Nav = ({ sites, content }) => {
                 key: "root/content",
                 title: "Content",
                 children: contentTree
+            },
+            {
+                key: "root/data",
+                title: "Data",
+                children: dataTree
             }]
         }]
 
         setTreeData(tree);
 
-    }, [sites, content]);
+    }, [sites, content, data]);
 
     const onSelect = (value) => {
         navigate(value[0], { replace: true });

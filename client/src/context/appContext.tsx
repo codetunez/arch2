@@ -9,15 +9,21 @@ export class AppProvider extends React.PureComponent<any, any> {
         super(props);
 
         let siteData = null;
+        let contentData = null;
         axios('http://localhost:3001/api/sites')
             .then((res: any) => {
                 siteData = res.data;
                 return axios('http://localhost:3001/api/content')
             })
             .then((res: any) => {
+                contentData = res.data;
+                return axios('http://localhost:3001/api/data')
+            })
+            .then((res: any) => {
                 this.setState({
                     sites: siteData,
-                    content: res.data,
+                    content: contentData,
+                    data: res.data,
                     engines: [{ name: 'Bootstrap 3', value: 'bootstrap3' }, { name: 'Tailwind CSS', value: 'tailwind' }, { name: 'Skeleton CSS', value: 'skeleton' }],
                     refreshRuntime: false
                 });
@@ -28,6 +34,13 @@ export class AppProvider extends React.PureComponent<any, any> {
         await axios.post('http://localhost:3002/api/reload', {});
         this.setState({ refreshRuntime: false });
     }
+
+    persist = async () => {
+        const res: any = await axios.post(`http://localhost:3001/api/persist`, {});
+        this.setState({ sites: res.data.sites, content: res.data.content, data: res.data.data, refreshRuntime: true })
+    }
+
+    // page
 
     updatePage = async (site, page, payload) => {
         const res: any = await axios.post(`http://localhost:3001/api/page/${site}/${page}`, payload);
@@ -44,13 +57,15 @@ export class AppProvider extends React.PureComponent<any, any> {
         this.setState({ sites: res.data.sites, content: res.data.content, refreshRuntime: true })
     }
 
+    // content
+
     updateContent = async (content, payload) => {
         const res: any = await axios.post(`http://localhost:3001/api/content/${content}`, payload);
         this.setState({ sites: res.data.sites, refreshRuntime: true })
     }
 
-    addContent = async (site) => {
-        const res: any = await axios.post(`http://localhost:3001/api/content/new`, { siteId: site });
+    addContent = async () => {
+        const res: any = await axios.post(`http://localhost:3001/api/content/new`, {});
         this.setState({ content: res.data.content, refreshRuntime: true })
     }
 
@@ -58,6 +73,8 @@ export class AppProvider extends React.PureComponent<any, any> {
         const res: any = await axios.delete(`http://localhost:3001/api/content/${content}`, {});
         this.setState({ sites: res.data.sites, content: res.data.content, refreshRuntime: true })
     }
+
+    // site
 
     updateSite = async (site, payload) => {
         const res: any = await axios.post(`http://localhost:3001/api/site/${site}`, payload);
@@ -74,14 +91,27 @@ export class AppProvider extends React.PureComponent<any, any> {
         this.setState({ sites: res.data.sites, content: res.data.content, refreshRuntime: true })
     }
 
-    persist = async () => {
-        const res: any = await axios.post(`http://localhost:3001/api/persist`, {});
-        this.setState({ sites: res.data.sites, content: res.data.content, refreshRuntime: true })
+    // data
+
+    updateData = async (data, payload) => {
+        const res: any = await axios.post(`http://localhost:3001/api/data/${data}`, payload);
+        this.setState({ data: res.data.data, refreshRuntime: true })
+    }
+
+    addData = async () => {
+        const res: any = await axios.post(`http://localhost:3001/api/data/new`, {});
+        this.setState({ data: res.data.data, refreshRuntime: true })
+    }
+
+    deleteData = async (data) => {
+        const res: any = await axios.delete(`http://localhost:3001/api/data/${data}`, {});
+        this.setState({ sites: res.data.sites, data: res.data.data, refreshRuntime: true })
     }
 
     state = {
         sites: [],
         content: [],
+        data: [],
         engines: [],
         refreshRuntime: false,
         runtimeRefresh: this.runtimeRefresh,
@@ -94,6 +124,9 @@ export class AppProvider extends React.PureComponent<any, any> {
         updateSite: this.updateSite,
         addSite: this.addSite,
         deleteSite: this.deleteSite,
+        updateData: this.updateData,
+        addData: this.addData,
+        deleteData: this.deleteData,
         persist: this.persist
     };
 

@@ -120,5 +120,24 @@
       "id": "C8000",
       "markup": "<img width=\"450\" src=\"https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Surface-Go-3-Business-Pen-Mouse-mosaic-medium-2x-1718x1500?wid=859&hei=750\"/>"
     }
+  ],
+  "data": [
+    {
+      "id": "D1000",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "address",
+          "type": "string"
+        },
+        {
+          "name": "phone",
+          "type": "string"
+        }
+      ]
+    }
   ]
 }
