@@ -24,6 +24,7 @@ module.exports.engines = {
 
         $("button").each(function (i, ele) { $(this).addClass("btn btn-primary"); });
         $("input").each(function (i, ele) { $(this).addClass("form-control"); });
+        $("form").find("group").each(function (i, ele) { $(this).replaceWith(`<div class="form-group">${$(ele).html()}</div>`); })
         $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
         $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
         $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
@@ -45,6 +46,7 @@ module.exports.engines = {
         })
 
         $("button").each(function (i, ele) { $(this).addClass("button-primary"); })
+        $("form").find("group").each(function (i, ele) { $(this).replaceWith($(ele).html()); })
         $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
         $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
         $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
@@ -64,6 +66,7 @@ module.exports.engines = {
         })
 
         $("button").each(function (i, ele) { $(this).addClass("bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"); })
+        $("form").find("group").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
         $("cell").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
         $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
         $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
