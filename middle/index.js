@@ -191,13 +191,13 @@ app.get('/api/data', (req, res) => {
 
 app.post('/api/persist', (req, res) => {
     try {
-        fs.writeFileSync(path.resolve(__dirname, 'data.json'), JSON.stringify({ sites: data.sites, content: data.content }, null, 2));
+        fs.writeFileSync(path.resolve(__dirname, 'data.json'), JSON.stringify({ sites: data.sites, content: data.content, data: data.data }, null, 2));
     }
     catch (err) {
         console.log("Error writing data to disk")
     }
     console.log("Persisted to disk")
-    res.send({ sites: data.sites, content: data.content }).end();
+    res.send({ sites: data.sites, content: data.content, data: data.data }).end();
 });
 
 app.listen(port, () => {

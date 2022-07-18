@@ -14,7 +14,7 @@
         {
           "id": "P2",
           "title": "Page One",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <content id=\"C2000\"></content>\r\n            </cell>\r\n            <cell>\r\n                <content id=\"C3000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <pp:form data=\"D1000\" ux=\"simpleform\"></pp:form>\r\n                <content id=\"C3000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
           "url": "p2"
         },
         {
@@ -102,7 +102,7 @@
     },
     {
       "id": "C4000",
-      "markup": "<server:time></server:time>"
+      "markup": "<pp:day></pp:day>"
     },
     {
       "id": "C5000",
