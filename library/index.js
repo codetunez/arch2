@@ -16,54 +16,38 @@ module.exports.engines = {
     "bootstrap3": (markup) => {
         let $ = cheerio.load(markup, null, false);
 
-        $("section").find("grid").each(function (i, grids) {
-            $(this).find("row").each(function (i, rows) {
-                $(this).find("cell").each(function (i, cell) {
-                    $(this).replaceWith(`<div class="col">${$(cell).html()}</div>`);
-                });
-            })
+        $("grid").find("row").each(function (i, rows) {
+            $(this).find("cell").each(function (i, cell) {
+                $(this).replaceWith(`<div class="col">${$(cell).html()}</div>`);
+            });
         })
 
-        $("button").each(function (i, ele) {
-            // a very basic check. this should inspect for specific attributes
-            if (!$(this).attr("class")) {
-                $(this).replaceWith(`<button class="btn btn-primary">${$(ele).text()}</button>`)
-            }
-        })
-
-        $("input").each(function (i, ele) {
-            $(this).addClass("form-control");
-        })
-
-        $("row").replaceWith(`<div class="row">${$("row").html()}</div>`);
-        $("grid").replaceWith(`<div class="container">${$("grid").html()}</div>`);
-        $("section").replaceWith(`<div class="section">${$("section").html()}</div>`);
+        $("button").each(function (i, ele) { $(this).addClass("btn btn-primary"); });
+        $("input").each(function (i, ele) { $(this).addClass("form-control"); });
+        $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
+        $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
+        $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
 
         return $.html();
     },
     "skeleton": (markup) => {
 
-        const gridMap = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven'];
+        const gridMap = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
 
         let $ = cheerio.load(markup, null, false);
 
-        $("section").find("grid").each(function (i, grids) {
-            $(this).find("row").each(function (i, rows) {
-                const cells = $(this).find("cell");
-                const gridCol = cells.length === 1 ? gridMap[gridMap.length - 1] : gridMap[Math.round(12 / cells.length) - 1];
-                cells.each(function (i, cell) {
-                    $(this).replaceWith(`<div class="${gridCol} columns">${$(cell).html()}</div>`);
-                });
-            })
+        $("grid").find("row").each(function (i, rows) {
+            const cells = $(this).find("cell");
+            const gridCol = cells.length === 1 ? gridMap[gridMap.length - 1] : gridMap[Math.floor(12 / cells.length) - 1];
+            cells.each(function (i, cell) {
+                $(this).replaceWith(`<div class="${gridCol} columns">${$(cell).html()}</div>`);
+            });
         })
 
-        $("button").each(function (i, ele) {
-            $(this).addClass("button-primary");
-        })
-
-        $("row").replaceWith(`<div class="row">${$("row").html()}</div>`);
-        $("grid").replaceWith(`<div class="container">${$("grid").html()}</div>`);
-        $("section").replaceWith(`<div class="section">${$("section").html()}</div>`);
+        $("button").each(function (i, ele) { $(this).addClass("button-primary"); })
+        $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
+        $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
+        $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
 
         return $.html();
     },
