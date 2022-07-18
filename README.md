@@ -22,5 +22,54 @@ This doesn't matter as the system will correct itself. But here is the optimal o
 2. Server
 3. Client
 
-## Usage
-Once all services are up and running visit http://locahost:3000 in a web browser
+### Usage
+Once all services are up and running visit http://locahost:3000 in a web browser.
+
+## Authoring
+You can use any HTML you desire as the markup. However, if you use any of the following elements (instead of framework DOM structures), the rendered version will utilze the stylesheet "engine" as set at the Site level and the system will transform the HTML into the desire DOM structures. For embedded form controls, remove as many of your custom css classes as possible.
+
+## Responsive support
+
+### Section
+Use to contain any content at 100% width. Can have a class attribute
+
+    <section>
+    ...
+    </section>
+
+Becomes
+
+    <div class="section"></div>
+
+### Grids
+Use to define a 12 column capable grid. Cells will be devided equally or rounded down. Classes not supported
+
+    <grid>
+      <row>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+    <grid>
+
+Becomes
+
+    <div class="container">
+      <div class="<row classes>">
+         <div class="<column classes>"></div>
+         <div class="<column classes>"></div>
+         <div class="<column classes>"></div>
+      </div>
+    </div>
+
+## Instrinsic support
+
+### Buttons
+Use to style any HTML button element
+
+    <button></button>
+
+### Inputs
+Use to style any HTML input element
+
+    <input></input>
