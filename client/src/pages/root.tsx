@@ -37,7 +37,7 @@ const Root = () => {
         : null}
 
       {paths[2] === 'content' ? <>
-        <h4>Add a Content item</h4>
+        <h4>Add a new Content item</h4>
         <div className="form">
           <div>
             <label>Create Content item</label>
@@ -48,7 +48,7 @@ const Root = () => {
         : null}
 
       {paths[2] === 'data' ? <>
-        <h4>Add a Data item</h4>
+        <h4>Add a new Data item</h4>
         <div className="form">
           <div>
             <label>Create Data item</label>
