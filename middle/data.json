@@ -4,15 +4,11 @@
       "id": "S1",
       "name": "Site One",
       "engine": "bootstrap3",
-      "sitenav": [
-        "P1",
-        "P2"
-      ],
       "pages": [
         {
           "id": "P1",
           "title": "Homepage",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <button class=\"btn btn-secondary\">\r\n                    Inline Button\r\n                </button>\r\n                <content id=\"C1000\"></content>\r\n                <content id=\"C7000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<style class=\"\">\r\n    .page {\r\n        margin-top: 100px;\r\n    }\r\n</style>\r\n\r\n<div class=\"page\">\r\n    <section>\r\n        <grid>\r\n            <row>\r\n                <cell>\r\n                    <h1>Welcome to an Auth II homepage</h1>\r\n                    <content id=\"C3000\"></content>\r\n                    <button>Click here to learn more</button>\r\n                </cell>\r\n                <cell>\r\n                    <content id=\"C7000\"></content>\r\n                </cell>\r\n            </row>\r\n            <br/>\r\n            <row>\r\n                <cell>\r\n                    <content id=\"C8000\"></content>\r\n                </cell>\r\n                <cell>\r\n                    <content id=\"C3000\"></content>\r\n                    <content id=\"C3000\"></content>\r\n                    <content id=\"C3000\"></content>\r\n                </cell>\r\n            </row>\r\n        </grid>\r\n    </section>\r\n</div>",
           "url": ""
         },
         {
@@ -27,6 +23,10 @@
           "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <content id=\"C1000\"></content>\r\n            </cell>\r\n            <cell>\r\n                <content id=\"C6000\"></content>\r\n                <content id=\"C2000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
           "url": "auth"
         }
+      ],
+      "sitenav": [
+        "P1",
+        "P2"
       ]
     },
     {
@@ -41,7 +41,7 @@
         {
           "id": "P1",
           "title": "Homepage",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <button class=\"btn btn-secondary\">\r\n                    Inline Button\r\n                </button>\r\n                <content id=\"C1000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<style class=\"\">\r\n    .page {\r\n        margin-top: 100px;\r\n    }\r\n\r\n    .section {\r\n        display: flex;\r\n        justify-content: center\r\n    }\r\n\r\n    h1 {\r\n        color: black;\r\n        font-size: 3rem;\r\n    }    \r\n</style>\r\n\r\n<div class=\"page\">\r\n    <section>\r\n        <grid>\r\n            <row>\r\n                <cell>\r\n                    <h1>Welcome to an Auth II homepage</h1>\r\n                    <content id=\"C3000\"></content>\r\n                    <button>Click here to learn more</button>\r\n                </cell>\r\n                <cell>\r\n                    <content id=\"C7000\"></content>\r\n                </cell>\r\n            </row>\r\n            <br/>\r\n            <row>\r\n                <cell>\r\n                    <content id=\"C8000\"></content>\r\n                </cell>\r\n                <cell>\r\n                    <content id=\"C3000\"></content>\r\n                    <content id=\"C3000\"></content>\r\n                    <content id=\"C3000\"></content>\r\n                </cell>\r\n            </row>\r\n        </grid>\r\n    </section>\r\n</div>",
           "url": ""
         },
         {
@@ -66,7 +66,7 @@
         {
           "id": "P1",
           "title": "Homepage",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <button class=\"btn btn-secondary\">\r\n                    Inline Button\r\n                </button>\r\n                <content id=\"C1000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<style class=\"\">\r\n    .page {\r\n        margin-top: 100px;\r\n    }\r\n</style>\r\n\r\n<div class=\"page\">\r\n    <section>\r\n        <grid>\r\n            <row>\r\n                <cell>\r\n                    <h1>Welcome to an Auth II homepage</h1>\r\n                    <content id=\"C3000\"></content>\r\n                    <button>Click here to learn more</button>\r\n                </cell>\r\n                <cell>\r\n                    <content id=\"C7000\"></content>\r\n                </cell>\r\n            </row>\r\n            <br/>\r\n            <row>\r\n                <cell>\r\n                    <content id=\"C8000\"></content>\r\n                </cell>\r\n                <cell>\r\n                    <content id=\"C3000\"></content>\r\n                    <content id=\"C3000\"></content>\r\n                    <content id=\"C3000\"></content>\r\n                </cell>\r\n            </row>\r\n        </grid>\r\n    </section>\r\n</div>",
           "url": ""
         },
         {
@@ -115,6 +115,10 @@
     {
       "id": "C7000",
       "markup": "<img src=\"https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4QWs8?ver=95ec&q=90&m=6&h=270&w=270&b=%23FFFFFFFF&f=jpg&o=f&aim=true\" alt=\"image\"></img>"
+    },
+    {
+      "id": "C8000",
+      "markup": "<img width=\"450\" src=\"https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Surface-Go-3-Business-Pen-Mouse-mosaic-medium-2x-1718x1500?wid=859&hei=750\"/>"
     }
   ]
 }
