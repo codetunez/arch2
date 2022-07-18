@@ -52,17 +52,32 @@ module.exports.engines = {
         return $.html();
     },
     "tailwind": (markup) => {
+
+        const gridMap = ['grid-cols-1', 'grid-cols-2', 'grid-cols-3', 'grid-cols-4', 'grid-cols-5', 'grid-cols-6', 'grid-cols-7', 'grid-cols-8', 'grid-cols-9', 'grid-cols-10', 'grid-cols-11', 'grid-cols-1'];
+
         let $ = cheerio.load(markup, null, false);
+
+        $("grid").find("row").each(function (i, rows) {
+            const cells = $(this).find("cell");
+            const gridCol = gridMap[cells.length - 1];
+            $(this).replaceWith(`<div class="grid ${gridCol} gap-4">${$(rows).html()}</div>`);
+        })
+
+        $("button").each(function (i, ele) { $(this).addClass("bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"); })
+        $("cell").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
+        $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
+        $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
+
         return $.html();
     },
 }
 
 module.exports.templates = {
-    "bootstrap3": (content) => `
+    "bootstrap3": (title, content) => `
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Bootstrap</title>
+        <title>${title} (Bootstrap)</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -74,11 +89,11 @@ module.exports.templates = {
     </body>
 </html>    
     `,
-    "tailwind": (content) => `
+    "tailwind": (title, content) => `
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Tailwind</title>
+        <title>${title} (Tailwind)</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -89,11 +104,11 @@ module.exports.templates = {
     </body>
 </html>    
     `,
-    "skeleton": (content) => `
+    "skeleton": (title, content) => `
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Skeleton</title>
+    <title>${title} (Skeleton)</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />

@@ -51,7 +51,7 @@ app.get('*', (req, res) => {
     // resolve all the content, transform the markup, render the html
     const markup = library.content.resolve(page.markup, content);
     const contentMarkup = library.engines[eng](markup);
-    const render = library.templates[eng](contentMarkup);
+    const render = library.templates[eng](page.title, contentMarkup);
 
     res.type('html');
     res.send(render).end();
