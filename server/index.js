@@ -12,6 +12,8 @@ app.use(morgan('tiny'));
 // setup data
 let sites = {};
 let content = {};
+let data = {};
+
 loadData();
 
 // not production code
@@ -65,18 +67,25 @@ app.listen(port, () => {
 // this is async to express starting
 function loadData() {
     let sitesRes = null;
+    let contentRes = null
     axios("http://localhost:3001/api/sites")
         .then((res) => {
             sitesRes = res.data;
             return axios("http://localhost:3001/api/content")
         })
         .then((res) => {
+            contentRes = res.data;
+            return axios("http://localhost:3001/api/data")
+        })
+        .then((res) => {
             // because the is an associative array, we have to re-init before re-creating to clear deleted enteries
             sites = {};
             content = {};
+            data = {};
             sitesRes.map((ele) => { sites[ele.id] = ele; })
-            res.data.map((ele) => { content[ele.id] = ele; })
-            console.log("Data loading");
+            contentRes.map((ele) => { content[ele.id] = ele; })
+            res.data.map((ele) => { data[ele.id] = ele; })
+            console.log(`Data load: sites:${sitesRes.length} content:${contentRes.length} data:${res.data.length}`);
         })
 }
 
