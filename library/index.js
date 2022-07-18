@@ -1,14 +1,55 @@
 const cheerio = require('cheerio');
 
 module.exports.content = {
-    "resolve": (markup, data) => {
+    "resolve": (markup, contentFragments) => {
         let $ = cheerio.load(markup, null, false);
         $("content").each(function (i, ele) {
             const id = $(this).attr("id");
-            const c = data[id];
-            if (c) { $(this).replaceWith(c.markup); } else { $(this).replaceWith(`<!-- Unresolved content missing: ${id} -->`) }
+            const c = contentFragments[id];
+            if (c) {
+                $(this).replaceWith(c.markup);
+            } else {
+                $(this).replaceWith(`<!-- Unresolved content missing: ${id} -->`)
+            }
         })
         return $.html();
+    },
+    "resolveServer": (markup, data) => {
+        let $ = cheerio.load(markup, null, false);
+        $("pp\\:form").each(function (i, ele) {
+            const id = $(this).attr("data");
+            const ux = $(this).attr("ux");
+            const d = data[id];
+            if (d) {
+                const u = serverForms[ux] || serverForms["default"];
+                const markup = u(d);
+                $(this).replaceWith(markup);
+            } else {
+                $(this).replaceWith(`<!-- Unresolved data missing: ${id} -->`)
+            }
+        })
+
+        $("pp\\:day").each(function (i, ele) {
+            $(this).replaceWith(new Date().toString());
+        })
+
+        return $.html();
+    }
+}
+
+module.exports.serverForms = {
+    // TODO: the extra div around the form button is not required but will make the button go to a new line in all frameworks
+    "simpleform": (data) => {
+        const fields = data.fields.map((ele) => {
+            return `<group><label>${ele.display}</label><input type="${ele.type === "number" ? "number" : "text"}" name="${ele.name}"></input></group>`
+        })
+        return `<form>${fields.join('')}<div><button type="submit">Submit</button></div></form>`
+    },
+    "default": () => {
+        const fields = data.fields.map((ele) => {
+            return `<div><label>${ele.display}</label><input type="${ele.type === "number" ? "number" : "text"}" name="${ele.name}"></input></div`
+        })
+        return `<form>${fields.join('')}<div><button type="submit">Submit</button></div></form>`
     }
 }
 
