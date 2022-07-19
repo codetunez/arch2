@@ -1,5 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
+import * as library from 'library';
 
 export const AppContext = React.createContext({});
 
@@ -24,7 +25,8 @@ export class AppProvider extends React.PureComponent<any, any> {
                     sites: siteData,
                     content: contentData,
                     data: res.data,
-                    engines: [{ name: 'Bootstrap 3', value: 'bootstrap3' }, { name: 'Tailwind CSS', value: 'tailwind' }, { name: 'Skeleton CSS', value: 'skeleton' }],
+                    engines: library.list.engines.map((ele) => { return { "name": ele, "value": ele } }),
+                    forms: library.list.forms.map((ele) => { return { "name": ele, "value": ele } }),
                     refreshRuntime: false
                 });
             })
@@ -113,6 +115,7 @@ export class AppProvider extends React.PureComponent<any, any> {
         content: [],
         data: [],
         engines: [],
+        forms: [],
         refreshRuntime: false,
         runtimeRefresh: this.runtimeRefresh,
         updatePage: this.updatePage,

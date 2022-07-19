@@ -1,5 +1,10 @@
 const cheerio = require('cheerio');
 
+module.exports.list = {
+    "engines": ["bootstrap3", "skeleton", "tailwind"],
+    "forms": ["simpleform", "default"]
+};
+
 module.exports.content = {
     "resolve": (markup, contentFragments) => {
         let $ = cheerio.load(markup, null, false);
@@ -45,7 +50,7 @@ module.exports.serverForms = {
         })
         return `<form>${fields.join('')}<div><button type="submit">Submit</button></div></form>`
     },
-    "default": () => {
+    "default": (data) => {
         const fields = data.fields.map((ele) => {
             return `<div><label>${ele.display}</label><input type="${ele.type === "number" ? "number" : "text"}" name="${ele.name}"></input></div`
         })
