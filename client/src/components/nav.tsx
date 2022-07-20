@@ -20,9 +20,9 @@ const Nav = ({ sites, content, data }) => {
         const siteTree = sites.map((site) => {
             const s = site;
             const dom = site.pages.map((page) => {
-                return { key: `/page/${s.id}/${page.id}`, title: page.title }
+                return { key: `/pages/${s.id}/${page.id}`, title: page.title }
             })
-            return { key: `/site/${s.id}`, title: s.name, children: dom }
+            return { key: `/sites/${s.id}`, title: s.name, children: dom }
         })
 
         const contentTree = content.map((content) => {

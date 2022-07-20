@@ -24,9 +24,9 @@ const Shell = () => {
                 <div className="navigation"><Nav sites={appContext.sites} content={appContext.content} data={appContext.data} /></div>
                 <div className="workspace">
                     <Routes>
-                        <Route path="/site/*" element={<Site />}></Route>
+                        <Route path="/sites/*" element={<Site />}></Route>
                         <Route path="/content/*" element={<Content />}></Route>
-                        <Route path="/page/*" element={<Page />}></Route>
+                        <Route path="/pages/*" element={<Page />}></Route>
                         <Route path="/data/*" element={<Data />}></Route>
                         <Route path="/root/*" element={<Root />}></Route>
                     </Routes>

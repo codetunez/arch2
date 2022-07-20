@@ -1,10 +1,17 @@
 import './root.css';
 
-import { useLocation } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { useContext, useState, useMemo } from 'react';
 import { AppContext } from '../context/appContext';
 
 import { Combo } from '../controls/combo';
+
+function indexBuilder(context, item, root?) {
+  return context[item].map((ele) => {
+    const path = `/${item}/${root ? root + '/' : ''}${ele.id}`
+    return <Link to={path}>http://localhost:3000{path}</Link>
+  })
+}
 
 const Root = () => {
 
@@ -14,13 +21,39 @@ const Root = () => {
 
   const [engine, setEngine] = useState<string>("bootstrap3");
 
-  const addContent = () => { appContext.addContent(); }
-  const addData = () => { appContext.addData(); }
-  const addSite = () => { appContext.addSite(engine); }
+  const pages = useMemo(() => {
+    return appContext.sites.map((ele) => {
+      const site = ele.id;
+      return indexBuilder(ele, "pages", site);
+    })
+  }, [appContext.sites])
+
+  const content = useMemo(() => { return indexBuilder(appContext, "content"); }, [appContext.content])
+  const data = useMemo(() => { return indexBuilder(appContext, "data"); }, [appContext.data])
+  const sites = useMemo(() => { return indexBuilder(appContext, "sites"); }, [appContext.sites])
 
   return (
     <div className="root-workspace">
-      {paths[2] === 'env' ? <h4>Expand tree or select Site or Content</h4> : null}
+      {paths[2] === 'env' ? <div className="index">
+        <div>
+          <h4>Sites</h4>
+          {sites}
+        </div>
+        <div>
+          <h4>Pages</h4>
+          {pages}
+        </div>
+        <div>
+          <h4>Content</h4>
+          {content}
+        </div>
+        <div>
+          <h4>Data</h4>
+          {data}
+        </div>
+        <br />
+      </div>
+        : null}
 
       {paths[2] === 'site' ? <>
         <h4>Add a new Site</h4>
@@ -30,7 +63,7 @@ const Root = () => {
             <Combo name="engine" items={appContext.engines} value={engine} onChange={(e) => setEngine(e.target.value)} />
             <br />
             <label>Create site</label>
-            <button onClick={() => addSite()}>+</button>
+            <button onClick={() => appContext.addSite(engine)}>+</button>
           </div>
         </div>
       </>
@@ -41,7 +74,7 @@ const Root = () => {
         <div className="form">
           <div>
             <label>Create Content item</label>
-            <button onClick={() => addContent()}>+</button>
+            <button onClick={() => appContext.addContent()}>+</button>
           </div>
         </div>
       </>
@@ -52,7 +85,7 @@ const Root = () => {
         <div className="form">
           <div>
             <label>Create Data item</label>
-            <button onClick={() => addData()}>+</button>
+            <button onClick={() => appContext.addData()}>+</button>
           </div>
         </div>
       </>

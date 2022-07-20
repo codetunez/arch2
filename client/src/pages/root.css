@@ -6,10 +6,25 @@
   padding: 1rem;
 }
 
-h4 {
+.root-workspace h4 {
   margin-top: 0;
 }
 
-h5 {
+.root-workspace h5 {
   margin: 0 0 0.5rem 0;
+}
+
+.root-workspace .index {
+  display: flex;
+  flex-direction: column;
+}
+
+.root-workspace .index h4 {
+  margin: 0;
+}
+
+.root-workspace .index div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
