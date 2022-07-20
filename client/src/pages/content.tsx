@@ -1,16 +1,19 @@
 import './content.css';
+import * as library from 'library';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useReducer, useContext } from 'react';
+import { useRef, useEffect, useReducer, useContext } from 'react';
 
 import axios from 'axios';
 import Editor from "@monaco-editor/react";
 import usePromise from '../hooks/usePromise';
 import { AppContext } from '../context/appContext';
+import { Combo } from '../controls/combo';
 
 interface State {
   data: any,
-  dirty: boolean
+  dirty: boolean,
+  form: any
 }
 
 interface Action {
@@ -21,6 +24,7 @@ interface Action {
 const reducer = (state: State, action: Action) => {
 
   let newData = Object.assign({}, state.data);
+  let newForm = Object.assign({}, state.form);
 
   switch (action.type) {
     case "load:data":
@@ -32,6 +36,9 @@ const reducer = (state: State, action: Action) => {
     case "update:markup":
       newData.markup = action.payload;
       return { ...state, data: newData, dirty: true }
+    case "update:engine":
+      newForm.engine = action.payload;
+      return { ...state, form: newForm }
     case "dirty:clear":
       return { ...state, dirty: false }
     default:
@@ -47,7 +54,9 @@ const Content = () => {
   const paths = location.pathname.split('/');
   const appContext: any = useContext(AppContext);
 
-  const [state, dispatch] = useReducer(reducer, { data: {}, dirty: true });
+  const refPreview = useRef();
+
+  const [state, dispatch] = useReducer(reducer, { data: {}, dirty: true, form: { engine: library.list.engines[0] } });
   // eslint-disable-next-line
   const [loading, payload, error, loadPayload] = usePromise({ promiseFn: () => axios.get(`http://localhost:3001/api/content/${paths[2]}`) });
 
@@ -60,6 +69,17 @@ const Content = () => {
     if (!payload) { return; }
     dispatch({ type: 'load:data', payload: payload.data })
   }, [payload])
+
+  useEffect(() => {
+
+    if (!state.data.id || !state.form.engine) { return; }
+
+    let markup = library.engines[state.form.engine](state.data.markup);
+    markup = library.templates[state.form.engine]("Sample", "<div style='padding: 2rem'>" + markup + "</div>");
+    const ref: any = refPreview.current;
+    if (ref) { ref.src = "data:text/html;charset=utf-8," + markup; }
+
+  }, [state.data.markup, state.form.engine])
 
   const updateContent = () => {
     appContext.updateContent(paths[2], {
@@ -80,7 +100,7 @@ const Content = () => {
         <>
           <div className="toolbar">
             <h5>Edit the content meta</h5>
-            <div className="btn-bar">              
+            <div className="btn-bar">
               <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updateContent() }}>Update</button>
               <button className={"btn-sm btn-danger"} onClick={() => { deleteContent() }}>Delete</button>
             </div>
@@ -108,6 +128,13 @@ const Content = () => {
               defaultValue={state.data.markup}
               value={state.data.markup}
             />
+          </div>
+          <div>
+            <h3>Content fragment preview</h3>
+            <div className='preview-bar'>
+              <Combo items={appContext.engines} value={state.form.engine || ''} onChange={(e) => dispatch({ type: 'update:engine', payload: e.target.value })} />
+            </div>
+            <iframe ref={refPreview} id="preview" title="preview" src="about:blank"></iframe>
           </div>
         </>
         : "No content data"}

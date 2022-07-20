@@ -2,7 +2,7 @@ import './data.css';
 import * as library from 'library';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useMemo, useRef, useEffect, useReducer, useContext } from 'react';
+import { useRef, useEffect, useReducer, useContext } from 'react';
 
 import axios from 'axios';
 import Editor from "@monaco-editor/react";

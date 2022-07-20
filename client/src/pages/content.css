@@ -1,8 +1,9 @@
 .content-workspace {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc(100% - 30px);
   padding: 1rem;
 }
 
@@ -17,7 +18,23 @@
 }
 
 .content-workspace .monaco {  
-  height: calc(100% - 160px);
+  height: 350px;
   border: 1px solid silver;
   border-radius: 2px;
+}
+
+#preview {
+  width: 132%;
+  height: 115%;
+  -ms-zoom: 0.75;
+  -moz-transform: scale(0.75);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.75);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.75);
+  -webkit-transform-origin: 0 0;
+}
+
+.preview-bar select {
+  margin: 0 0.5rem 0.5rem 0;
 }
