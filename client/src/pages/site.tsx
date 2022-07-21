@@ -4,6 +4,7 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useReducer, useContext } from 'react';
 
 import axios from 'axios';
+import Editor from "@monaco-editor/react";
 import usePromise from '../hooks/usePromise';
 import { AppContext } from '../context/appContext';
 
@@ -35,6 +36,9 @@ const reducer = (state: State, action: Action) => {
       return { ...state, data: newData, dirty: true }
     case "update:engine":
       newData.engine = action.payload;
+      return { ...state, data: newData, dirty: true }
+    case "update:stylesheet":
+      newData.stylesheet = action.payload;
       return { ...state, data: newData, dirty: true }
     case "update:sitenav":
       if (action.payload.value) {
@@ -79,6 +83,7 @@ const Site = () => {
       id: state.data.id,
       name: state.data.name,
       engine: state.data.engine,
+      stylesheet: state.data.stylesheet,
       pages: state.data.pages,
       sitenav: state.data.sitenav,
     });
@@ -121,8 +126,27 @@ const Site = () => {
               <input type='text' value={state.data.name} onChange={(e) => dispatch({ type: 'update:name', payload: e.target.value })} />
             </div>
             <div>
-              <label>Engine</label>
+              <label>CSS Engine</label>
               <Combo name="engine" items={appContext.engines} value={state.data.engine} onChange={(e) => dispatch({ type: 'update:engine', payload: e.target.value })} />
+            </div>
+            <div>
+              <label>Site Stylesheet</label>
+              <div className="monaco">
+                <Editor options={{
+                  renderLineHighlight: 'none',
+                  wordWrap: 'false',
+                  formatOnType: true,
+                  lineNumbers: 'off',
+                  minimap: { enabled: false },
+                  glyphMargin: false,
+                  disableLayerHinting: true,
+                }}
+                  onChange={(value) => dispatch({ type: 'update:stylesheet', payload: value })}
+                  language="css"
+                  defaultValue={state.data.stylesheet}
+                  value={state.data.stylesheet}
+                />
+              </div>
             </div>
             <div>
               <label>Add a new Page</label>

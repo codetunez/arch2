@@ -122,49 +122,52 @@ module.exports.engines = {
 }
 
 module.exports.templates = {
-    "bootstrap3": (title, content) => `
+    "bootstrap3": (title, content, styles) => `
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>${title} (Bootstrap)</title>
+        <title>${title || ""} (Bootstrap)</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        ${styles || ""}
     </head>
     <body>
-    ${content}
+    ${content || ""}
     </body>
 </html>    
     `,
-    "tailwind": (title, content) => `
+    "tailwind": (title, content, styles) => `
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>${title} (Tailwind)</title>
+        <title>${title || ""} (Tailwind)</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <script src="https://cdn.tailwindcss.com"></script>
-        </head>
+        ${styles || ""}
+    </head>
     <body>
-    ${content}
+    ${content || ""}
     </body>
 </html>    
     `,
-    "skeleton": (title, content) => `
+    "skeleton": (title, content, styles) => `
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <title>${title} (Skeleton)</title>
+    <title>${title || ""} (Skeleton)</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        ${styles || ""}        
     </head>
     <body>
-    ${content}
+    ${content || ""}
     </body>
 </html>    
     `

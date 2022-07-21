@@ -43,6 +43,7 @@ app.get('*', (req, res) => {
     // site not found
     if (!sites[segments[1]]) { res.status(404).end(); return; }
 
+    const styles = sites[segments[1]].stylesheet ? `<style>${sites[segments[1]].stylesheet}</style>` : "";
     const page = sites[segments[1]].pages.find((x) => x.url === (segments[2] || ""));
 
     // page not found
@@ -55,7 +56,7 @@ app.get('*', (req, res) => {
     markup = library.content.resolve(markup, content);
     markup = library.content.resolveServer(markup, data);
     markup = library.engines[eng](markup);
-    markup = library.templates[eng](page.title, markup);
+    markup = library.templates[eng](page.title, markup, styles);
 
     res.type('html');
     res.send(markup).end();

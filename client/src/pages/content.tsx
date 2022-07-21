@@ -75,7 +75,7 @@ const Content = () => {
     if (!state.data.id || !state.form.engine) { return; }
 
     let markup = library.engines[state.form.engine](state.data.markup);
-    markup = library.templates[state.form.engine]("Sample", "<div style='padding: 2rem'>" + markup + "</div>");
+    markup = library.templates[state.form.engine]("Sample", "<div style='padding: 2rem'>" + markup + "</div>","");
     const ref: any = refPreview.current;
     if (ref) { ref.src = "data:text/html;charset=utf-8," + markup; }
 

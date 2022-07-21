@@ -1,25 +1,32 @@
 .site-workspace {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc(100% - 30px);
   padding: 1rem;
 }
 
-h5 {
+.site-workspace h5 {
   margin: 0 0 0.5rem 0;
 }
 
-.toolbar {
+.site-workspace .toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.pages-list .item {
+.site-workspace .pages-list .item {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: 0.5rem;
+}
+
+.site-workspace .monaco {  
+  height: 200px;
+  border: 1px solid silver;
+  border-radius: 2px;
 }
