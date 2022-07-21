@@ -63,13 +63,13 @@ Becomes
     </div>
 
 ### Grids
-Use to define a 12 column capable grid. Cells will be devided equally or rounded down. Has some targetable class attributes. Child elements honored.
+Use to define a 12 column capable grid. columns will be devided equally or rounded down. Has some targetable class attributes. Child elements honored.
 
     <grid>
       <row>
-        <cell>...</cell>
-        <cell>...</cell>
-        <cell>...</cell>
+        <column>...</column>
+        <column>...</column>
+        <column>...</column>
       </row>
     <grid>
 

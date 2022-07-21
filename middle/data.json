@@ -8,19 +8,19 @@
         {
           "id": "P1",
           "title": "Homepage",
-          "markup": "<style class=\"\">\r\n    .page {\r\n        margin-top: 20px;\r\n    }\r\n</style>\r\n\r\n<div class=\"page\">\r\n    <section>\r\n        <grid>\r\n            <row>\r\n                <cell>\r\n                    <h1>Welcome Bootsrap 5 CSS homepage</h1>\r\n                    <h6><pp:day></pp:day></h6>\r\n                    <content id=\"C3000\"></content>\r\n                    <button>Click here to learn more</button>\r\n                </cell>\r\n                <cell>\r\n                    <content id=\"C7000\"></content>\r\n                </cell>\r\n            </row>\r\n            <br/>\r\n            <row>\r\n                <cell>\r\n                    <content id=\"C8000\"></content>\r\n                </cell>\r\n                <cell>                    \r\n                    <content id=\"C3000\"></content>\r\n                    <content id=\"C5000\"></content>\r\n                    <content id=\"C3000\"></content>\r\n                </cell>\r\n            </row>\r\n        </grid>\r\n    </section>\r\n</div>",
+          "markup": "<style class=\"\">\r\n    .page {\r\n        margin-top: 20px;\r\n    }\r\n</style>\r\n\r\n<div class=\"page\">\r\n    <section>\r\n        <grid>\r\n            <row>\r\n                <column>\r\n                    <h1>Welcome Bootsrap 5 CSS homepage</h1>\r\n                    <h6><pp:day></pp:day></h6>\r\n                    <content id=\"C3000\"></content>\r\n                    <button>Click here to learn more</button>\r\n                </column>\r\n                <column>\r\n                    <content id=\"C7000\"></content>\r\n                </column>\r\n            </row>\r\n            <br/>\r\n            <row>\r\n                <column>\r\n                    <content id=\"C8000\"></content>\r\n                </column>\r\n                <column>                    \r\n                    <content id=\"C3000\"></content>\r\n                    <content id=\"C5000\"></content>\r\n                    <content id=\"C3000\"></content>\r\n                </column>\r\n            </row>\r\n        </grid>\r\n    </section>\r\n</div>",
           "url": ""
         },
         {
           "id": "P2",
           "title": "Page One",
-          "markup": "<style class=\"\">\r\n    .section {\r\n        padding-top: 100px;\r\n    }\r\n\r\n    .form-group {\r\n        margin-bottom: 1rem;\r\n    }\r\n</style>\r\n\r\n<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <h3>Please complete the form</h3>\r\n                <pp:form data=\"D1000\" ux=\"simpleform\"></pp:form>\r\n                <br/>\r\n                <content id=\"C3000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<style class=\"\">\r\n    .section {\r\n        padding-top: 100px;\r\n    }\r\n\r\n    .form-group {\r\n        margin-bottom: 1rem;\r\n    }\r\n</style>\r\n\r\n<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <h3>Please complete the form</h3>\r\n                <pp:form data=\"D1000\" ux=\"simpleform\"></pp:form>\r\n                <br/>\r\n                <content id=\"C3000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
           "url": "p2"
         },
         {
           "id": "P3",
           "title": "Auth Page",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <content id=\"C1000\"></content>\r\n            </cell>\r\n            <cell>\r\n                <content id=\"C6000\"></content>\r\n                <content id=\"C2000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <content id=\"C1000\"></content>\r\n            </column>\r\n            <column>\r\n                <content id=\"C6000\"></content>\r\n                <content id=\"C2000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
           "url": "auth"
         }
       ],
@@ -41,19 +41,19 @@
         {
           "id": "P1",
           "title": "Homepage",
-          "markup": "<style class=\"\">\r\n    .section {\r\n        margin-top: 20px;\r\n        display: flex;\r\n        justify-content: center\r\n    }\r\n\r\n    h1 {\r\n        color: black;\r\n        font-size: 3rem;\r\n    }\r\n</style>\r\n\r\n<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <h1>Welcome to the Tailwind CSS homepage</h1>\r\n                <h6>\r\n                    <pp:day></pp:day>\r\n                </h6>\r\n                <content id=\"C3000\"></content>\r\n                <button>Click here to learn more</button>\r\n            </cell>\r\n            <cell>\r\n                <content id=\"C7000\"></content>\r\n            </cell>\r\n        </row>\r\n        <br/>\r\n        <row>\r\n            <cell>\r\n                <content id=\"C8000\"></content>\r\n            </cell>\r\n            <cell>\r\n                <content id=\"C3000\"></content>\r\n                <content id=\"C5000\"></content>\r\n                <content id=\"C3000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<style class=\"\">\r\n    .section {\r\n        margin-top: 20px;\r\n        display: flex;\r\n        justify-content: center\r\n    }\r\n\r\n    h1 {\r\n        columnor: black;\r\n        font-size: 3rem;\r\n    }\r\n</style>\r\n\r\n<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <h1>Welcome to the Tailwind CSS homepage</h1>\r\n                <h6>\r\n                    <pp:day></pp:day>\r\n                </h6>\r\n                <content id=\"C3000\"></content>\r\n                <button>Click here to learn more</button>\r\n            </column>\r\n            <column>\r\n                <content id=\"C7000\"></content>\r\n            </column>\r\n        </row>\r\n        <br/>\r\n        <row>\r\n            <column>\r\n                <content id=\"C8000\"></content>\r\n            </column>\r\n            <column>\r\n                <content id=\"C3000\"></content>\r\n                <content id=\"C5000\"></content>\r\n                <content id=\"C3000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
           "url": ""
         },
         {
           "id": "P2",
           "title": "Page One",
-          "markup": "<style class=\"\">\r\n    .section {\r\n        margin-top: 30px;\r\n        display: flex;\r\n        justify-content: center\r\n    }\r\n\r\n    h3 {\r\n        color: black;\r\n        font-size: 2rem;\r\n    }\r\n\r\n    form>div {\r\n        margin-bottom: 1rem;\r\n    }\r\n\r\n    input[type=\"text\"] {\r\n        margin-left: 20px;\r\n    }\r\n</style>\r\n\r\n<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <h3>Please complete the form</h3>\r\n                <pp:form data=\"D1000\" ux=\"simpleform\"></pp:form>\r\n                <br/>\r\n                <content id=\"C3000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<style class=\"\">\r\n    .section {\r\n        margin-top: 30px;\r\n        display: flex;\r\n        justify-content: center\r\n    }\r\n\r\n    h3 {\r\n        columnor: black;\r\n        font-size: 2rem;\r\n    }\r\n\r\n    form>div {\r\n        margin-bottom: 1rem;\r\n    }\r\n\r\n    input[type=\"text\"] {\r\n        margin-left: 20px;\r\n    }\r\n</style>\r\n\r\n<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <h3>Please complete the form</h3>\r\n                <pp:form data=\"D1000\" ux=\"simpleform\"></pp:form>\r\n                <br/>\r\n                <content id=\"C3000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
           "url": "p2"
         },
         {
           "id": "P3",
           "title": "Auth Page",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <content id=\"C1000\"></content>\r\n            </cell>\r\n            <cell>\r\n                <content id=\"C6000\"></content>\r\n                <content id=\"C2000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <content id=\"C1000\"></content>\r\n            </column>\r\n            <column>\r\n                <content id=\"C6000\"></content>\r\n                <content id=\"C2000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
           "url": "auth"
         }
       ]
@@ -66,19 +66,19 @@
         {
           "id": "P1",
           "title": "Homepage",
-          "markup": "<style class=\"\">\r\n    .page {\r\n        margin-top: 20px;\r\n    }\r\n</style>\r\n\r\n<div class=\"page\">\r\n    <section>\r\n        <grid>\r\n            <row>\r\n                <cell>\r\n                    <h1>Welcome the Skeleton CSS homepage</h1>\r\n                    <content id=\"C3000\"></content>\r\n                    <button>Click here to learn more</button>\r\n                </cell>\r\n                <cell>\r\n                    <content id=\"C7000\"></content>\r\n                </cell>\r\n            </row>\r\n            <br/>\r\n            <row>\r\n                <cell>\r\n                    <content id=\"C8000\"></content>\r\n                </cell>\r\n                <cell>\r\n                    <content id=\"C3000\"></content>\r\n                    <content id=\"C5000\"></content>\r\n                    <content id=\"C3000\"></content>\r\n                </cell>\r\n            </row>\r\n        </grid>\r\n    </section>\r\n</div>",
+          "markup": "<style class=\"\">\r\n    .page {\r\n        margin-top: 20px;\r\n    }\r\n</style>\r\n\r\n<div class=\"page\">\r\n    <section>\r\n        <grid>\r\n            <row>\r\n                <column>\r\n                    <h1>Welcome the Skeleton CSS homepage</h1>\r\n                    <content id=\"C3000\"></content>\r\n                    <button>Click here to learn more</button>\r\n                </column>\r\n                <column>\r\n                    <content id=\"C7000\"></content>\r\n                </column>\r\n            </row>\r\n            <br/>\r\n            <row>\r\n                <column>\r\n                    <content id=\"C8000\"></content>\r\n                </column>\r\n                <column>\r\n                    <content id=\"C3000\"></content>\r\n                    <content id=\"C5000\"></content>\r\n                    <content id=\"C3000\"></content>\r\n                </column>\r\n            </row>\r\n        </grid>\r\n    </section>\r\n</div>",
           "url": ""
         },
         {
           "id": "P2",
           "title": "Page One",
-          "markup": "<style class=\"\">\r\n    .section {\r\n        padding-top: 100px;\r\n    }\r\n</style>\r\n\r\n<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <h3>Please complete the form</h3>\r\n                <pp:form data=\"D1000\" ux=\"simpleform\"></pp:form>\r\n                <br/>\r\n                <content id=\"C3000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<style class=\"\">\r\n    .section {\r\n        padding-top: 100px;\r\n    }\r\n</style>\r\n\r\n<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <h3>Please complete the form</h3>\r\n                <pp:form data=\"D1000\" ux=\"simpleform\"></pp:form>\r\n                <br/>\r\n                <content id=\"C3000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
           "url": "p2"
         },
         {
           "id": "P3",
           "title": "Auth Page",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <cell>\r\n                <content id=\"C1000\"></content>\r\n            </cell>\r\n            <cell>\r\n                <content id=\"C6000\"></content>\r\n                <content id=\"C2000\"></content>\r\n            </cell>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <content id=\"C1000\"></content>\r\n            </column>\r\n            <column>\r\n                <content id=\"C6000\"></content>\r\n                <content id=\"C2000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
           "url": "auth"
         }
       ],

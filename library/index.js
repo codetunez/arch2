@@ -63,8 +63,8 @@ module.exports.engines = {
         let $ = cheerio.load(markup, null, false);
 
         $("grid").find("row").each(function (i, rows) {
-            $(this).find("cell").each(function (i, cell) {
-                $(this).replaceWith(`<div class="col">${$(cell).html()}</div>`);
+            $(this).find("column").each(function (i, column) {
+                $(this).replaceWith(`<div class="col">${$(column).html()}</div>`);
             });
         })
 
@@ -84,10 +84,10 @@ module.exports.engines = {
         let $ = cheerio.load(markup, null, false);
 
         $("grid").find("row").each(function (i, rows) {
-            const cells = $(this).find("cell");
-            const gridCol = cells.length === 1 ? gridMap[gridMap.length - 1] : gridMap[Math.floor(12 / cells.length) - 1];
-            cells.each(function (i, cell) {
-                $(this).replaceWith(`<div class="${gridCol} columns">${$(cell).html()}</div>`);
+            const columns = $(this).find("column");
+            const gridColumn = columns.length === 1 ? gridMap[gridMap.length - 1] : gridMap[Math.floor(12 / columns.length) - 1];
+            columns.each(function (i, column) {
+                $(this).replaceWith(`<div class="${gridColumn} columns">${$(column).html()}</div>`);
             });
         })
 
@@ -106,14 +106,14 @@ module.exports.engines = {
         let $ = cheerio.load(markup, null, false);
 
         $("grid").find("row").each(function (i, rows) {
-            const cells = $(this).find("cell");
-            const gridCol = gridMap[cells.length - 1];
-            $(this).replaceWith(`<div class="grid ${gridCol} gap-4">${$(rows).html()}</div>`);
+            const columns = $(this).find("column");
+            const gridColumn = gridMap[columns.length - 1];
+            $(this).replaceWith(`<div class="grid ${gridColumn} gap-4">${$(rows).html()}</div>`);
         })
 
         $("button").each(function (i, ele) { $(this).addClass("bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"); })
         $("form").find("group").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
-        $("cell").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
+        $("column").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
         $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
         $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
 
