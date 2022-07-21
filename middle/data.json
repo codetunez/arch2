@@ -34,7 +34,7 @@
       "id": "S2",
       "name": "Site Two",
       "engine": "tailwind",
-      "stylesheet": ".section {\r\n    margin-top: 20px;\r\n    display: flex;\r\n    justify-content: center\r\n}\r\n\r\nh1 {\r\n    color: black;\r\n    font-size: 3rem;\r\n}\r\n\r\nh3 {\r\n    columnor: black;\r\n    font-size: 2rem;\r\n}\r\n\r\nform>div {\r\n    margin-bottom: 1rem;\r\n}\r\n\r\ninput[type=\"text\"] {\r\n    margin-left: 20px;\r\n}",
+      "stylesheet": ".section {\r\n    margin-top: 20px;\r\n    display: flex;\r\n    justify-content: center\r\n}\r\n\r\nh1 {\r\n    color: black;\r\n    font-size: 3rem;\r\n}\r\n\r\nh3 {\r\n    color: black;\r\n    font-size: 2rem;\r\n}\r\n\r\nform>div {\r\n    margin-bottom: 1rem;\r\n}",
       "pages": [
         {
           "id": "P1",

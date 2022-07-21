@@ -89,7 +89,7 @@ const Page = () => {
       {Object.keys(state.data).length > 0 ?
         <>
           <div className="toolbar">
-            <h5>Edit the page meta</h5>
+            <h5>Edit the page</h5>
             <div className="btn-bar">
               <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updatePage() }}>Update</button>
               <button className={"btn-sm btn-danger"} onClick={() => { deletePage() }}>Delete</button>

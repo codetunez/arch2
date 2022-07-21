@@ -104,7 +104,7 @@ const Data = () => {
       {Object.keys(state.data).length > 0 ?
         <>
           <div className="toolbar">
-            <h5>Edit the content meta</h5>
+            <h5>Edit Data</h5>
             <div className="btn-bar">
               <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updateData() }}>Update</button>
               <button className={"btn-sm btn-danger"} onClick={() => { deleteData() }}>Delete</button>

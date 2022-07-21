@@ -117,6 +117,9 @@ module.exports.engines = {
         $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
         $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
 
+        $("label").each(function (i, ele) { $(this).addClass("block text-gray-700 text-sm font-bold mb-2"); });
+        $("input").each(function (i, ele) { $(this).addClass("appearance-none border rounded w-full py-2 px-3"); });
+
         return $.html();
     },
 }
@@ -148,9 +151,11 @@ module.exports.templates = {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <script src="https://cdn.tailwindcss.com"></script>
-        ${styles || ""}
+        <!-- Tailwind reorders the CSS hence styles not in head -->
     </head>
+    
     <body>
+    ${styles || ""}
     ${content || ""}
     </body>
 </html>    

@@ -99,7 +99,7 @@ const Content = () => {
       {Object.keys(state.data).length > 0 ?
         <>
           <div className="toolbar">
-            <h5>Edit the content meta</h5>
+            <h5>Edit Content fragment</h5>
             <div className="btn-bar">
               <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updateContent() }}>Update</button>
               <button className={"btn-sm btn-danger"} onClick={() => { deleteContent() }}>Delete</button>
@@ -112,7 +112,7 @@ const Content = () => {
             </div>
           </div>
           <br />
-          <h5>Edit the page markup</h5>
+          <h5>Edit the content fragment</h5>
           <div className="monaco">
             <Editor options={{
               renderLineHighlight: 'none',
