@@ -1,12 +1,27 @@
 import './page.css';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useReducer, useContext } from 'react';
+import { useEffect, useReducer, useContext, useState } from 'react';
+
+import BlocksEditor from 'blocks-ui';
+import * as Blocks from '@blocks/react';
+import Grid from "../blocks/Grid";
+import Date from "../blocks/Date";
+
 
 import axios from 'axios';
 import Editor from "@monaco-editor/react";
 import usePromise from '../hooks/usePromise';
 import { AppContext } from '../context/appContext';
+import { useSiteInformation } from '../hooks/useSiteInformation';
+import useEngineCSS from '../hooks/useEngineCSS';
+import Content from '../blocks/Content';
+import Button from '../blocks/Button';
+import Heading from '../blocks/Heading';
+import Section from '../blocks/Section';
+import Row from '../blocks/Row';
+import Column from '../blocks/Column';
+import Form from '../blocks/Form';
 
 interface State {
   data: any,
@@ -45,18 +60,33 @@ const reducer = (state: State, action: Action) => {
   }
 }
 
-const Page = () => {
+const newBlocks = Blocks;
 
+newBlocks.Row = Row;
+newBlocks.Column = Column;
+newBlocks.Grid = Grid;
+newBlocks.Date = Date;
+newBlocks.Content = Content;
+newBlocks.Button = Button;
+newBlocks.Heading = Heading;
+newBlocks.Section = Section;
+newBlocks.Form = Form;
+
+const Page = () => {
+  
   const location = useLocation();
   const navigate = useNavigate();
-
+  
   const paths = location.pathname.split('/');
   const appContext: any = useContext(AppContext);
-
+  
   const [state, dispatch] = useReducer(reducer, { data: {}, dirty: false });
+
+  const {engine} = useSiteInformation();
+
   // eslint-disable-next-line
   const [loading, payload, error, loadPayload] = usePromise({ promiseFn: () => axios.get(`http://localhost:3001/api/page/${paths[2]}/${paths[3]}`) });
-
+  
   useEffect(() => {
     loadPayload();
     // eslint-disable-next-line
@@ -66,7 +96,7 @@ const Page = () => {
     if (!payload) { return; }
     dispatch({ type: 'load:data', payload: payload.data })
   }, [payload])
-
+  
   const updatePage = () => {
     appContext.updatePage(paths[2], paths[3], {
       id: state.data.id,
@@ -76,14 +106,34 @@ const Page = () => {
     })
     dispatch({ type: 'dirty:clear', payload: null })
   }
-
+  
   const deletePage = () => {
     appContext.deletePage(paths[2], paths[3]);
     navigate("/root/data");
   }
-
+  
   const url = Object.keys(state.data).length > 0 ? `${paths[2]}/${state.data.url}` : null;
 
+  const cssLink = useEngineCSS();
+  
+  const JSX = `
+  import React from 'react'
+  export default () => (
+    <Blocks.Root>
+      ${state.data.markup}
+    </Blocks.Root>
+  )
+  `;
+
+  const [blocksHTML, setBlocksHTML] = useState('');
+
+  function setHTML(blocksCode) {
+    let startPos = blocksCode.indexOf("<Blocks.Root>") + "<Blocks.Root>".length;
+    let endPos = blocksCode.indexOf("</Blocks.Root>");
+    let targetText = blocksCode.substring(startPos,endPos).trim();
+    setBlocksHTML(targetText);
+  }
+  
   return (
     <div className="page-workspace">
       {Object.keys(state.data).length > 0 ?
@@ -131,6 +181,13 @@ const Page = () => {
               value={state.data.markup}
             />
           </div>
+          { state.data.markup && engine && 
+            <>
+              <button onClick={() => dispatch({ type: 'update:markup', payload: blocksHTML })}>Sync HTML</button> 
+              <BlocksEditor blocks={newBlocks} onChange={(code)=> setHTML(code)} src={JSX} />
+            </>
+          }
+          { cssLink }
         </>
         : "No page data"}
     </div>

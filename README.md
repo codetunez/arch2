@@ -44,7 +44,7 @@ Content is assembled prior to serving to the browser. Therefore CSS can be added
 ## Composablity support
 Use to embedded fragements of reuseable content. Works when referencing server controls. Has no child elements.
 
-    <content id="<content id"></content>
+    <Content id="<content id">
 
 ## Responsive controls support
 Styling of these DOM structures will happen through the transformation engine.
@@ -52,9 +52,9 @@ Styling of these DOM structures will happen through the transformation engine.
 ### Section
 Use to contain any content at 100% width. Has a targetable class attribute. Child elements honored.
 
-    <section>
+    <Section>
     ...
-    </section>
+    </Section>
 
 Becomes
 
@@ -65,13 +65,13 @@ Becomes
 ### Grids
 Use to define a 12 column capable grid. columns will be devided equally or rounded down. Has some targetable class attributes. Child elements honored.
 
-    <grid>
-      <row>
-        <column>...</column>
-        <column>...</column>
-        <column>...</column>
-      </row>
-    <grid>
+    <Grid>
+      <Row>
+        <Column>...</Column>
+        <Column>...</Column>
+        <Column>...</Column>
+      </Row>
+    <Grid>
 
 Becomes
 
@@ -102,7 +102,7 @@ Styling of these instrinsic controls will happen through the transformation engi
 ### Buttons
 Use to style any HTML button element. Child elements honored.
 
-    <button>...</button>
+    <Button>...</Button>
 
 ### Inputs
 Use to style any HTML input element. Child elements honored.
@@ -115,9 +115,9 @@ The HTML for these controls will be built by the server and are typically used w
 ## Forms and Data
 Use to create form from a Data item. Has no child elements.
 
-    <pp:form data="<data id>" ux="<simpleform | default>"></pp:form>
+    <Form data="<data id>" ux="<simpleform | default>" />
 
 ## Date time
 Use to return a long string version of the current Data and Time. Has no child elements.
 
-    <pp:day></pp:day>
+    <Date locale="<locale> | en-us" />

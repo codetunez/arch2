@@ -9,19 +9,19 @@
         {
           "id": "P1",
           "title": "Homepage",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <h1>Welcome Bootsrap 5 CSS homepage</h1>\r\n                <h6>\r\n                    <pp:day></pp:day>\r\n                </h6>\r\n                <content id=\"C3000\"></content>\r\n                <button>Click here to learn more</button>\r\n            </column>\r\n            <column>\r\n                <content id=\"C7000\"></content>\r\n            </column>\r\n        </row>\r\n        <br/>\r\n        <row>\r\n            <column>\r\n                <content id=\"C8000\"></content>\r\n            </column>\r\n            <column>\r\n                <content id=\"C3000\"></content>\r\n                <content id=\"C5000\"></content>\r\n                <content id=\"C3000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<Section>\n    <Grid>\n        <Row>\n            <Column>\n                <Heading as='H1' text='Welcome Bootstrap 5 CSS homepage'></Heading>\n                <Heading as='H6'>\n                    <Date/>\n                </Heading>\n                <Content id='C3000' />\n                <Button text='Click here to learn more' />\n            </Column>\n            <Column>\n                <Content id='C7000'/>\n            </Column>\n        </Row>\n        <br />\n        <Row>\n            <Column>\n                <Content id='C8000' />\n            </Column>\n            <Column>\n                <Content id='C3000' />\n                <Content id='C5000' />\n                <Content id='C3000' />\n            </Column>\n        </Row>\n    </Grid>\n</Section>",
           "url": ""
         },
         {
           "id": "P2",
           "title": "Page One",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <h3>Please complete the form</h3>\r\n                <pp:form data=\"D1000\" ux=\"simpleform\"></pp:form>\r\n                <br/>\r\n                <content id=\"C3000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Heading as='H3' text='Please complete the form' />\r\n                <Form data='D1000' type='simpleform' />\r\n                <br/>\r\n                <Content id='C3000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
           "url": "p2"
         },
         {
           "id": "P3",
           "title": "Auth Page",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <content id=\"C1000\"></content>\r\n            </column>\r\n            <column>\r\n                <content id=\"C6000\"></content>\r\n                <content id=\"C2000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Content id='C1000' />\r\n            </Column>\r\n            <Column>\r\n                <Content id='C6000' />\r\n                <Content id='C2000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
           "url": "auth"
         }
       ],
@@ -39,19 +39,19 @@
         {
           "id": "P1",
           "title": "Homepage",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <h1>Welcome to the Tailwind CSS homepage</h1>\r\n                <h6>\r\n                    <pp:day></pp:day>\r\n                </h6>\r\n                <content id=\"C3000\"></content>\r\n                <button>Click here to learn more</button>\r\n            </column>\r\n            <column>\r\n                <content id=\"C7000\"></content>\r\n            </column>\r\n        </row>\r\n        <br/>\r\n        <row>\r\n            <column>\r\n                <content id=\"C8000\"></content>\r\n            </column>\r\n            <column>\r\n                <content id=\"C3000\"></content>\r\n                <content id=\"C5000\"></content>\r\n                <content id=\"C3000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<Section>\n    <Grid>\n        <Row>\n            <Column>\n                <Heading as='H1' text='Welcome to the Tailwind CSS homepage'></Heading>\n                <Heading as='H6'>\n                    <Date/>\n                </Heading>\n                <Content id='C3000' />\n                <Button text='Click here to learn more' />\n            </Column>\n            <Column>\n                <Content id='C7000'/>\n            </Column>\n        </Row>\n        <br />\n        <Row>\n            <Column>\n                <Content id='C8000' />\n            </Column>\n            <Column>\n                <Content id='C3000' />\n                <Content id='C5000' />\n                <Content id='C3000' />\n            </Column>\n        </Row>\n    </Grid>\n</Section>",
           "url": ""
         },
         {
           "id": "P2",
           "title": "Page One",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <h3>Please complete the form</h3>\r\n                <pp:form data=\"D1000\" ux=\"simpleform\"></pp:form>\r\n                <br/>\r\n                <content id=\"C3000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Heading as='H3' text='Please complete the form' />\r\n                <Form data='D1000' type='simpleform' />\r\n                <br/>\r\n                <Content id='C3000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
           "url": "p2"
         },
         {
           "id": "P3",
           "title": "Auth Page",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <content id=\"C1000\"></content>\r\n            </column>\r\n            <column>\r\n                <content id=\"C6000\"></content>\r\n                <content id=\"C2000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Content id='C1000' />\r\n            </Column>\r\n            <Column>\r\n                <Content id='C6000' />\r\n                <Content id='C2000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
           "url": "auth"
         }
       ],
@@ -69,19 +69,19 @@
         {
           "id": "P1",
           "title": "Homepage",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <h1>Welcome the Skeleton CSS homepage</h1>\r\n                <content id=\"C3000\"></content>\r\n                <button>Click here to learn more</button>\r\n            </column>\r\n            <column>\r\n                <content id=\"C7000\"></content>\r\n            </column>\r\n        </row>\r\n        <br/>\r\n        <row>\r\n            <column>\r\n                <content id=\"C8000\"></content>\r\n            </column>\r\n            <column>\r\n                <content id=\"C3000\"></content>\r\n                <content id=\"C5000\"></content>\r\n                <content id=\"C3000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<Section>\n    <Grid>\n        <Row>\n            <Column>\n                <Heading as='H1' text='Welcome Skeleton CSS homepage'></Heading>\n                <Heading as='H6'>\n                    <Date/>\n                </Heading>\n                <Content id='C3000' />\n                <Button text='Click here to learn more' />\n            </Column>\n            <Column>\n                <Content id='C7000'/>\n            </Column>\n        </Row>\n        <br />\n        <Row>\n            <Column>\n                <Content id='C8000' />\n            </Column>\n            <Column>\n                <Content id='C3000' />\n                <Content id='C5000' />\n                <Content id='C3000' />\n            </Column>\n        </Row>\n    </Grid>\n</Section>",
           "url": ""
         },
         {
           "id": "P2",
           "title": "Page One",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <h3>Please complete the form</h3>\r\n                <pp:form data=\"D1000\" ux=\"simpleform\"></pp:form>\r\n                <br/>\r\n                <content id=\"C3000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Heading as='H3' text='Please complete the form' />\r\n                <Form data='D1000' type='simpleform' />\r\n                <br/>\r\n                <Content id='C3000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
           "url": "p2"
         },
         {
           "id": "P3",
           "title": "Auth Page",
-          "markup": "<section>\r\n    <grid>\r\n        <row>\r\n            <column>\r\n                <content id=\"C1000\"></content>\r\n            </column>\r\n            <column>\r\n                <content id=\"C6000\"></content>\r\n                <content id=\"C2000\"></content>\r\n            </column>\r\n        </row>\r\n    </grid>\r\n</section>",
+          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Content id='C1000' />\r\n            </Column>\r\n            <Column>\r\n                <Content id='C6000' />\r\n                <Content id='C2000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
           "url": "auth"
         }
       ],
@@ -105,7 +105,7 @@
     },
     {
       "id": "C4000",
-      "markup": "<pp:day></pp:day>"
+      "markup": "<Date/>"
     },
     {
       "id": "C5000",
@@ -113,7 +113,7 @@
     },
     {
       "id": "C6000",
-      "markup": "<div class=\"form\">\r\n    <form>\r\n        <label>\r\n            Username\r\n        </label>\r\n        <input type=\"text\"></input>\r\n        <br/>\r\n        <label>\r\n            Password\r\n        </label>\r\n        <input type=\"text\"></input>\r\n    </form>\r\n</div>"
+      "markup": "<div class=\"form\">\r\n    <Form>\r\n        <label>\r\n            Username\r\n        </label>\r\n        <input type=\"text\"></input>\r\n        <br/>\r\n        <label>\r\n            Password\r\n        </label>\r\n        <input type=\"text\"></input>\r\n    </Form>\r\n</div>"
     },
     {
       "id": "C7000",
@@ -121,7 +121,7 @@
     },
     {
       "id": "C8000",
-      "markup": "<img width=\"450\" src=\"https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Surface-Go-3-Business-Pen-Mouse-mosaic-medium-2x-1718x1500?wid=859&hei=750\"/>"
+      "markup": "<img width=\"450\" src=\"https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4QWs8?ver=95ec&q=90&m=6&h=270&w=270&b=%23FFFFFFFF&f=jpg&o=f&aim=true\"/>"
     }
   ],
   "data": [

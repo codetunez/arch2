@@ -18,4 +18,5 @@
 
 .shell .workspace {
     width: calc(100% - 200px);
+    overflow-y: auto;
 }

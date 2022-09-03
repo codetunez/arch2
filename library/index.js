@@ -7,8 +7,8 @@ module.exports.list = {
 
 module.exports.content = {
     "resolve": (markup, contentFragments) => {
-        let $ = cheerio.load(markup, null, false);
-        $("content").each(function (i, ele) {
+        let $ = cheerio.load(markup, { xmlMode: true }, false);
+        $("Content").each(function (i, ele) {
             const id = $(this).attr("id");
             const c = contentFragments[id];
             if (c) {
@@ -17,10 +17,10 @@ module.exports.content = {
                 $(this).replaceWith(`<!-- Unresolved content missing: ${id} -->`)
             }
         })
-        return $.html();
+        return $.html({ xmlMode: false });
     },
     "resolveServer": (markup, data) => {
-        let $ = cheerio.load(markup, null, false);
+        let $ = cheerio.load(markup, { xmlMode: true }, false);
         $("pp\\:form").each(function (i, ele) {
             const id = $(this).attr("data");
             const ux = $(this).attr("ux");
@@ -34,11 +34,12 @@ module.exports.content = {
             }
         })
 
-        $("pp\\:day").each(function (i, ele) {
-            $(this).replaceWith(new Date().toString());
+        $("Date").each(function (i, ele) {
+            const locale = $(this).attr("locale");
+            $(this).replaceWith(new Date().toLocaleString(locale));
         })
 
-        return $.html();
+        return $.html({ xmlMode: false });
     }
 }
 
@@ -60,67 +61,104 @@ module.exports.serverForms = {
 
 module.exports.engines = {
     "bootstrap3": (markup) => {
-        let $ = cheerio.load(markup, null, false);
+        let $ = cheerio.load(markup, { xmlMode: true }, false);
 
-        $("grid").find("row").each(function (i, rows) {
-            $(this).find("column").each(function (i, column) {
+        $("Grid").find("Row").each(function (i, rows) {
+            $(this).find("Column").each(function (i, column) {
                 $(this).replaceWith(`<div class="col">${$(column).html()}</div>`);
             });
         })
 
-        $("button").each(function (i, ele) { $(this).addClass("btn btn-primary"); });
+        $("Heading").each(function (i, ele) {
+            const headingType = $(this).attr("as").toLowerCase();
+            const textOrHtml = $(this).attr("text") || $(ele).html();
+            $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
+        });
+        $("Button").each(function (i, ele) {
+            const textOrHtml = $(this).attr("text") || $(ele).html();
+            $(this).replaceWith(`<button class="btn btn-primary">${textOrHtml}</button>`) 
+        });
         $("input").each(function (i, ele) { $(this).addClass("form-control"); });
-        $("form").find("group").each(function (i, ele) { $(this).replaceWith(`<div class="form-group">${$(ele).html()}</div>`); })
-        $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
-        $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
-        $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
+        $("Form").find("group").each(function (i, ele) { $(this).replaceWith(`<div class="form-group">${$(ele).html()}</div>`); })
+        $("Row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
+        $("Grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
+        $("Section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
 
-        return $.html();
+        return $.html({ xmlMode: false });
     },
     "skeleton": (markup) => {
 
         const gridMap = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
 
-        let $ = cheerio.load(markup, null, false);
+        let $ = cheerio.load(markup, { xmlMode: true }, false);
 
-        $("grid").find("row").each(function (i, rows) {
-            const columns = $(this).find("column");
+        $("Grid").find("Row").each(function (i, rows) {
+            const columns = $(this).find("Column");
             const gridColumn = columns.length === 1 ? gridMap[gridMap.length - 1] : gridMap[Math.floor(12 / columns.length) - 1];
             columns.each(function (i, column) {
                 $(this).replaceWith(`<div class="${gridColumn} columns">${$(column).html()}</div>`);
             });
         })
 
-        $("button").each(function (i, ele) { $(this).addClass("button-primary"); })
-        $("form").find("group").each(function (i, ele) { $(this).replaceWith($(ele).html()); })
-        $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
-        $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
-        $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
+        $("Heading").each(function (i, ele) {
+            const headingType = $(this).attr("as").toLowerCase();
+            const textOrHtml = $(this).attr("text") || $(ele).html();
+            $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
+        });
 
-        return $.html();
+        $("Button").each(function (i, ele) {
+            const textOrHtml = $(this).attr("text") || $(ele).html();
+            $(this).replaceWith(`
+                <button class="button-primary">
+                    ${textOrHtml}
+                </button>
+            `);
+        });
+        
+        $("Form").find("group").each(function (i, ele) { $(this).replaceWith($(ele).html()); })
+        $("Row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
+        $("Grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
+        $("Section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
+
+        return $.html({ xmlMode: false });
     },
     "tailwind": (markup) => {
 
         const gridMap = ['grid-cols-1', 'grid-cols-2', 'grid-cols-3', 'grid-cols-4', 'grid-cols-5', 'grid-cols-6', 'grid-cols-7', 'grid-cols-8', 'grid-cols-9', 'grid-cols-10', 'grid-cols-11', 'grid-cols-1'];
 
-        let $ = cheerio.load(markup, null, false);
+        let $ = cheerio.load(markup, { xmlMode: true }, false);
 
-        $("grid").find("row").each(function (i, rows) {
-            const columns = $(this).find("column");
+
+        $("Heading").each(function (i, ele) {
+            const headingType = $(this).attr("as").toLowerCase();
+            const textOrHtml = $(this).attr("text") || $(ele).html();
+            $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
+        });
+
+        $("Grid").find("Row").each(function (i, rows) {
+            const columns = $(this).find("Column");
             const gridColumn = gridMap[columns.length - 1];
             $(this).replaceWith(`<div class="grid ${gridColumn} gap-4">${$(rows).html()}</div>`);
         })
 
-        $("button").each(function (i, ele) { $(this).addClass("bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"); })
-        $("form").find("group").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
-        $("column").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
-        $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
-        $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
+        $("Button").each(function (i, ele) {
+            const textOrHtml = $(this).attr("text") || $(ele).html();
+            $(this).replaceWith(`
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    ${textOrHtml}
+                </button>
+            `);
+        });
+        
+        $("Form").find("group").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
+        $("Column").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
+        $("Grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
+        $("Section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
 
         $("label").each(function (i, ele) { $(this).addClass("block text-gray-700 text-sm font-bold mb-2"); });
         $("input").each(function (i, ele) { $(this).addClass("appearance-none border rounded w-full py-2 px-3"); });
 
-        return $.html();
+        return $.html({ xmlMode: false });
     },
 }
 
@@ -150,7 +188,7 @@ module.exports.templates = {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
-        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
         <!-- Tailwind reorders the CSS hence styles not in head -->
     </head>
     
