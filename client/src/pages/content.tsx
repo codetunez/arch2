@@ -116,7 +116,7 @@ const Content = () => {
           <div className="monaco">
             <Editor options={{
               renderLineHighlight: 'none',
-              wordWrap: 'false',
+              wordWrap: 'off',
               formatOnType: true,
               lineNumbers: 'off',
               minimap: { enabled: false },

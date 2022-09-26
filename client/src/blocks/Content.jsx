@@ -1,10 +1,8 @@
 import { ControlType, applyPropertyControls } from 'property-controls';
 import ReactHtmlParser from 'react-html-parser';
-import parse from 'html-react-parser';
 import * as library from 'library';
 import useContentMap from '../hooks/useContentMap';
 import {useSiteInformation} from '../hooks/useSiteInformation';
-import { useRef, useEffect, useReducer, useContext } from 'react';
 
 const Content = ({id, ...props}) => {
     const contentMap = useContentMap();

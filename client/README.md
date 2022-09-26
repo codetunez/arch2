@@ -8,7 +8,7 @@ It is important to do the following steps. Missing a step will cause the client 
 
 __1. Build the client__
 ```
-npm i
+npm i  --legacy-peer-deps
 ```
 
 __2. Connect the Symbolic link__\
@@ -17,7 +17,7 @@ This client needs access to the transformation [library](../library/README.md). 
 Ensure you have built the [library](../library/README.md) and created the Symbolic link before doing the following
 
 ```
-npm link library
+npm link library  --legacy-peer-deps
 ```
 ...after this, a package called _library_ will be added to the client's node_modules
 

@@ -6,9 +6,9 @@ import { AppContext } from '../context/appContext';
 
 import { Combo } from '../controls/combo';
 
-function indexBuilder(context, item, root?) {
-  return context[item].map((ele) => {
-    const path = `/${item}/${root ? root + '/' : ''}${ele.id}`
+function indexBuilder(items, itemKey, root?) {
+  return items.map((ele) => {
+    const path = `/${itemKey}/${root ? root + '/' : ''}${ele.id}`
     return <Link to={path}>http://localhost:3000{path}</Link>
   })
 }
@@ -28,9 +28,9 @@ const Root = () => {
     })
   }, [appContext.sites])
 
-  const content = useMemo(() => { return indexBuilder(appContext, "content"); }, [appContext.content])
-  const data = useMemo(() => { return indexBuilder(appContext, "data"); }, [appContext.data])
-  const sites = useMemo(() => { return indexBuilder(appContext, "sites"); }, [appContext.sites])
+  const content = useMemo(() => { return indexBuilder(appContext.content, "content"); }, [appContext.content])
+  const data = useMemo(() => { return indexBuilder(appContext.data, "data"); }, [appContext.data])
+  const sites = useMemo(() => { return indexBuilder(appContext.sites, "sites"); }, [appContext.sites])
 
   return (
     <div className="root-workspace">

@@ -1,5 +1,4 @@
 import { ControlType, applyPropertyControls } from 'property-controls'
-import { Link } from '@theme-ui/components'
 
 const Grid = ({gridClasses = '', ...props}) => {
   
