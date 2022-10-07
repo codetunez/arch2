@@ -28,6 +28,8 @@ Review each of the individual README.md files and follow the instruction. Each s
 ./start.sh
 ```
 
+Note: These two script are good to get started quickly but are not great at cleaning up background processes. So you may have to kill your processes manually using task manager.
+
 ## Build sequence
 
 1. [Library](./library/README.md) (with Symbolic links created)
