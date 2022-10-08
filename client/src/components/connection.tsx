@@ -7,14 +7,14 @@ export async function initDataverseConnection() {
         throw Error("No active account! Verify a user has been signed in and setActiveAccount has been called.");
     }
 
-    const response1 = await msalInstance.acquireTokenPopup({
+    const response = await msalInstance.acquireTokenPopup({
         ...cdsRequest,
         account: account
     });
 
 
     const headers = new Headers();
-    const bearer = `Bearer ${response1.accessToken}`;
+    const bearer = `Bearer ${response.accessToken}`;
     console.log(bearer);
     headers.append("Authorization", bearer);
     headers.append("OData-MaxVersion", "4.0");
@@ -35,14 +35,14 @@ export async function fetchMetadata() {
         throw Error("No active account! Verify a user has been signed in and setActiveAccount has been called.");
     }
 
-    const response1 = await msalInstance.acquireTokenSilent({
+    const response = await msalInstance.acquireTokenSilent({
         ...cdsRequest,
         account: account
     });
 
 
     const headers = new Headers();
-    const bearer = `Bearer ${response1.accessToken}`;
+    const bearer = `Bearer ${response.accessToken}`;
     console.log(bearer);
     headers.append("Authorization", bearer);
     headers.append("OData-MaxVersion", "4.0");

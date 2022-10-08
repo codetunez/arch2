@@ -11,7 +11,6 @@ export const SignOutButton = () => {
             });
         } 
     }
-
     return (
         <button className="btn-sm" onClick={() => handleLogout("popup")} key="logoutPopup">Logout</button>
     )

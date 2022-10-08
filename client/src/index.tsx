@@ -29,20 +29,9 @@ msalInstance.addEventCallback((event: EventMessage) => {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <>
-{/*   
- <AuthenticatedTemplate> */}
   <AppProvider>
     <Router>
       <Shell pca={msalInstance}/>
     </Router>
   </AppProvider>
-{/*  
- </AuthenticatedTemplate> */}
-{/* 
- <UnauthenticatedTemplate>
-   <h6>Please sign-in to see your profile information.</h6>
- </UnauthenticatedTemplate> */}
-</>
-
 );

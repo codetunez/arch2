@@ -24,13 +24,7 @@ type AppProps = {
 };
 
 const Shell = ({ pca }: AppProps) => {
-
     const appContext: any = React.useContext(AppContext);
-// The next 3 lines are optional. This is how you configure MSAL to take advantage of the router's navigate functions when MSAL redirects between pages in your app
-//const history = useHistory();
-//const navigationClient = new CustomNavigationClient(history);
-//pca.setNavigationClient(navigationClient);
-
 
     return (
         <MsalProvider instance={pca}>

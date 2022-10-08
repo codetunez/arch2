@@ -16,5 +16,4 @@ const SignInSignOutButton = () => {
         return null;
     }
 }
-
 export default SignInSignOutButton;
