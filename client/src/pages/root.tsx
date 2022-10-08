@@ -5,6 +5,7 @@ import { useContext, useState, useMemo } from 'react';
 import { AppContext } from '../context/appContext';
 
 import { Combo } from '../controls/combo';
+import { fetchMetadata } from '../components/connection';
 
 function indexBuilder(context, item, root?) {
   return context[item].map((ele) => {
@@ -22,10 +23,12 @@ const Root = () => {
   const [engine, setEngine] = useState<string>("bootstrap3");
 
   const pages = useMemo(() => {
+    
+    fetchMetadata();
     return appContext.sites.map((ele) => {
       const site = ele.id;
       return indexBuilder(ele, "pages", site);
-    })
+    });
   }, [appContext.sites])
 
   const content = useMemo(() => { return indexBuilder(appContext, "content"); }, [appContext.content])

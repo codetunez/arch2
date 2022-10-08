@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@azure/msal-browser": "^2.28.3",
+    "@azure/msal-react": "^1.4.7",
     "@monaco-editor/react": "^4.4.5",
     "axios": "^0.27.2",
     "rc-tree": "^5.6.5",
-    "react": "^18.2.0",
+    "react": "16.14.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
@@ -38,6 +40,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^18.0.15"
+    "@types/react": "16.14.0"
   }
 }

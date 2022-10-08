@@ -29,6 +29,7 @@ button:hover {
 
 .btn-sm {
   padding: 0.25rem 1rem;
+  margin: 4px;
 }
 
 .btn-warning {

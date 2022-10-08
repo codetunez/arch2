@@ -13,13 +13,30 @@ import Site from './pages/site';
 import Root from './pages/root';
 import Data from './pages/data';
 
-const Shell = () => {
+
+// MSAL imports
+import { MsalProvider } from "@azure/msal-react";
+import { IPublicClientApplication } from "@azure/msal-browser";
+
+
+type AppProps = {
+    pca: IPublicClientApplication
+};
+
+const Shell = ({ pca }: AppProps) => {
 
     const appContext: any = React.useContext(AppContext);
+// The next 3 lines are optional. This is how you configure MSAL to take advantage of the router's navigate functions when MSAL redirects between pages in your app
+//const history = useHistory();
+//const navigationClient = new CustomNavigationClient(history);
+//pca.setNavigationClient(navigationClient);
+
 
     return (
+        <MsalProvider instance={pca}>
         <div className="shell">
             <div className="header"><Header /></div>
+            
             <div className="content">
                 <div className="navigation"><Nav sites={appContext.sites} content={appContext.content} data={appContext.data} /></div>
                 <div className="workspace">
@@ -33,6 +50,7 @@ const Shell = () => {
                 </div>
             </div>
         </div>
+        </MsalProvider>
     )
 }
 
