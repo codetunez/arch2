@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 
 module.exports.list = {
-    "engines": ["bootstrap3", "skeleton", "tailwind"],
+    "engines": ["bootstrap3","bootstrap5", "skeleton", "tailwind"],
     "forms": ["simpleform", "default"]
 };
 
@@ -61,6 +61,32 @@ module.exports.serverForms = {
 
 module.exports.engines = {
     "bootstrap3": (markup) => {
+        let $ = cheerio.load(markup, { xmlMode: true }, false);
+
+        $("Grid").find("Row").each(function (i, rows) {
+            $(this).find("Column").each(function (i, column) {
+                $(this).replaceWith(`<div class="col">${$(column).html()}</div>`);
+            });
+        })
+
+        $("Heading").each(function (i, ele) {
+            const headingType = $(this).attr("as").toLowerCase();
+            const textOrHtml = $(this).attr("text") || $(ele).html();
+            $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
+        });
+        $("Button").each(function (i, ele) {
+            const textOrHtml = $(this).attr("text") || $(ele).html();
+            $(this).replaceWith(`<button class="btn btn-primary">${textOrHtml}</button>`) 
+        });
+        $("input").each(function (i, ele) { $(this).addClass("form-control"); });
+        $("Form").find("group").each(function (i, ele) { $(this).replaceWith(`<div class="form-group">${$(ele).html()}</div>`); })
+        $("Row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
+        $("Grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
+        $("Section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
+
+        return $.html({ xmlMode: false });
+    },
+    "bootstrap5": (markup) => {
         let $ = cheerio.load(markup, { xmlMode: true }, false);
 
         $("Grid").find("Row").each(function (i, rows) {
@@ -167,7 +193,24 @@ module.exports.templates = {
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>${title || ""} (Bootstrap)</title>
+        <title>${title || ""} (Bootstrap 3)</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        ${styles || ""}
+    </head>
+    <body>
+    ${content || ""}
+    </body>
+</html>    
+    `,
+    "bootstrap5": (title, content, styles) => `
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>${title || ""} (Bootstrap 5)</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
