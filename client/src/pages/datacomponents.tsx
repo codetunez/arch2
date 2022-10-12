@@ -1,20 +1,17 @@
-import './content.css';
 import React from 'react';
-import * as library from 'library';
+import './page.css';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useRef, useEffect, useReducer, useContext } from 'react';
+import { useEffect, useReducer, useContext } from 'react';
 
 import axios from 'axios';
 import Editor from "@monaco-editor/react";
 import usePromise from '../hooks/usePromise';
 import { AppContext } from '../context/appContext';
-import { Combo } from '../controls/combo';
 
 interface State {
   data: any,
-  dirty: boolean,
-  form: any
+  dirty: boolean
 }
 
 interface Action {
@@ -25,7 +22,6 @@ interface Action {
 const reducer = (state: State, action: Action) => {
 
   let newData = Object.assign({}, state.data);
-  let newForm = Object.assign({}, state.form);
 
   switch (action.type) {
     case "load:data":
@@ -34,12 +30,15 @@ const reducer = (state: State, action: Action) => {
     case "update:id":
       newData.id = action.payload;
       return { ...state, data: newData, dirty: true }
+    case "update:title":
+      newData.title = action.payload;
+      return { ...state, data: newData, dirty: true }
+    case "update:url":
+      newData.url = action.payload;
+      return { ...state, data: newData, dirty: true }
     case "update:markup":
       newData.markup = action.payload;
       return { ...state, data: newData, dirty: true }
-    case "update:engine":
-      newForm.engine = action.payload;
-      return { ...state, form: newForm }
     case "dirty:clear":
       return { ...state, dirty: false }
     default:
@@ -47,7 +46,7 @@ const reducer = (state: State, action: Action) => {
   }
 }
 
-const Content = () => {
+const DataComponents = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -55,11 +54,9 @@ const Content = () => {
   const paths = location.pathname.split('/');
   const appContext: any = useContext(AppContext);
 
-  const refPreview = useRef();
-
-  const [state, dispatch] = useReducer(reducer, { data: {}, dirty: true, form: { engine: library.list.engines[0] } });
+  const [state, dispatch] = useReducer(reducer, { data: {}, dirty: false });
   // eslint-disable-next-line
-  const [loading, payload, error, loadPayload] = usePromise({ promiseFn: () => axios.get(`http://localhost:3001/api/content/${paths[2]}`) });
+  const [loading, payload, error, loadPayload] = usePromise({ promiseFn: () => axios.get(`http://localhost:3001/api/page/${paths[2]}/${paths[3]}`) });
 
   useEffect(() => {
     loadPayload();
@@ -71,49 +68,54 @@ const Content = () => {
     dispatch({ type: 'load:data', payload: payload.data })
   }, [payload])
 
-  useEffect(() => {
-
-    if (!state.data.id || !state.form.engine) { return; }
-
-    let markup = library.engines[state.form.engine](state.data.markup);
-    markup = library.templates[state.form.engine]("Sample", "<div style='padding: 2rem'>" + markup + "</div>","");
-    const ref: any = refPreview.current;
-    if (ref) { ref.src = "data:text/html;charset=utf-8," + markup; }
-
-  }, [state.data.markup, state.form.engine])
-
-  const updateContent = () => {
-    appContext.updateContent(paths[2], {
+  const updatePage = () => {
+    appContext.updatePage(paths[2], paths[3], {
       id: state.data.id,
-      markup: state.data.markup
+      title: state.data.title,
+      markup: state.data.markup,
+      url: state.data.url,
     })
     dispatch({ type: 'dirty:clear', payload: null })
   }
 
-  const deleteContent = () => {
-    appContext.deleteContent(paths[2]);
+  const deletePage = () => {
+    appContext.deletePage(paths[2], paths[3]);
     navigate("/root/data");
   }
 
+  const url = Object.keys(state.data).length > 0 ? `${paths[2]}/${state.data.url}` : null;
+
   return (
-    <div className="content-workspace">
+    <div className="page-workspace">
       {Object.keys(state.data).length > 0 ?
         <>
           <div className="toolbar">
-            <h5>Edit Content fragment</h5>
+            <h5>Edit the page</h5>
             <div className="btn-bar">
-              <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updateContent() }}>Update</button>
-              <button className={"btn-sm btn-danger"} onClick={() => { deleteContent() }}>Delete</button>
+              <button className={state.dirty ? "btn-sm btn-warning" : "btn-sm"} onClick={() => { updatePage() }}>Update</button>
+              <button className={"btn-sm btn-danger"} onClick={() => { deletePage() }}>Delete</button>
             </div>
           </div>
           <div className="form">
             <div>
+              <label>URL</label>
+              <a href={`http://localhost:3002/${url}`} rel="noreferrer" target="_blank">{`http://localhost:3002/${url}`}</a>
+            </div>
+            <div>
               <label>ID</label>
               <input type='text' value={state.data.id} onChange={(e) => dispatch({ type: 'update:id', payload: e.target.value })} />
             </div>
+            <div>
+              <label>Title</label>
+              <input type='text' value={state.data.title} onChange={(e) => dispatch({ type: 'update:title', payload: e.target.value })} />
+            </div>
+            <div>
+              <label>Url</label>
+              <input type='text' value={state.data.url} onChange={(e) => dispatch({ type: 'update:url', payload: e.target.value })} />
+            </div>
           </div>
           <br />
-          <h5>Edit the content fragment</h5>
+          <h5>Edit the page markup</h5>
           <div className="monaco">
             <Editor options={{
               renderLineHighlight: 'none',
@@ -129,18 +131,11 @@ const Content = () => {
               value={state.data.markup}
             />
           </div>
-          <div>
-            <h3>Content fragment preview</h3>
-            <div className='preview-bar'>
-              <Combo items={appContext.engines} value={state.form.engine || ''} onChange={(e) => dispatch({ type: 'update:engine', payload: e.target.value })} />
-            </div>
-            <iframe ref={refPreview} id="preview" title="preview" src="about:blank"></iframe>
-          </div>
         </>
-        : "No content data"}
+        : "No page data"}
     </div>
 
   )
 }
 
-export default Content;
+export default DataComponents;

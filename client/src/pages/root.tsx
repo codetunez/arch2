@@ -1,5 +1,5 @@
 import './root.css';
-
+import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { useContext, useState, useMemo } from 'react';
 import { AppContext } from '../context/appContext';

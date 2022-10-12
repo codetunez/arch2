@@ -1,4 +1,5 @@
 import './data.css';
+import React from 'react';
 import * as library from 'library';
 
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -123,7 +124,6 @@ const Data = () => {
               <div className="monaco">
                 <Editor options={{
                   renderLineHighlight: 'none',
-                  wordWrap: 'false',
                   formatOnType: true,
                   lineNumbers: 'off',
                   minimap: { enabled: false },

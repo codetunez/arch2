@@ -1,3 +1,4 @@
+import React from 'react';
 import './page.css';
 
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -118,7 +119,6 @@ const Page = () => {
           <div className="monaco">
             <Editor options={{
               renderLineHighlight: 'none',
-              wordWrap: 'false',
               formatOnType: true,
               lineNumbers: 'off',
               minimap: { enabled: false },

@@ -1,5 +1,5 @@
 import './site.css';
-
+import React, { useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useReducer, useContext } from 'react';
 
@@ -9,6 +9,21 @@ import usePromise from '../hooks/usePromise';
 import { AppContext } from '../context/appContext';
 
 import { Combo } from '../controls/combo';
+import { Card } from '../components/Card';
+import { Dropdown, DropdownMenuItemType, IDropdownStyles, IDropdownOption } from '@fluentui/react/lib/Dropdown';
+import { List } from '../components/List';
+
+
+const dropdownStyles: Partial<IDropdownStyles> = {
+  dropdown: { width: 300 },
+};
+
+const options: IDropdownOption[] = [
+  { key: 'card', text: 'card' },
+  { key: 'list', text: 'list' },
+  { key: 'table', text: 'table' }
+];
+
 
 interface State {
   data: any,
@@ -20,6 +35,7 @@ interface Action {
   payload: any;
 }
 
+const layouts = ['card', 'list'];
 const reducer = (state: State, action: Action) => {
 
   let newData = Object.assign({}, state.data);
@@ -67,6 +83,13 @@ const Site = () => {
   // eslint-disable-next-line
   const [loading, payload, error, loadPayload] = usePromise({ promiseFn: () => axios.get(`http://localhost:3001/api/site/${paths[2]}`) });
 
+  const [showCard, setShowCard] = useState(false);
+  const [showList, setShowList] = useState(false);
+  const [showTable, setShowTable] = useState(false);
+
+  
+  const [repeat, setRepeat] = useState(1);
+
   useEffect(() => {
     loadPayload();
     // eslint-disable-next-line
@@ -100,6 +123,7 @@ const Site = () => {
   }
 
   const url = Object.keys(state.data).length > 0 ? `${paths[2]}` : null;
+  console.log("path**" + paths[2]);
 
   return (
     <div className="site-workspace">
@@ -118,23 +142,49 @@ const Site = () => {
               <a href={`http://localhost:3002/${url}`} rel="noreferrer" target="_blank">{`http://localhost:3002/${url}`}</a>
             </div>
             <div>
+              <Dropdown
+                placeholder="Select an option"
+                label="Layouts"
+                options={options}
+                styles={dropdownStyles}
+                onChange={(e, selectedOption) => {
+                  // Not working.
+                  console.log("value updtaed.." + selectedOption.text)
+                  if(selectedOption.text === 'card'){
+                    setShowCard(true);
+                    setShowList(false);
+                  }
+                  if(selectedOption.text === 'list'){
+                    console.log("showing list");
+                    setShowList(true);
+                    setShowCard(false);
+                  }
+                  if(selectedOption.text === 'table'){
+
+                  }
+                  
+              }}
+              />   
+             </div>
+             <div>
+              <label>Repeat</label>
+              <input type='number' value={repeat} onChange={(e) => setRepeat(parseInt(e.target.value))} />
+            </div>
+            {/* <div>
               <label>ID</label>
               <input type='text' value={state.data.id} onChange={(e) => dispatch({ type: 'update:id', payload: e.target.value })} />
-            </div>
-            <div>
-              <label>Name</label>
-              <input type='text' value={state.data.name} onChange={(e) => dispatch({ type: 'update:name', payload: e.target.value })} />
-            </div>
-            <div>
+            </div> */}
+          
+            {/* <div>
               <label>CSS Engine</label>
               <Combo name="engine" items={appContext.engines} value={state.data.engine} onChange={(e) => dispatch({ type: 'update:engine', payload: e.target.value })} />
-            </div>
-            <div>
+            </div> */}
+            
+            {/* <div>
               <label>Site Stylesheet</label>
               <div className="monaco">
                 <Editor options={{
                   renderLineHighlight: 'none',
-                  wordWrap: 'false',
                   formatOnType: true,
                   lineNumbers: 'off',
                   minimap: { enabled: false },
@@ -168,9 +218,14 @@ const Site = () => {
                 </div>
               })}
             </div>
+             */}
           </div>
         </>
         : "No site data"}
+        <div>
+        {showCard && <Card repeat={repeat}/>}
+        {showList && <List repeat={repeat} />}
+        </div>
     </div>
 
   )
