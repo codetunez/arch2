@@ -58,7 +58,7 @@
       "id": "S2",
       "name": "Site Two",
       "engine": "bootstrap5",
-      "stylesheet": "",
+      "stylesheet": "section {margin-top: 16px}",
       "pages": [
         {
           "id": "P1",
