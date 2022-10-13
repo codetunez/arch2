@@ -1,6 +1,33 @@
 {
   "sites": [
     {
+      "id": "S0",
+      "name": "Site Zero",
+      "engine": "html5",
+      "stylesheet": ".section {\r\n    padding-top: 20px;\r\n}\r\n\r\n.form-group {\r\n    margin-bottom: 1rem;\r\n}\r\n",
+      "pages": [
+        {
+          "id": "P1",
+          "title": "Homepage",
+          "markup": "<Section>\n    <Grid>\n        <Row>\n            <Column>\n                <Heading as='H1' text='Welcome Bootstrap 3 homepage'></Heading>\n                <Heading as='H6'>\n                    <Date/>\n                </Heading>\n                <Content id='C3000' />\n                <Button text='Click here to learn more' />\n            </Column>\n            <Column>\n                <Content id='C7000'/>\n            </Column>\n        </Row>\n        <br />\n        <Row>\n            <Column>\n                <Content id='C8000' />\n            </Column>\n            <Column>\n                <Content id='C3000' />\n                <Content id='C5000' />\n                <Content id='C3000' />\n            </Column>\n        </Row>\n    </Grid>\n</Section>",
+          "url": ""
+        },
+        {
+          "id": "P2",
+          "title": "Page One",
+          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Heading as='H3' text='Please complete the form' />\r\n                <Form data='D1000' type='simpleform' />\r\n                <br/>\r\n                <Content id='C3000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
+          "url": "p2"
+        },
+        {
+          "id": "P3",
+          "title": "Auth Page",
+          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Content id='C1000' />\r\n            </Column>\r\n            <Column>\r\n                <Content id='C6000' />\r\n                <Content id='C2000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
+          "url": "auth"
+        }
+      ],
+      "sitenav": ["P1", "P2"]
+    },
+    {
       "id": "S1",
       "name": "Site One",
       "engine": "bootstrap3",
@@ -25,10 +52,7 @@
           "url": "auth"
         }
       ],
-      "sitenav": [
-        "P1",
-        "P2"
-      ]
+      "sitenav": ["P1", "P2"]
     },
     {
       "id": "S2",
@@ -55,10 +79,7 @@
           "url": "auth"
         }
       ],
-      "sitenav": [
-        "P1",
-        "P2"
-      ]
+      "sitenav": ["P1", "P2"]
     },
     {
       "id": "S3",
@@ -85,9 +106,7 @@
           "url": "auth"
         }
       ],
-      "sitenav": [
-        "P1"
-      ]
+      "sitenav": ["P1"]
     },
     {
       "id": "S4",
@@ -114,10 +133,7 @@
           "url": "auth"
         }
       ],
-      "sitenav": [
-        "P1",
-        "P2"
-      ]
+      "sitenav": ["P1", "P2"]
     }
   ],
   "content": [
