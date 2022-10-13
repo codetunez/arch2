@@ -4,7 +4,7 @@
       "id": "S0",
       "name": "Site Zero",
       "engine": "html5",
-      "stylesheet": ".section {\r\n    padding-top: 20px;\r\n}\r\n\r\n.form-group {\r\n    margin-bottom: 1rem;\r\n}\r\n",
+      "stylesheet": "",
       "pages": [
         {
           "id": "P1",
@@ -31,7 +31,7 @@
       "id": "S1",
       "name": "Site One",
       "engine": "bootstrap3",
-      "stylesheet": ".section {\r\n    padding-top: 20px;\r\n}\r\n\r\n.form-group {\r\n    margin-bottom: 1rem;\r\n}\r\n",
+      "stylesheet": "",
       "pages": [
         {
           "id": "P1",
@@ -58,7 +58,7 @@
       "id": "S2",
       "name": "Site Two",
       "engine": "bootstrap5",
-      "stylesheet": ".section {\r\n    margin-top: 20px;\r\n    display: flex;\r\n    justify-content: center\r\n}\r\n\r\nh1 {\r\n    color: black;\r\n    font-size: 3rem;\r\n}\r\n\r\nh3 {\r\n    color: black;\r\n    font-size: 2rem;\r\n}\r\n\r\nform>div {\r\n    margin-bottom: 1rem;\r\n}",
+      "stylesheet": "",
       "pages": [
         {
           "id": "P1",
@@ -85,7 +85,7 @@
       "id": "S3",
       "name": "Site Three",
       "engine": "tailwind",
-      "stylesheet": ".section {\r\n    margin-top: 20px;\r\n}",
+      "stylesheet": "",
       "pages": [
         {
           "id": "P1",
@@ -112,7 +112,7 @@
       "id": "S4",
       "name": "Site Four",
       "engine": "skeleton",
-      "stylesheet": ".section {\r\n    padding-top: 20px;\r\n}\r\n\r\n.form-group {\r\n    margin-bottom: 1rem;\r\n}\r\n",
+      "stylesheet": "",
       "pages": [
         {
           "id": "P1",

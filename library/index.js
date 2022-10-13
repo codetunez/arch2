@@ -62,53 +62,50 @@ module.exports.serverForms = {
 module.exports.engines = {
     "bootstrap3": (markup) => {
         let $ = cheerio.load(markup, { xmlMode: true }, false);
+        
+        // TODO: what if multiple navs in header 
+        $(`header nav`).addClass("navbar navbar-default")
+        $(`header nav ul`)
+            .addClass("nav navbar-nav navbar-right")
+            .wrap($(`<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"></div>`))
+        $(`header nav a[data-pp-element="brand"]`)
+            .addClass("navbar-brand")
+        $(`header nav a[data-pp-element="brand"]`)
+            .wrap($(`<div class="navbar-header"></div`))
+        $(`<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>`)
+            .insertBefore($(`header nav div a[data-pp-element="brand"]`))
+        $(`header nav`).wrapInner($(`<div class="container-fluid"></div>`))
 
-        $("grid").find("row").each(function (i, rows) {
-            $(this).find("column").each(function (i, column) {
-                $(this).replaceWith(`<div class="col">${$(column).html()}</div>`);
-            });
+
+        $(`div[data-pp-element="grid"]`).addClass("container")
+        $(`div[data-pp-element="row"]`).each((_,row) => {
+            const cols = $(row).find(`div[data-pp-element="column"]`)
+            const colspan = Math.floor(12 / cols.length) > 0 ? Math.floor(12 / cols.length) : 1 
+            cols.addClass(`col-md-${colspan}`)
         })
-
-        $("heading").each(function (i, ele) {
-            const headingType = $(this).attr("as").toLowerCase();
-            const textOrHtml = $(this).attr("text") || $(ele).html();
-            $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
-        });
-        $("button").each(function (i, ele) {
-            const textOrHtml = $(this).attr("text") || $(ele).html();
-            $(this).replaceWith(`<button class="btn btn-primary">${textOrHtml}</button>`) 
-        });
-        $("input").each(function (i, ele) { $(this).addClass("form-control"); });
-        $("form").find("group").each(function (i, ele) { $(this).replaceWith(`<div class="form-group">${$(ele).html()}</div>`); })
-        $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
-        $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
-        $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
+        $("button").addClass("btn btn-primary")
+        // TODO: form groups, help blocks ?
+        $("input").addClass("form-control")
 
         return $.html({ xmlMode: false });
     },
     "bootstrap5": (markup) => {
         let $ = cheerio.load(markup, { xmlMode: true }, false);
 
-        $("grid").find("row").each(function (i, rows) {
-            $(this).find("column").each(function (i, column) {
-                $(this).replaceWith(`<div class="col">${$(column).html()}</div>`);
-            });
+        $(`div[data-pp-element="grid"]`).addClass("container")
+        $(`div[data-pp-element="row"]`).each((i,row) => {
+            const cols = $(this).find(`div[data-pp-element="column"]`)
+            const colspan = Math.floor(12 / cols.length) > 0 ? Math.floor(12 / cols.length) > 0 : 1 
+            cols.addClass(`col-md-${colspan}`)
         })
-
-        $("heading").each(function (i, ele) {
-            const headingType = $(this).attr("as").toLowerCase();
-            const textOrHtml = $(this).attr("text") || $(ele).html();
-            $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
-        });
-        $("button").each(function (i, ele) {
-            const textOrHtml = $(this).attr("text") || $(ele).html();
-            $(this).replaceWith(`<button class="btn btn-primary">${textOrHtml}</button>`) 
-        });
-        $("input").each(function (i, ele) { $(this).addClass("form-control"); });
-        $("Form").find("group").each(function (i, ele) { $(this).replaceWith(`<div class="form-group">${$(ele).html()}</div>`); })
-        $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
-        $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
-        $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
+        $("button").addClass("btn btn-primary")
+        // TODO: form groups, help blocks ?
+        $("input").addClass("form-control")
 
         return $.html({ xmlMode: false });
     },
@@ -118,33 +115,33 @@ module.exports.engines = {
 
         let $ = cheerio.load(markup, { xmlMode: true }, false);
 
-        $("grid").find("row").each(function (i, rows) {
-            const columns = $(this).find("column");
-            const gridcolumn = columns.length === 1 ? gridMap[gridMap.length - 1] : gridMap[Math.floor(12 / columns.length) - 1];
-            columns.each(function (i, column) {
-                $(this).replaceWith(`<div class="${gridcolumn} columns">${$(column).html()}</div>`);
-            });
-        })
+        // $(`div[data-pp-element="grid"]`).find(`div[data-pp-element="row"]`)).each(function (i, rows) {
+        //     const columns = $(this).find(`div[data-pp-element="column"]`);
+        //     const gridcolumn = columns.length === 1 ? gridMap[gridMap.length - 1] : gridMap[Math.floor(12 / columns.length) - 1];
+        //     columns.each(function (i, column) {
+        //         $(this).replaceWith(`<div class="${gridcolumn} columns">${$(column).html()}</div>`);
+        //     });
+        // })
 
-        $("heading").each(function (i, ele) {
-            const headingType = $(this).attr("as").toLowerCase();
-            const textOrHtml = $(this).attr("text") || $(ele).html();
-            $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
-        });
+        // $("heading").each(function (i, ele) {
+        //     const headingType = $(this).attr("as").toLowerCase();
+        //     const textOrHtml = $(this).attr("text") || $(ele).html();
+        //     $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
+        // });
 
-        $("button").each(function (i, ele) {
-            const textOrHtml = $(this).attr("text") || $(ele).html();
-            $(this).replaceWith(`
-                <button class="button-primary">
-                    ${textOrHtml}
-                </button>
-            `);
-        });
+        // $("button").each(function (i, ele) {
+        //     const textOrHtml = $(this).attr("text") || $(ele).html();
+        //     $(this).replaceWith(`
+        //         <button class="button-primary">
+        //             ${textOrHtml}
+        //         </button>
+        //     `);
+        // });
         
-        $("Form").find("group").each(function (i, ele) { $(this).replaceWith($(ele).html()); })
-        $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
-        $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
-        $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
+        // $("Form").find("group").each(function (i, ele) { $(this).replaceWith($(ele).html()); })
+        // $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
+        // $(`div[data-pp-element="grid"]`).each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
+        // $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
 
         return $.html({ xmlMode: false });
     },
@@ -152,37 +149,37 @@ module.exports.engines = {
 
         const gridMap = ['grid-cols-1', 'grid-cols-2', 'grid-cols-3', 'grid-cols-4', 'grid-cols-5', 'grid-cols-6', 'grid-cols-7', 'grid-cols-8', 'grid-cols-9', 'grid-cols-10', 'grid-cols-11', 'grid-cols-1'];
 
-        let $ = cheerio.load(markup, { xmlMode: true }, false);
+        // let $ = cheerio.load(markup, { xmlMode: true }, false);
 
 
-        $("heading").each(function (i, ele) {
-            const headingType = $(this).attr("as").toLowerCase();
-            const textOrHtml = $(this).attr("text") || $(ele).html();
-            $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
-        });
+        // $("heading").each(function (i, ele) {
+        //     const headingType = $(this).attr("as").toLowerCase();
+        //     const textOrHtml = $(this).attr("text") || $(ele).html();
+        //     $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
+        // });
 
-        $("grid").find("row").each(function (i, rows) {
-            const columns = $(this).find("column");
-            const gridcolumn = gridMap[columns.length - 1];
-            $(this).replaceWith(`<div class="grid ${gridcolumn} gap-4">${$(rows).html()}</div>`);
-        })
+        // $(`div[data-pp-element="grid"]`).find(`div[data-pp-element="row"]`)).each(function (i, rows) {
+        //     const columns = $(this).find(`div[data-pp-element="column"]`);
+        //     const gridcolumn = gridMap[columns.length - 1];
+        //     $(this).replaceWith(`<div class="grid ${gridcolumn} gap-4">${$(rows).html()}</div>`);
+        // })
 
-        $("button").each(function (i, ele) {
-            const textOrHtml = $(this).attr("text") || $(ele).html();
-            $(this).replaceWith(`
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    ${textOrHtml}
-                </button>
-            `);
-        });
+        // $("button").each(function (i, ele) {
+        //     const textOrHtml = $(this).attr("text") || $(ele).html();
+        //     $(this).replaceWith(`
+        //         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        //             ${textOrHtml}
+        //         </button>
+        //     `);
+        // });
         
-        $("Form").find("group").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
-        $("column").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
-        $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
-        $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
+        // $("Form").find("group").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
+        // $("column").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
+        // $(`div[data-pp-element="grid"]`).each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
+        // $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
 
-        $("label").each(function (i, ele) { $(this).addClass("block text-gray-700 text-sm font-bold mb-2"); });
-        $("input").each(function (i, ele) { $(this).addClass("appearance-none border rounded w-full py-2 px-3"); });
+        // $("label").each(function (i, ele) { $(this).addClass("block text-gray-700 text-sm font-bold mb-2"); });
+        // $("input").each(function (i, ele) { $(this).addClass("appearance-none border rounded w-full py-2 px-3"); });
 
         return $.html({ xmlMode: false });
     },
@@ -192,6 +189,21 @@ module.exports.engines = {
 }
 
 module.exports.templates = {
+    "html5":(title,content,styles) => `
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>${title || ""} (HTML5)</title>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+            <meta name="description" content="" />
+            ${styles || ""}
+        </head>
+        <body>
+        ${content || ""}
+        </body>
+    </html>        
+    `,
     "bootstrap3": (title, content, styles) => `
 <!DOCTYPE html>
 <html lang="en">

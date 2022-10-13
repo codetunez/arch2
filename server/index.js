@@ -36,7 +36,7 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 
 // this will match any url. this allows us to handle the page request
 app.get('*', (req, res) => {
-
+    // TODO: refresh data in dev 
     // code assumes path starts with a slash and root segment is empty string
     const segments = req.url.split('/');
 

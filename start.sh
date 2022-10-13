@@ -10,7 +10,7 @@ cd -
 # start server
 echo "Starting Server.."
 cd server
-npm run start > console.log 2>&1 &
+NODE_ENV=development npm run start > console.log 2>&1 &
 server_pid=$!
 tail -f console.log &
 ts_pid=$!

@@ -1,9 +1,9 @@
 <header>
-  <a>
-    <img src="https://samritblobstorage.blob.core.windows.net/public/Logo-sm-64.png" />
-    <h1>Company Name</h1>
-  </a>
-  <nav>
+  <nav> 
+    <a data-pp-element="brand" href="#">
+      <img src="https://samritblobstorage.blob.core.windows.net/public/Logo-sm-64.png" width="24px" />
+      Company Name
+    </a>
     <ul>
       <li>
         <a href="">Home</a>
@@ -19,69 +19,82 @@
 </header>
 <main>
   <section>
-    <grid>
-      <row>
-        <column>
+    <div data-pp-element="grid">
+      <div data-pp-element="row">
+        <div data-pp-element="column">
           <h1>Create an engaging headline, welcome, or call to action</h1>
           <button>Add a call to action here</button>
-        </column>
-        <column>
-          <img src="https://samritblobstorage.blob.core.windows.net/public/Geometric-4.png"/>
-        </column>
-      </row>
-    </grid>
+        </div>
+        <div data-pp-element="column">
+          <img src="https://samritblobstorage.blob.core.windows.net/public/Geometric-4.png" width="100%"/>
+        </div>
+      </div>
+    </div>
   </section>
   <section>
-    <grid>
-      <row>
-        <column>
+    <div data-pp-element="grid">
+      <div data-pp-element="row">
+        <div data-pp-element="column">
           <h2>Introductory Section</h2>
           <p>Create a short paragraph that shows your target audience a clear benefit to them if they continue past this point and offer direction about the next steps</p>
-        </column>
-      </row>
-      <row>
-        <column>
+        </div>
+      </div>
+      <div data-pp-element="row">
+        <div data-pp-element="column">
           <div data-pp-style-text-align="center">
             <img src="https://samritblobstorage.blob.core.windows.net/public/Circle-1.png" />
             <h3>Featured Item 1</h3>
             <p>Create a short description or engaging message to motivate your audience to find out more about this item.</p>
           </div>
-        </column>
-        <column>
+        </div>
+        <div data-pp-element="column">
           <div data-pp-style-text-align="center">
             <img src="https://samritblobstorage.blob.core.windows.net/public/Circle-2.png"/>
             <h3>Featured Item 2</h3>
             <p>Create a short description or engaging message to motivate your audience to find out more about this item.</p>
           </div>
-        </column>
-        <column>
+        </div>
+        <div data-pp-element="column">
           <div data-pp-style-text-align="center">
             <img src="https://samritblobstorage.blob.core.windows.net/public/Circle-3.png"/>
             <h3>Featured Item 3</h3>
             <p>Create a short description or engaging message to motivate your audience to find out more about this item.</p>
           </div>
-        </column>
-      </row>
-    </grid>
+        </div>
+      </div>
+    </div>
   </section>
   <section>
-    <h2>Contact Us</h2>
-    <form>
-      <fieldset>
-        <legend>Fill in your details</legend>
-        <label id="input-name-label" for="input-name">Name</label>
-        <input id="input-name" type="text" aria-labelledby="input-name-label" /> 
-        <label id="input-email-label" for="input-email">Email</label>
-        <input id="input-email" type="email" aria-labelledby="input-email-label" /> 
-        <label id="input-subject-label" for="input-subject">Subject</label>
-        <input id="input-subject" type="text" aria-labelledby="input-subject-label" />
-        <label id="input-message-label" for="input-message">Message</label>
-        <input id="input-message" type="text" aria-labelledby="input-message-label" /> 
-        <input type="submit" value="Submit"/>
-      </fieldset>
-    </form>
+    <div data-pp-element="grid">
+      <div data-pp-element="row">
+        <div data-pp-element="column">
+          <h2>Contact Us</h2>
+        </div>
+        <div data-pp-element="column">
+          <form role="form">
+            <fieldset>
+              <legend>Fill in your details</legend>
+              <label id="input-name-label" for="input-name">Name</label>
+              <input id="input-name" type="text" aria-labelledby="input-name-label" /> 
+              <label id="input-email-label" for="input-email">Email</label>
+              <input id="input-email" type="email" aria-labelledby="input-email-label" /> 
+              <label id="input-subject-label" for="input-subject">Subject</label>
+              <input id="input-subject" type="text" aria-labelledby="input-subject-label" />
+              <label id="input-message-label" for="input-message">Message</label>
+              <input id="input-message" type="text" aria-labelledby="input-message-label" /> 
+              <input type="submit" value="Submit"/>
+            </fieldset>
+          </form>
+        </div>
+      </div>
   </section>
 </main>
 <footer>
-  <p>Copyright © 2022 . All rights reserved.</p>
+  <div data-pp-element="grid">
+    <div data-pp-element="row">
+      <div data-pp-element="column">
+        <p>Copyright © 2022 . All rights reserved.</p>
+      </div>
+    </div>
+  </div>
 </footer>
