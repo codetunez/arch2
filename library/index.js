@@ -98,11 +98,8 @@ module.exports.engines = {
         let $ = cheerio.load(markup, { xmlMode: true }, false);
 
         $(`div[data-pp-element="grid"]`).addClass("container")
-        $(`div[data-pp-element="row"]`).each((i,row) => {
-            const cols = $(this).find(`div[data-pp-element="column"]`)
-            const colspan = Math.floor(12 / cols.length) > 0 ? Math.floor(12 / cols.length) > 0 : 1 
-            cols.addClass(`col-md-${colspan}`)
-        })
+        $(`div[data-pp-element="row"]`).addClass("row")
+        $(`div[data-pp-element="column"]`).addClass("column")
         $("button").addClass("btn btn-primary")
         // TODO: form groups, help blocks ?
         $("input").addClass("form-control")

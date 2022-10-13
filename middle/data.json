@@ -31,7 +31,7 @@
       "id": "S1",
       "name": "Site One",
       "engine": "bootstrap3",
-      "stylesheet": "",
+      "stylesheet": ".navbar-brand img { display:inline;}",
       "pages": [
         {
           "id": "P1",
