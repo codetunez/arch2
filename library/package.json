@@ -6,6 +6,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12"
+    "axios": "^1.1.2",
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^3.2.10"
   }
 }

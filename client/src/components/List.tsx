@@ -73,14 +73,19 @@ export interface IDocument {
   //repeat?: string;
 }
 
-export class List extends React.Component<{repeat?: number}, IDetailsListDocumentsExampleState> {
+interface IList {
+    repeat?: number;
+    data?: any;
+}
+
+export class List extends React.Component<IList,IDetailsListDocumentsExampleState> {
   private _selection: Selection;
   private _allItems: IDocument[];
 
   constructor(props: {}) {
     super(props);
 
-    this._allItems = _generateDocuments();
+    this._allItems = _generateDocuments(this.props);
 
     const columns: IColumn[] = [
       {
@@ -185,7 +190,7 @@ export class List extends React.Component<{repeat?: number}, IDetailsListDocumen
     const { columns, isCompactMode, items, selectionDetails, isModalSelection, announcedMessage } = this.state;
 
     const fields: JSX.Element[] = [];
-    for (let i = 1; i <= this.props.repeat; i++) {
+    for (let i = 1; i <= 1; i++) {
       fields.push( <div>
         <div className={classNames.selectionDetails}>{selectionDetails}</div>
         <Announced message={selectionDetails} />
@@ -304,9 +309,12 @@ function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boo
   return items.slice(0).sort((a: T, b: T) => ((isSortedDescending ? a[key] < b[key] : a[key] > b[key]) ? 1 : -1));
 }
 
-function _generateDocuments() {
+function _generateDocuments(props: any) {
   const items: IDocument[] = [];
-  for (let i = 0; i < 5; i++) {
+
+console.log("from list"+props.data);
+const data = props.data;
+  for (let i = 0; i < props.repeat; i++) {
     const randomDate = _randomDate(new Date(2012, 0, 1), new Date());
     const randomFileSize = _randomFileSize();
     const randomFileType = _randomFileIcon();
@@ -319,14 +327,14 @@ function _generateDocuments() {
       .join(' ');
     items.push({
       key: i.toString(),
-      name: fileName,
-      value: fileName,
+      name: data[i].fileName,
+      value: data[i].fileName,
       iconName: randomFileType.url,
       fileType: randomFileType.docType,
-      modifiedBy: userName,
-      dateModified: randomDate.dateFormatted,
+      modifiedBy: data[i].modifiedBy,
+      dateModified: data[i].dateModified,
       dateModifiedValue: randomDate.value,
-      fileSize: randomFileSize.value,
+      fileSize: data[i].fileSize,
       fileSizeRaw: randomFileSize.rawSize,
     });
   }

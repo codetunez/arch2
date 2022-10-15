@@ -1,4 +1,7 @@
 const cheerio = require('cheerio');
+const axios = require('axios');
+
+//const fetch = require('fetch');
 
 module.exports.list = {
     "engines": ["bootstrap3", "skeleton", "tailwind"],
@@ -42,6 +45,71 @@ module.exports.content = {
     }
 }
 
+  function injectData1($){
+    let componentHTML = $("repeater").attr("component");
+  //  console.log("html=>"+ $("repeater").attr("component"));
+  
+    let data;
+
+     
+// var waitTill = new Date(new Date().getTime() + 9 * 1000);
+// while(waitTill > new Date()){}
+
+    return axios.get(`http://localhost:3001/api/site/S1`).then((response)=>{
+ //   return fetch('./data.json').then((response)=>{
+    console.log("before then.....");
+    
+        data = response.data.pages[0];
+     //   console.log("title1" + data.title);
+        $("attribute").each(function (i, attribute) {
+            console.log("attr======" + attribute);
+            let attri = $(attribute);
+            let dataAttribute = attri.attr();
+       //    console.log("data attr" + attri);
+            let mapTo = dataAttribute.mapto;
+            let mapFrom = dataAttribute.mapfrom;
+            
+            // console.log("mapTo : " + mapTo);
+            // console.log("mapFrom : " + mapFrom);
+    
+            // console.log("data **" + data);
+            let recordValue = data[mapFrom];
+            
+          //  console.log("value : " + data[mapFrom]);
+            // read json - mapFrom values
+            // continue replacing mapTo with mapFrom
+            componentHTML=componentHTML.replaceAll(mapTo, recordValue);
+        //   console.log("final html=>"+componentHTML);
+         
+    });
+
+
+    console.log("before wait.....");
+    return Promise.resolve(componentHTML);
+    // return Promise.resolve(componentHTML);
+});
+ 
+console.log("after");
+
+console.log("after wait.....");
+return promise;
+}
+function injectData($, data){
+    let componentHTML = $("repeater").attr("component");
+    let rows = $("repeater").attr("rows");
+
+        $("attribute").each(function (i, attribute) {
+            let dataAttribute = $(attribute).attr();
+            let mapTo = dataAttribute.mapto;
+            let mapFrom = dataAttribute.mapfrom;
+            let recordValue = data[mapFrom];
+            componentHTML=componentHTML.replaceAll(mapTo, recordValue);
+    });
+
+    console.log("before return....."+ componentHTML);
+    return componentHTML;
+}
+
 module.exports.serverForms = {
     // TODO: the extra div around the form button is not required but will make the button go to a new line in all frameworks
     "simpleform": (data) => {
@@ -59,7 +127,7 @@ module.exports.serverForms = {
 }
 
 module.exports.engines = {
-    "bootstrap3": (markup) => {
+    "bootstrap3":  (markup, siteData) => {
         let $ = cheerio.load(markup, null, false);
 
         $("grid").find("row").each(function (i, rows) {
@@ -74,10 +142,18 @@ module.exports.engines = {
         $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
         $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
         $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
+       
+        let componentHTML=injectData($,siteData["S1"].pages[0]);
 
+        $("attribute").remove();
+        $("repeater").each(function (i, ele) { 
+            $(this).replaceWith(`<div class="repeater">${componentHTML}</div>`);        
+        });
+        
         return $.html();
+
     },
-    "skeleton": (markup) => {
+    "skeleton":  (markup, siteData) => {
 
         const gridMap = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
 
@@ -96,10 +172,25 @@ module.exports.engines = {
         $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
         $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
         $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
-
+        
+        injectData($).then((componentHTML) => {
+            console.log("inside then"+ componentHTML);
+            
+        $("attribute").remove();
+            $("repeater").each(function (i, ele) { 
+                $(this).replaceWith(`<div class="repeater">${componentHTML}</div>`); 
+               
+            })
+        });
+        $("repeater").each(function (i, ele) { 
+            $(this).replaceWith(`<div class="repeater">helloooooooooooo</div>`); 
+           
+        })
+       
+        console.log("repeater =>"+$("repeater"));
         return $.html();
     },
-    "tailwind": (markup) => {
+    "tailwind": (markup, siteData) => {
 
         const gridMap = ['grid-cols-1', 'grid-cols-2', 'grid-cols-3', 'grid-cols-4', 'grid-cols-5', 'grid-cols-6', 'grid-cols-7', 'grid-cols-8', 'grid-cols-9', 'grid-cols-10', 'grid-cols-11', 'grid-cols-1'];
 
@@ -119,7 +210,24 @@ module.exports.engines = {
 
         $("label").each(function (i, ele) { $(this).addClass("block text-gray-700 text-sm font-bold mb-2"); });
         $("input").each(function (i, ele) { $(this).addClass("appearance-none border rounded w-full py-2 px-3"); });
-
+        
+        
+        injectData($).then((componentHTML) => {
+            console.log("inside then"+ componentHTML);
+            
+        $("attribute").remove();
+            $("repeater").each(function (i, ele) { 
+                $(this).replaceWith(`<div class="repeater">${componentHTML}</div>`); 
+               
+            })
+        });
+        $("repeater").each(function (i, ele) { 
+            $(this).replaceWith(`<div class="repeater">helloooooooooooo</div>`); 
+           
+        })
+       
+        console.log("repeater =>"+$("repeater"));
+       
         return $.html();
     },
 }

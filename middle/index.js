@@ -181,6 +181,11 @@ app.get('/api/sites', (req, res) => {
     res.send(data.sites).end();
 })
 
+
+app.get('/api/dvRecords', (req, res) => {
+    res.send(data.dvRecords).end();
+})
+
 app.get('/api/content', (req, res) => {
     res.send(data.content).end();
 });
