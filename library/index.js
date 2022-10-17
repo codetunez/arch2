@@ -45,60 +45,18 @@ module.exports.content = {
     }
 }
 
-  function injectData1($){
-    let componentHTML = $("repeater").attr("component");
-  //  console.log("html=>"+ $("repeater").attr("component"));
-  
-    let data;
-
-     
-// var waitTill = new Date(new Date().getTime() + 9 * 1000);
-// while(waitTill > new Date()){}
-
-    return axios.get(`http://localhost:3001/api/site/S1`).then((response)=>{
- //   return fetch('./data.json').then((response)=>{
-    console.log("before then.....");
-    
-        data = response.data.pages[0];
-     //   console.log("title1" + data.title);
-        $("attribute").each(function (i, attribute) {
-            console.log("attr======" + attribute);
-            let attri = $(attribute);
-            let dataAttribute = attri.attr();
-       //    console.log("data attr" + attri);
-            let mapTo = dataAttribute.mapto;
-            let mapFrom = dataAttribute.mapfrom;
-            
-            // console.log("mapTo : " + mapTo);
-            // console.log("mapFrom : " + mapFrom);
-    
-            // console.log("data **" + data);
-            let recordValue = data[mapFrom];
-            
-          //  console.log("value : " + data[mapFrom]);
-            // read json - mapFrom values
-            // continue replacing mapTo with mapFrom
-            componentHTML=componentHTML.replaceAll(mapTo, recordValue);
-        //   console.log("final html=>"+componentHTML);
-         
-    });
-
-
-    console.log("before wait.....");
-    return Promise.resolve(componentHTML);
-    // return Promise.resolve(componentHTML);
-});
- 
-console.log("after");
-
-console.log("after wait.....");
-return promise;
-}
-function injectData($, data){
+function injectData($, resData){
     let componentHTML = $("repeater").attr("component");
     let rows = $("repeater").attr("rows");
+    let data = resData[0];
+
+    // continue reading rows and updating the html
 
         $("attribute").each(function (i, attribute) {
+
+            for(let i =0; i<rows;i++){
+
+            }
             let dataAttribute = $(attribute).attr();
             let mapTo = dataAttribute.mapto;
             let mapFrom = dataAttribute.mapfrom;
@@ -127,7 +85,7 @@ module.exports.serverForms = {
 }
 
 module.exports.engines = {
-    "bootstrap3":  (markup, siteData) => {
+    "bootstrap3":  (markup, dvData) => {
         let $ = cheerio.load(markup, null, false);
 
         $("grid").find("row").each(function (i, rows) {
@@ -143,13 +101,15 @@ module.exports.engines = {
         $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
         $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
        
-        let componentHTML=injectData($,siteData["S1"].pages[0]);
+       console.log("records : "+ JSON.stringify(dvData));
+      //  console.log("records : "+ dvData[0].id);
+     //   let componentHTML=injectData($,dvData[0].value[0]);
 
-        $("attribute").remove();
         $("repeater").each(function (i, ele) { 
-            $(this).replaceWith(`<div class="repeater">${componentHTML}</div>`);        
+            $(this).replaceWith(`<div class="repeater">${injectData($,dvData[0].value)}</div>`);        
         });
         
+        $("attribute").remove();
         return $.html();
 
     },

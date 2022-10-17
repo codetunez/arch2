@@ -7,6 +7,8 @@ const morgan = require('morgan');
 const port = 3001;
 
 const data = require('./data.json');
+const dvmock = require('./dataversemock.json');
+
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -183,7 +185,8 @@ app.get('/api/sites', (req, res) => {
 
 
 app.get('/api/dvRecords', (req, res) => {
-    res.send(data.dvRecords).end();
+   // console.log("oops : "+ JSON.stringify(dvmock.dvRecords));
+    res.send(dvmock.dvRecords).end();
 })
 
 app.get('/api/content', (req, res) => {

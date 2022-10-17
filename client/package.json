@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fluentui/example-data": "^8.4.2",
+    "@fluentui/react": "^8.97.2",
     "@monaco-editor/react": "^4.4.5",
     "axios": "^0.27.2",
     "rc-tree": "^5.6.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
@@ -38,6 +40,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^18.0.15"
+    "@types/react": "^16.13.0"
   }
 }

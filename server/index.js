@@ -52,18 +52,20 @@ app.get('*', (req, res) => {
 
     const eng = sites[segments[1]].engine;
 
-    console.log("server dvrecords ******************"+ dvRecords);
+    console.log("server dvrecords ******************"+ JSON.stringify(dvRecords));
     
-    console.log("server data ******************"+ data);
+ //   console.log("server data ******************"+ data);
     // resolve all the content fragments, resolve server controls, transform the markup, render the html
     let markup = page.markup;
     markup = library.content.resolve(markup, content);
     markup = library.content.resolveServer(markup, data);
-    markup = library.engines[eng](markup, sites);
+    markup = library.engines[eng](markup, dvRecords);
     markup = library.templates[eng](page.title, markup, styles);
 
-    res.type('html');
-    res.send(markup).end();
+//});
+
+res.type('html');
+res.send(markup).end();
 });
 
 // start the server
@@ -76,6 +78,10 @@ function loadData() {
     let sitesRes = null;
     let contentRes = null;
     let dvRes = null;
+    axios("http://localhost:3001/api/dvRecords").then((res)=>{
+        dvRecords = res.data;
+        dvRes = dvRecords;
+});
     axios("http://localhost:3001/api/sites")
         .then((res) => {
             sitesRes = res.data;
@@ -84,21 +90,23 @@ function loadData() {
         .then((res) => {
             contentRes = res.data;
             return axios("http://localhost:3001/api/data")
-        }).then((res) => {
-            dvRes = res.data;
-            return axios("http://localhost:3001/api/dvRecords")
-        })
+        // }).then((res) => {
+        //     console.log("server res-"+ JSON.stringify(res));
+        //     dvRecords = res.data;
+        //     return axios("http://localhost:3001/api/dvRecords")
+         })
         .then((res) => {
             // because the is an associative array, we have to re-init before re-creating to clear deleted enteries
             sites = {};
             content = {};
             data = {};
-            dvRecords ={};
+        //    dvRecords ={};
             sitesRes.map((ele) => { sites[ele.id] = ele; })
             contentRes.map((ele) => { content[ele.id] = ele; })
-            dvRes.map((ele) => { dvRecords[ele.id] = ele; })
-            
+        //    dvRes.map((ele) => { dvRecords[ele.id] = ele; })
+       //     dvRecords = dvRes;
             res.data.map((ele) => { data[ele.id] = ele; })
-            console.log(`Data load: sites:${sitesRes.length} content:${contentRes.length} data:${res.data.length}`);
+     //       console.log("ff@@@@@@@"+ JSON.stringify(dvRecords));
+            console.log(`Data load: dvrecords: ${dvRecords.length} sites:${sitesRes.length} content:${contentRes.length} data:${res.data.length}`);
         })
 }
