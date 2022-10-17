@@ -52,7 +52,7 @@ app.get('*', (req, res) => {
 
     const eng = sites[segments[1]].engine;
 
-    console.log("server dvrecords ******************"+ JSON.stringify(dvRecords));
+   // console.log("server dvrecords ******************"+ JSON.stringify(dvRecords));
     
  //   console.log("server data ******************"+ data);
     // resolve all the content fragments, resolve server controls, transform the markup, render the html

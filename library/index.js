@@ -46,26 +46,27 @@ module.exports.content = {
 }
 
 function injectData($, resData){
-    let componentHTML = $("repeater").attr("component");
     let rows = $("repeater").attr("rows");
-    let data = resData[0];
-
+    console.log("No of rows....."+ rows);
+     let data = resData;
+     let finalHTML ='';
     // continue reading rows and updating the html
+    for(let j =0; j<rows;j++){
+        
+    let componentHTML = $("repeater").attr("component");
+     finalHTML = finalHTML + "<div style='margin:8px'>";
 
         $("attribute").each(function (i, attribute) {
-
-            for(let i =0; i<rows;i++){
-
-            }
-            let dataAttribute = $(attribute).attr();
-            let mapTo = dataAttribute.mapto;
-            let mapFrom = dataAttribute.mapfrom;
-            let recordValue = data[mapFrom];
-            componentHTML=componentHTML.replaceAll(mapTo, recordValue);
-    });
-
-    console.log("before return....."+ componentHTML);
-    return componentHTML;
+                let dataAttribute = $(attribute).attr();
+                let mapTo = dataAttribute.mapto;
+                let mapFrom = dataAttribute.mapfrom;
+                let recordValue = data[j][mapFrom];
+                componentHTML=componentHTML.replaceAll(mapTo, recordValue);    
+        });
+       finalHTML = finalHTML + componentHTML + "</div>"
+}
+    console.log("before return....."+ finalHTML);
+    return finalHTML;
 }
 
 module.exports.serverForms = {
@@ -101,7 +102,7 @@ module.exports.engines = {
         $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
         $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
        
-       console.log("records : "+ JSON.stringify(dvData));
+   //    console.log("records : "+ JSON.stringify(dvData));
       //  console.log("records : "+ dvData[0].id);
      //   let componentHTML=injectData($,dvData[0].value[0]);
 
