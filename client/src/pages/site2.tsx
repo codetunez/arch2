@@ -73,7 +73,7 @@ const reducer = (state: State, action: Action) => {
   }
 }
 
-const Site = () => {
+const Site2 = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -241,4 +241,4 @@ const Site = () => {
   )
 }
 
-export default Site;
+export default Site2;

@@ -9,7 +9,7 @@ import Header from './components/header';
 
 import Page from './pages/page';
 import Content from './pages/content';
-import Site from './pages/site2';
+import Site from './pages/site';
 import Root from './pages/root';
 import Data from './pages/data';
 

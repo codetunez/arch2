@@ -46,27 +46,32 @@ module.exports.content = {
 }
 
 function injectData($, resData){
+    let repeat = $("repeater").attr("repeat");
+    let className = $("repeater").attr("classname");
+
+    // handle tables/lists
     let rows = $("repeater").attr("rows");
-    console.log("No of rows....."+ rows);
-     let data = resData;
-     let finalHTML ='';
-    // continue reading rows and updating the html
-    for(let j =0; j<rows;j++){
+    let wrapper = $("repeater").attr("wrapperhtml");
+
+//    let finalHTML =`<div class=${className}>`;
+   let finalHTML = '';
+    for(let j =0; j<repeat;j++){
         
-    let componentHTML = $("repeater").attr("component");
-     finalHTML = finalHTML + "<div style='margin:8px'>";
+    let componentHTML = $("repeater").attr("componenthtml");
 
         $("attribute").each(function (i, attribute) {
                 let dataAttribute = $(attribute).attr();
                 let mapTo = dataAttribute.mapto;
                 let mapFrom = dataAttribute.mapfrom;
-                let recordValue = data[j][mapFrom];
+                let recordValue = resData[j][mapFrom];
                 componentHTML=componentHTML.replaceAll(mapTo, recordValue);    
         });
-       finalHTML = finalHTML + componentHTML + "</div>"
+       finalHTML = finalHTML + componentHTML;
 }
-    console.log("before return....."+ finalHTML);
-    return finalHTML;
+
+console.log("html  : "+ finalHTML);
+// return finalHTML+"</div>";
+   return finalHTML;
 }
 
 module.exports.serverForms = {
@@ -89,6 +94,7 @@ module.exports.engines = {
     "bootstrap3":  (markup, dvData) => {
         let $ = cheerio.load(markup, null, false);
 
+        console.log("markup : "+ markup);
         $("grid").find("row").each(function (i, rows) {
             $(this).find("column").each(function (i, column) {
                 $(this).replaceWith(`<div class="col">${$(column).html()}</div>`);
@@ -101,14 +107,17 @@ module.exports.engines = {
         $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
         $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
         $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
-       
-   //    console.log("records : "+ JSON.stringify(dvData));
-      //  console.log("records : "+ dvData[0].id);
-     //   let componentHTML=injectData($,dvData[0].value[0]);
-
+      
+         
         $("repeater").each(function (i, ele) { 
-            $(this).replaceWith(`<div class="repeater">${injectData($,dvData[0].value)}</div>`);        
+         //   $(this).replaceWith(`<div class="repeater">${injectData($,dvData[0].value)}</div>`);  
+            $(this).replaceWith(`${injectData($,dvData[0].value)}`);  
         });
+        $("cth").each(function (i, ele) { $(this).replaceWith(`<th id='th1'>${$(ele).html()}</th>`); })
+        $("ctr").each(function (i, ele) { $(this).replaceWith(`<tr id='tr1'>${$(ele).html()}</tr>`); })
+       
+      
+        $("ctable").each(function (i, ele) { $(this).replaceWith(`<table id='table1'>${$(ele).html()}</table>`); })
         
         $("attribute").remove();
         return $.html();
@@ -134,22 +143,19 @@ module.exports.engines = {
         $("grid").each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
         $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
         
-        injectData($).then((componentHTML) => {
-            console.log("inside then"+ componentHTML);
-            
-        $("attribute").remove();
-            $("repeater").each(function (i, ele) { 
-                $(this).replaceWith(`<div class="repeater">${componentHTML}</div>`); 
-               
-            })
-        });
+          
         $("repeater").each(function (i, ele) { 
-            $(this).replaceWith(`<div class="repeater">helloooooooooooo</div>`); 
+            //   $(this).replaceWith(`<div class="repeater">${injectData($,dvData[0].value)}</div>`);  
+               $(this).replaceWith(`${injectData($,dvData[0].value)}`);  
+           });
+           $("cth").each(function (i, ele) { $(this).replaceWith(`<th id='th1'>${$(ele).html()}</th>`); })
+           $("ctr").each(function (i, ele) { $(this).replaceWith(`<tr id='tr1'>${$(ele).html()}</tr>`); })
+          
+         
+           $("ctable").each(function (i, ele) { $(this).replaceWith(`<table id='table1'>${$(ele).html()}</table>`); })
            
-        })
-       
-        console.log("repeater =>"+$("repeater"));
-        return $.html();
+           $("attribute").remove();
+           return $.html();
     },
     "tailwind": (markup, siteData) => {
 
@@ -172,24 +178,19 @@ module.exports.engines = {
         $("label").each(function (i, ele) { $(this).addClass("block text-gray-700 text-sm font-bold mb-2"); });
         $("input").each(function (i, ele) { $(this).addClass("appearance-none border rounded w-full py-2 px-3"); });
         
-        
-        injectData($).then((componentHTML) => {
-            console.log("inside then"+ componentHTML);
-            
-        $("attribute").remove();
-            $("repeater").each(function (i, ele) { 
-                $(this).replaceWith(`<div class="repeater">${componentHTML}</div>`); 
-               
-            })
-        });
+          
         $("repeater").each(function (i, ele) { 
-            $(this).replaceWith(`<div class="repeater">helloooooooooooo</div>`); 
+            //   $(this).replaceWith(`<div class="repeater">${injectData($,dvData[0].value)}</div>`);  
+               $(this).replaceWith(`${injectData($,dvData[0].value)}`);  
+           });
+           $("cth").each(function (i, ele) { $(this).replaceWith(`<th id='th1'>${$(ele).html()}</th>`); })
+           $("ctr").each(function (i, ele) { $(this).replaceWith(`<tr id='tr1'>${$(ele).html()}</tr>`); })
+          
+         
+           $("ctable").each(function (i, ele) { $(this).replaceWith(`<table id='table1'>${$(ele).html()}</table>`); })
            
-        })
-       
-        console.log("repeater =>"+$("repeater"));
-       
-        return $.html();
+           $("attribute").remove();
+           return $.html();
     },
 }
 
