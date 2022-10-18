@@ -1,6 +1,10 @@
 var resolve = require('path').resolve;
 var cp = require('child_process');
-    
+const { Console } = require('console');
+
+cp.execSync("npm i -g nodemon");
+console.log("Installed nodemon");
+
 var library = resolve(__dirname, 'library/');
 cp.exec('npm i', {cwd: library}, function(err, _stdout, stderr) {
     if(err) {

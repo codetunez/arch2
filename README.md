@@ -16,7 +16,7 @@ The codebase is made up of 4 parts
 - [Server](./server/README.md) - A web server for server side rendering of webpages and static content
 
 ## Installing
-In the root directory open a terminal and enter `node install.js`. This script automatically executes the steps in [Build Sequence](#build-sequence) 
+In the root directory open a terminal and enter `node install.js`. This script installs nodemon and automatically executes the steps described in [Build Sequence](#build-sequence) 
 
 ## Running the project
 1. In VS Code, open `Run and Debug` from the sidebar

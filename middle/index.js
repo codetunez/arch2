@@ -9,8 +9,7 @@ const port = 3001;
 const data = require('./data.json');
 
 // TODO: Dirty hack to replace data.json template for home page for all sites
-
-const homeTemplateMarkup = fs.readFileSync("template.html","utf-8")
+const homeTemplateMarkup = fs.readFileSync(path.resolve(__dirname,"template.html"),"utf-8")
 
 data.sites.forEach(site => {
     site.pages[0].markup = homeTemplateMarkup
