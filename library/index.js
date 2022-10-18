@@ -1,8 +1,6 @@
 const cheerio = require('cheerio');
 const axios = require('axios');
 
-//const fetch = require('fetch');
-
 module.exports.list = {
     "engines": ["bootstrap3", "skeleton", "tailwind"],
     "forms": ["simpleform", "default"]
@@ -47,13 +45,6 @@ module.exports.content = {
 
 function injectData($, resData){
     let repeat = $("repeater").attr("repeat");
-    let className = $("repeater").attr("classname");
-
-    // handle tables/lists
-    let rows = $("repeater").attr("rows");
-    let wrapper = $("repeater").attr("wrapperhtml");
-
-//    let finalHTML =`<div class=${className}>`;
    let finalHTML = '';
     for(let j =0; j<repeat;j++){
         
@@ -68,9 +59,6 @@ function injectData($, resData){
         });
        finalHTML = finalHTML + componentHTML;
 }
-
-console.log("html  : "+ finalHTML);
-// return finalHTML+"</div>";
    return finalHTML;
 }
 
@@ -110,7 +98,6 @@ module.exports.engines = {
       
          
         $("repeater").each(function (i, ele) { 
-         //   $(this).replaceWith(`<div class="repeater">${injectData($,dvData[0].value)}</div>`);  
             $(this).replaceWith(`${injectData($,dvData[0].value)}`);  
         });
         $("cth").each(function (i, ele) { $(this).replaceWith(`<th id='th1'>${$(ele).html()}</th>`); })
@@ -145,7 +132,6 @@ module.exports.engines = {
         
           
         $("repeater").each(function (i, ele) { 
-            //   $(this).replaceWith(`<div class="repeater">${injectData($,dvData[0].value)}</div>`);  
                $(this).replaceWith(`${injectData($,dvData[0].value)}`);  
            });
            $("cth").each(function (i, ele) { $(this).replaceWith(`<th id='th1'>${$(ele).html()}</th>`); })
@@ -180,7 +166,6 @@ module.exports.engines = {
         
           
         $("repeater").each(function (i, ele) { 
-            //   $(this).replaceWith(`<div class="repeater">${injectData($,dvData[0].value)}</div>`);  
                $(this).replaceWith(`${injectData($,dvData[0].value)}`);  
            });
            $("cth").each(function (i, ele) { $(this).replaceWith(`<th id='th1'>${$(ele).html()}</th>`); })

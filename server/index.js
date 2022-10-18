@@ -77,10 +77,8 @@ app.listen(port, () => {
 function loadData() {
     let sitesRes = null;
     let contentRes = null;
-    let dvRes = null;
     axios("http://localhost:3001/api/dvRecords").then((res)=>{
         dvRecords = res.data;
-        dvRes = dvRecords;
 });
     axios("http://localhost:3001/api/sites")
         .then((res) => {
@@ -90,23 +88,15 @@ function loadData() {
         .then((res) => {
             contentRes = res.data;
             return axios("http://localhost:3001/api/data")
-        // }).then((res) => {
-        //     console.log("server res-"+ JSON.stringify(res));
-        //     dvRecords = res.data;
-        //     return axios("http://localhost:3001/api/dvRecords")
          })
         .then((res) => {
             // because the is an associative array, we have to re-init before re-creating to clear deleted enteries
             sites = {};
             content = {};
             data = {};
-        //    dvRecords ={};
             sitesRes.map((ele) => { sites[ele.id] = ele; })
             contentRes.map((ele) => { content[ele.id] = ele; })
-        //    dvRes.map((ele) => { dvRecords[ele.id] = ele; })
-       //     dvRecords = dvRes;
             res.data.map((ele) => { data[ele.id] = ele; })
-     //       console.log("ff@@@@@@@"+ JSON.stringify(dvRecords));
             console.log(`Data load: dvrecords: ${dvRecords.length} sites:${sitesRes.length} content:${contentRes.length} data:${res.data.length}`);
         })
 }

@@ -70,9 +70,6 @@ const Site = () => {
 
   useEffect(() => {
     
-    axios.get(`http://localhost:3001/api/site/S1`).then((response) => {
-                console.log(response.data.pages[0].title);
-              });
     loadPayload();
     // eslint-disable-next-line
   }, [location])
