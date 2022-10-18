@@ -1,0 +1,45 @@
+{
+    "version": "0.2.0",
+    "configurations": [        
+        {
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "name": "Launch Middleware",
+            "program": "${workspaceFolder}/middle/index.js",
+            "request": "launch",
+            "restart": true,
+            "runtimeExecutable": "nodemon",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "name": "Launch Server",
+            "program": "${workspaceFolder}/server/index.js",
+            "request": "launch",
+            "restart": true,
+            "runtimeExecutable": "nodemon",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "type": "node-terminal",
+            "name": "Launch Client",
+            "command": "npm start",
+            "cwd": "${workspaceFolder}/client",
+            "request": "launch",
+        }
+    ],
+    "compounds": [
+        {
+          "name": "Start arch2",
+          "configurations": ["Launch Middleware", "Launch Server", "Launch Client"],
+          "stopAll": true
+        }
+      ]
+}

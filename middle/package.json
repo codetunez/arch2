@@ -12,6 +12,10 @@
     "shortid": "^2.2.16"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "devStart": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }

@@ -16,41 +16,15 @@ The codebase is made up of 4 parts
 - [Server](./server/README.md) - A web server for server side rendering of webpages and static content
 
 ## Installing
+In the root directory open a terminal and enter `node install.js`. This script automatically executes the steps in [Build Sequence](#build-sequence) 
 
-Review each of the individual README.md files and follow the instruction. Each service will need to be run in its own console window.
+## Running the project
+1. In VS Code, open `Run and Debug` from the sidebar
+    ![](run-install.png)
+2. Select `Start arch2` from the list
+3. Click on the green icon next to the dropdown
 
-**Pay special attention** to setting up the [Library](./library/README.md) as this needs to be _npm linked_ for the client to build.
-
-## TLDR
-
-```
-./build.sh
-./start.sh
-```
-
-Note: These two script are good to get started quickly but are not great at cleaning up background processes. So you may have to kill your processes manually using task manager.
-
-## Build sequence
-
-1. [Library](./library/README.md) (with Symbolic links created)
-2. [Client](./client/README.md) - Build through _npm run start_
-3. [Middle](./middle/README.md) - Build not required
-4. [Server](./server/README.md) - Build not required
-
-Once all services are built and linked, you do not need to rebuild unless the code has changed. Therefore you will only need to do the Startup Sequence activities to run the system.
-
-## Startup sequence
-
-This doesn't matter as the system will correct itself on a browser refresh. But here is the optimal order.
-
-1. [Middle](./middle/README.md)
-2. [Server](./server/README.md)
-3. [Client](./client/README.md)
-
-### Usage
-
-Once all services are up and running visit http://locahost:3000 in a web browser.
-
+This will open three terminals and automatically open a tab in the browser which will run this project. See [Startup Sequence](#startup-sequence) for details
 # Authoring
 
 You can use any HTML you desire as the markup. However, if you use any of the following elements (instead of framework DOM structures), the rendered version will utilze the stylesheet "engine" as set at the Site level and the system will transform the HTML into the desire DOM structures. For embedded form controls, remove as many of your custom css classes as possible.
@@ -150,3 +124,23 @@ Use to create form from a Data item. Has no child elements.
 Use to return a long string version of the current Data and Time. Has no child elements.
 
     <Date locale="<locale> | en-us" />
+
+## Project build internals
+
+### Build sequence
+1. [Library](./library/README.md) (with Symbolic links created)
+2. [Client](./client/README.md) - Build through _npm run start_
+3. [Middle](./middle/README.md) - Build not required
+4. [Server](./server/README.md) - Build not required
+
+Once all services are built and linked, you do not need to rebuild unless the code has changed. Therefore you will only need to do the Startup Sequence activities to run the system.
+
+### Startup sequence
+This doesn't matter as the system will correct itself on a browser refresh. But here is the optimal order.
+
+1. [Middle](./middle/README.md)
+2. [Server](./server/README.md)
+3. [Client](./client/README.md)
+
+### Usage
+Once all services are up and running visit http://locahost:3000 in a web browser.
