@@ -39,7 +39,7 @@
             "        </div>",
             "        <div data-pp-element=\"column\">",
             "          <figure>",
-            "            <img src=\"https://samritblobstorage.blob.core.windows.net/public/Geometric-4.png\" alt=\"Decorative Image\"/>",
+            "            <img src=\"https://samritblobstorage.blob.core.windows.net/public/Geometric-4.png\" alt=\"Decorative Image\" width=\"100%\"/>",
             "          </figure>",
             "        </div>",
             "      </div>",

@@ -129,42 +129,26 @@ module.exports.engines = {
         const gridMap = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
 
         let $ = cheerio.load(markup, { xmlMode: true }, false);
-
-        // $(`div[data-pp-element="grid"]`).find(`div[data-pp-element="row"]`)).each(function (i, rows) {
-        //     const columns = $(this).find(`div[data-pp-element="column"]`);
-        //     const gridcolumn = columns.length === 1 ? gridMap[gridMap.length - 1] : gridMap[Math.floor(12 / columns.length) - 1];
-        //     columns.each(function (i, column) {
-        //         $(this).replaceWith(`<div class="${gridcolumn} columns">${$(column).html()}</div>`);
-        //     });
-        // })
-
-        // $("heading").each(function (i, ele) {
-        //     const headingType = $(this).attr("as").toLowerCase();
-        //     const textOrHtml = $(this).attr("text") || $(ele).html();
-        //     $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
-        // });
-
-        // $("button").each(function (i, ele) {
-        //     const textOrHtml = $(this).attr("text") || $(ele).html();
-        //     $(this).replaceWith(`
-        //         <button class="button-primary">
-        //             ${textOrHtml}
-        //         </button>
-        //     `);
-        // });
         
-        // $("Form").find("group").each(function (i, ele) { $(this).replaceWith($(ele).html()); })
-        // $("row").each(function (i, ele) { $(this).replaceWith(`<div class="row">${$(ele).html()}</div>`); })
-        // $(`div[data-pp-element="grid"]`).each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
-        // $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
-
+        $(`div[data-pp-element="grid"]`).addClass("container")
+        $(`div[data-pp-element="row"]`).each((_,row) => {
+            $(row).addClass("row")
+            const cols = $(row).find(`div[data-pp-element="column"]`)
+            const colspan = Math.floor(12 / cols.length) > 0 ? Math.floor(12 / cols.length) : 1 
+            cols.addClass(`${gridMap[colspan-1]} ${colspan === 1?"column":"columns"}`)
+        })
+        $("button").addClass("button-primary")
+        $("input").addClass("u-full-width")
         return $.html({ xmlMode: false });
     },
     "tailwind": (markup) => {
 
         const gridMap = ['grid-cols-1', 'grid-cols-2', 'grid-cols-3', 'grid-cols-4', 'grid-cols-5', 'grid-cols-6', 'grid-cols-7', 'grid-cols-8', 'grid-cols-9', 'grid-cols-10', 'grid-cols-11', 'grid-cols-1'];
 
-        // let $ = cheerio.load(markup, { xmlMode: true }, false);
+        let $ = cheerio.load(markup, { xmlMode: true }, false);
+
+        $(`div[data-pp-element="grid"]`).addClass("container mx-auto")
+        $(`div[data-pp-element="row"]`).addClass("grid grid-flow-col auto-cols-max")
 
 
         // $("heading").each(function (i, ele) {
@@ -262,8 +246,7 @@ module.exports.templates = {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
-        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
-        <!-- Tailwind reorders the CSS hence styles not in head -->
+        <script src="https://cdn.tailwindcss.com/"></script>
     </head>
     
     <body>

@@ -50,9 +50,8 @@ app.get('*', (req, res) => {
     if (!page) { res.status(404).end(); return; }
 
     const eng = sites[segments[1]].engine;
-
     // resolve all the content fragments, resolve server controls, transform the markup, render the html
-    let markup = page.markup.join("\n");
+    let markup = page.markup;
     markup = library.content.resolve(markup, content);
     markup = library.content.resolveServer(markup, data);
     markup = library.engines[eng](markup);
