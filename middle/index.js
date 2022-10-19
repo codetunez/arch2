@@ -8,15 +8,33 @@ const port = 3001;
 
 const data = require('./data.json');
 
-// TODO: Dirty hack to replace data.json template for home page for all sites
-const homeTemplateMarkup = fs.readFileSync(path.resolve(__dirname,"template.html"),"utf-8")
-
-data.sites.forEach(site => {
-    site.pages[0].markup = homeTemplateMarkup
-})
-
 const express = require('express');
 const app = express();
+
+const arrayToString = (site) => {
+    return {
+        ...site,
+        pages: site.pages.map(page => {
+            return {
+                ...page,
+                markup: page.markup.join("\n")
+            }
+        })
+    } 
+}
+
+const stringToArray = (site) => {
+    return {
+        ...site,
+        pages: site.pages.map(page => {
+            return {
+                ...page,
+                markup: page.markup.split("\n")
+            }
+        })
+    }
+}
+
 app.use(express.json());
 app.use(morgan('tiny'));
 
@@ -28,13 +46,15 @@ app.use(function (req, res, next) {
     next();
 });
 
+
+
 /* APIs for discrete operations */
 
 // site
 
 app.get('/api/site/:siteId', (req, res) => {
     let s = data.sites.find((x) => x.id === req.params.siteId);
-    res.send(s).end();
+    res.send(arrayToString(s)).end();
 })
 
 app.post('/api/site/new', (req, res) => {
@@ -47,18 +67,18 @@ app.post('/api/site/new', (req, res) => {
         "pages": [{
             "id": shortid.generate().replace(/-/g, ""),
             "title": "Homepage",
-            "markup": "",
+            "markup": [""],
             "url": ""
         }]
     })
-    res.send({ sites: data.sites }).end();
+    res.send({ sites: data.sites.map(arrayToString) }).end();
 })
 
 app.post('/api/site/:siteId', (req, res) => {
     let s = data.sites.findIndex((x) => x.id === req.params.siteId);
     if (s > -1) {
-        data.sites[s] = req.body;
-        res.send({ sites: data.sites, site: data.sites[s] });
+        data.sites[s] = stringToArray(req.body);
+        res.send({ sites: data.sites.map(arrayToString), site: arrayToString(data.sites[s]) });
     }
     res.end();
 })
@@ -67,7 +87,7 @@ app.delete('/api/site/:siteId', (req, res) => {
     let s = data.sites.findIndex((x) => x.id === req.params.siteId);
     if (s > -1) {
         data.sites.splice(s, 1);
-        res.send({ sites: data.sites, content: data.content });
+        res.send({ sites: data.sites.map(arrayToString), content: data.content });
     }
     res.end();
 })
@@ -77,7 +97,10 @@ app.delete('/api/site/:siteId', (req, res) => {
 app.get('/api/page/:siteId/:pageId', (req, res) => {
     let s = data.sites.find((x) => x.id === req.params.siteId);
     let p = s.pages.find((x) => x.id === req.params.pageId);
-    res.send(p).end();
+    res.send({
+        ...p,
+        markup: p.markup.join("\n")
+    }).end();
 })
 
 app.post('/api/page/new', (req, res) => {
@@ -87,10 +110,10 @@ app.post('/api/page/new', (req, res) => {
     data.sites[i].pages.push({
         "id": id,
         "title": "New Page",
-        "markup": "<div></div>",
+        "markup": ["<div></div>"],
         "url": id
     })
-    res.send({ sites: data.sites }).end();
+    res.send({ sites: data.sites.map(arrayToString) }).end();
 })
 
 app.post('/api/page/:siteId/:pageId', (req, res) => {
@@ -98,8 +121,11 @@ app.post('/api/page/:siteId/:pageId', (req, res) => {
     if (s > -1) {
         let p = data.sites[s].pages.findIndex((x) => x.id === req.params.pageId);
         if (p > -1) {
-            data.sites[s].pages[p] = req.body;
-            res.send({ sites: data.sites, page: data.sites[s].pages[p] });
+            data.sites[s].pages[p] = {
+                ...req.body,
+                markup: req.body.markup.split("\n")
+            };
+            res.send({ sites: data.sites.map(arrayToString), page: data.sites[s].pages[p] });
         }
     }
     res.end();
@@ -111,7 +137,7 @@ app.delete('/api/page/:siteId/:pageId', (req, res) => {
         let p = data.sites[s].pages.findIndex((x) => x.id === req.params.pageId);
         if (p > -1) {
             data.sites[s].pages.splice(p, 1);
-            res.send({ sites: data.sites, content: data.content });
+            res.send({ sites: data.sites.map(arrayToString), content: data.content });
         }
     }
     res.end();
@@ -136,7 +162,7 @@ app.post('/api/content/:contentId', (req, res) => {
     let c = data.content.findIndex((x) => x.id === req.params.contentId);
     if (c > -1) {
         data.content[c] = req.body;
-        res.send({ sites: data.sites, content: data.content });
+        res.send({ sites: data.sites.map(arrayToString), content: data.content });
     }
     res.end();
 })
@@ -145,7 +171,7 @@ app.delete('/api/content/:contentId', (req, res) => {
     let c = data.content.findIndex((x) => x.id === req.params.contentId);
     if (c > -1) {
         data.content.splice(c, 1);
-        res.send({ sites: data.sites, content: data.content });
+        res.send({ sites: data.sites.map(arrayToString), content: data.content });
     }
     res.end();
 })
@@ -178,7 +204,7 @@ app.delete('/api/data/:dataId', (req, res) => {
     let d = data.data.findIndex((x) => x.id === req.params.dataId);
     if (d > -1) {
         data.data.splice(d, 1);
-        res.send({ sites: data.sites, data: data.data });
+        res.send({ sites: data.sites.map(arrayToString), data: data.data });
     }
     res.end();
 })
@@ -186,7 +212,7 @@ app.delete('/api/data/:dataId', (req, res) => {
 /* APIs for full current state */
 
 app.get('/api/sites', (req, res) => {
-    res.send(data.sites).end();
+    res.send(data.sites.map(arrayToString)).end();
 })
 
 app.get('/api/content', (req, res) => {
@@ -205,7 +231,7 @@ app.post('/api/persist', (req, res) => {
         console.log("Error writing data to disk")
     }
     console.log("Persisted to disk")
-    res.send({ sites: data.sites, content: data.content, data: data.data }).end();
+    res.send({ sites: data.sites.map(arrayToString), content: data.content, data: data.data }).end();
 });
 
 app.listen(port, () => {

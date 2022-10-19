@@ -1,136 +1,120 @@
 {
   "sites": [
     {
-      "id": "S0",
-      "name": "Site Zero",
-      "engine": "html5",
-      "stylesheet": "",
-      "pages": [
-        {
-          "id": "P1",
-          "title": "Homepage",
-          "markup": "<Section>\n    <Grid>\n        <Row>\n            <Column>\n                <Heading as='H1' text='Welcome Bootstrap 3 homepage'></Heading>\n                <Heading as='H6'>\n                    <Date/>\n                </Heading>\n                <Content id='C3000' />\n                <Button text='Click here to learn more' />\n            </Column>\n            <Column>\n                <Content id='C7000'/>\n            </Column>\n        </Row>\n        <br />\n        <Row>\n            <Column>\n                <Content id='C8000' />\n            </Column>\n            <Column>\n                <Content id='C3000' />\n                <Content id='C5000' />\n                <Content id='C3000' />\n            </Column>\n        </Row>\n    </Grid>\n</Section>",
-          "url": ""
-        },
-        {
-          "id": "P2",
-          "title": "Page One",
-          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Heading as='H3' text='Please complete the form' />\r\n                <Form data='D1000' type='simpleform' />\r\n                <br/>\r\n                <Content id='C3000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
-          "url": "p2"
-        },
-        {
-          "id": "P3",
-          "title": "Auth Page",
-          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Content id='C1000' />\r\n            </Column>\r\n            <Column>\r\n                <Content id='C6000' />\r\n                <Content id='C2000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
-          "url": "auth"
-        }
-      ],
-      "sitenav": ["P1", "P2"]
-    },
-    {
       "id": "S1",
       "name": "Site One",
-      "engine": "bootstrap3",
-      "stylesheet": ".navbar-brand img { display:inline;}",
-      "pages": [
-        {
-          "id": "P1",
-          "title": "Homepage",
-          "markup": "<Section>\n    <Grid>\n        <Row>\n            <Column>\n                <Heading as='H1' text='Welcome Bootstrap 3 homepage'></Heading>\n                <Heading as='H6'>\n                    <Date/>\n                </Heading>\n                <Content id='C3000' />\n                <Button text='Click here to learn more' />\n            </Column>\n            <Column>\n                <Content id='C7000'/>\n            </Column>\n        </Row>\n        <br />\n        <Row>\n            <Column>\n                <Content id='C8000' />\n            </Column>\n            <Column>\n                <Content id='C3000' />\n                <Content id='C5000' />\n                <Content id='C3000' />\n            </Column>\n        </Row>\n    </Grid>\n</Section>",
-          "url": ""
-        },
-        {
-          "id": "P2",
-          "title": "Page One",
-          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Heading as='H3' text='Please complete the form' />\r\n                <Form data='D1000' type='simpleform' />\r\n                <br/>\r\n                <Content id='C3000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
-          "url": "p2"
-        },
-        {
-          "id": "P3",
-          "title": "Auth Page",
-          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Content id='C1000' />\r\n            </Column>\r\n            <Column>\r\n                <Content id='C6000' />\r\n                <Content id='C2000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
-          "url": "auth"
-        }
-      ],
-      "sitenav": ["P1", "P2"]
-    },
-    {
-      "id": "S2",
-      "name": "Site Two",
-      "engine": "bootstrap5",
-      "stylesheet": "section {margin-top: 16px}",
-      "pages": [
-        {
-          "id": "P1",
-          "title": "Homepage",
-          "markup": "<Section>\n    <Grid>\n        <Row>\n            <Column>\n                <Heading as='H1' text='Welcome to Bootstrap 5 homepage'></Heading>\n                <Heading as='H6'>\n                    <Date/>\n                </Heading>\n                <Content id='C3000' />\n                <Button text='Click here to learn more' />\n            </Column>\n            <Column>\n                <Content id='C7000'/>\n            </Column>\n        </Row>\n        <br />\n        <Row>\n            <Column>\n                <Content id='C8000' />\n            </Column>\n            <Column>\n                <Content id='C3000' />\n                <Content id='C5000' />\n                <Content id='C3000' />\n            </Column>\n        </Row>\n    </Grid>\n</Section>",
-          "url": ""
-        },
-        {
-          "id": "P2",
-          "title": "Page One",
-          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Heading as='H3' text='Please complete the form' />\r\n                <Form data='D1000' type='simpleform' />\r\n                <br/>\r\n                <Content id='C3000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
-          "url": "p2"
-        },
-        {
-          "id": "P3",
-          "title": "Auth Page",
-          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Content id='C1000' />\r\n            </Column>\r\n            <Column>\r\n                <Content id='C6000' />\r\n                <Content id='C2000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
-          "url": "auth"
-        }
-      ],
-      "sitenav": ["P1", "P2"]
-    },
-    {
-      "id": "S3",
-      "name": "Site Three",
-      "engine": "tailwind",
+      "engine": "none",
       "stylesheet": "",
       "pages": [
         {
           "id": "P1",
           "title": "Homepage",
-          "markup": "<Section>\n    <Grid>\n        <Row>\n            <Column>\n                <Heading as='H1' text='Welcome to Tailwind homepage'></Heading>\n                <Heading as='H6'>\n                    <Date/>\n                </Heading>\n                <Content id='C3000' />\n                <Button text='Click here to learn more' />\n            </Column>\n            <Column>\n                <Content id='C7000'/>\n            </Column>\n        </Row>\n        <br />\n        <Row>\n            <Column>\n                <Content id='C8000' />\n            </Column>\n            <Column>\n                <Content id='C3000' />\n                <Content id='C5000' />\n                <Content id='C3000' />\n            </Column>\n        </Row>\n    </Grid>\n</Section>",
+          "markup": [
+            "<header>",
+            "<nav> ",
+            "  <a data-pp-element=\"brand\" href=\"#\">",
+            "    <img src=\"https://samritblobstorage.blob.core.windows.net/public/Logo-sm-64.png\" width=\"24px\" />",
+            "    <span>Company Name</span>",
+            "  </a>",
+            "  <ul>",
+            "    <li>",
+            "      <a href=\"\">Home</a>",
+            "    </li>",
+            "    <li>",
+            "      <a href=\"\">Products</a>",
+            "    </li>",
+            "    <li>",
+            "        <a href=\"\">About Us</a>",
+            "    </li>",
+            "  </ul>",
+            "</nav>",
+            "</header>",
+            "<main>",
+            "  <section>",
+            "    <div data-pp-element=\"grid\">",
+            "      <div data-pp-element=\"row\">",
+            "        <div data-pp-element=\"column\">",
+            "          <h1>Create an engaging headline, welcome, or call to action</h1>",
+            "          <button type=\"button\">Add a call to action here</button>",
+            "        </div>",
+            "        <div data-pp-element=\"column\">",
+            "          <figure>",
+            "            <img src=\"https://samritblobstorage.blob.core.windows.net/public/Geometric-4.png\" alt=\"Decorative Image\"/>",
+            "          </figure>",
+            "        </div>",
+            "      </div>",
+            "    </div>",
+            "  </section>",
+            "  <section>",
+            "    <div data-pp-element=\"grid\">",
+            "      <div data-pp-element=\"row\">",
+            "        <div data-pp-element=\"column\">",
+            "          <h2>Introductory Section</h2>",
+            "          <p>Create a short paragraph that shows your target audience a clear benefit to them if they continue past this point and offer direction about the next steps</p>",
+            "        </div>",
+            "      </div>",
+            "      <div data-pp-element=\"row\">",
+            "        <div data-pp-element=\"column\">",
+            "          <div data-pp-style-text-align=\"center\">",
+            "            <img src=\"https://samritblobstorage.blob.core.windows.net/public/Circle-1.png\" />",
+            "            <h3>Featured Item 1</h3>",
+            "            <p>Create a short description or engaging message to motivate your audience to find out more about this item.</p>",
+            "          </div>",
+            "        </div>",
+            "        <div data-pp-element=\"column\">",
+            "          <div data-pp-style-text-align=\"center\">",
+            "            <img src=\"https://samritblobstorage.blob.core.windows.net/public/Circle-2.png\"/>",
+            "            <h3>Featured Item 2</h3>",
+            "            <p>Create a short description or engaging message to motivate your audience to find out more about this item.</p>",
+            "          </div>",
+            "        </div>",
+            "        <div data-pp-element=\"column\">",
+            "          <div data-pp-style-text-align=\"center\">",
+            "            <img src=\"https://samritblobstorage.blob.core.windows.net/public/Circle-3.png\"/>",
+            "            <h3>Featured Item 3</h3>",
+            "            <p>Create a short description or engaging message to motivate your audience to find out more about this item.</p>",
+            "          </div>",
+            "        </div>",
+            "      </div>",
+            "    </div>",
+            "  </section>",
+            "  <section>",
+            "    <div data-pp-element=\"grid\">",
+            "      <div data-pp-element=\"row\">",
+            "        <div data-pp-element=\"column\">",
+            "          <h2>Contact Us</h2>",
+            "        </div>",
+            "        <div data-pp-element=\"column\">",
+            "          <form role=\"form\">",
+            "            <fieldset>",
+            "              <legend>Fill in your details</legend>",
+            "              <label id=\"input-name-label\" for=\"input-name\">Name</label>",
+            "              <input id=\"input-name\" type=\"text\" aria-labelledby=\"input-name-label\" /> ",
+            "              <label id=\"input-email-label\" for=\"input-email\">Email</label>",
+            "              <input id=\"input-email\" type=\"email\" aria-labelledby=\"input-email-label\" /> ",
+            "              <label id=\"input-subject-label\" for=\"input-subject\">Subject</label>",
+            "              <input id=\"input-subject\" type=\"text\" aria-labelledby=\"input-subject-label\" />",
+            "              <label id=\"input-message-label\" for=\"input-message\">Message</label>",
+            "              <input id=\"input-message\" type=\"text\" aria-labelledby=\"input-message-label\" /> ",
+            "              <input type=\"submit\" value=\"Submit\"/>",
+            "            </fieldset>",
+            "          </form>",
+            "        </div>",
+            "      </div>",
+            "    </div>",
+            "  </section>",
+            "</main>",
+            "<footer>",
+            "  <div data-pp-element=\"grid\">",
+            "    <div data-pp-element=\"row\">",
+            "      <div data-pp-element=\"column\">",
+            "        <p>Copyright © 2022 . All rights reserved.</p>",
+            "      </div>",
+            "    </div>",
+            "  </div>",
+            "</footer>"
+          ],
           "url": ""
-        },
-        {
-          "id": "P2",
-          "title": "Page One",
-          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Heading as='H3' text='Please complete the form' />\r\n                <Form data='D1000' type='simpleform' />\r\n                <br/>\r\n                <Content id='C3000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
-          "url": "p2"
-        },
-        {
-          "id": "P3",
-          "title": "Auth Page",
-          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Content id='C1000' />\r\n            </Column>\r\n            <Column>\r\n                <Content id='C6000' />\r\n                <Content id='C2000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
-          "url": "auth"
-        }
-      ],
-      "sitenav": ["P1"]
-    },
-    {
-      "id": "S4",
-      "name": "Site Four",
-      "engine": "skeleton",
-      "stylesheet": "",
-      "pages": [
-        {
-          "id": "P1",
-          "title": "Homepage",
-          "markup": "<Section>\n    <Grid>\n        <Row>\n            <Column>\n                <Heading as='H1' text='Welcome to Skeleton homepage'></Heading>\n                <Heading as='H6'>\n                    <Date/>\n                </Heading>\n                <Content id='C3000' />\n                <Button text='Click here to learn more' />\n            </Column>\n            <Column>\n                <Content id='C7000'/>\n            </Column>\n        </Row>\n        <br />\n        <Row>\n            <Column>\n                <Content id='C8000' />\n            </Column>\n            <Column>\n                <Content id='C3000' />\n                <Content id='C5000' />\n                <Content id='C3000' />\n            </Column>\n        </Row>\n    </Grid>\n</Section>",
-          "url": ""
-        },
-        {
-          "id": "P2",
-          "title": "Page One",
-          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Heading as='H3' text='Please complete the form' />\r\n                <Form data='D1000' type='simpleform' />\r\n                <br/>\r\n                <Content id='C3000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
-          "url": "p2"
-        },
-        {
-          "id": "P3",
-          "title": "Auth Page",
-          "markup": "<Section>\r\n    <Grid>\r\n        <Row>\r\n            <Column>\r\n                <Content id='C1000' />\r\n            </Column>\r\n            <Column>\r\n                <Content id='C6000' />\r\n                <Content id='C2000' />\r\n            </Column>\r\n        </Row>\r\n    </Grid>\r\n</Section>",
-          "url": "auth"
         }
       ],
       "sitenav": ["P1", "P2"]

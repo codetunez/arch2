@@ -52,7 +52,7 @@ app.get('*', (req, res) => {
     const eng = sites[segments[1]].engine;
 
     // resolve all the content fragments, resolve server controls, transform the markup, render the html
-    let markup = page.markup;
+    let markup = page.markup.join("\n");
     markup = library.content.resolve(markup, content);
     markup = library.content.resolveServer(markup, data);
     markup = library.engines[eng](markup);

@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 
 module.exports.list = {
-    "engines": ["bootstrap3","bootstrap5", "skeleton", "tailwind","html5"],
+    "engines": ["bootstrap3","bootstrap5", "skeleton", "tailwind","none"],
     "forms": ["simpleform", "default"]
 };
 
@@ -70,6 +70,8 @@ module.exports.engines = {
             .wrap($(`<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"></div>`))
         $(`header nav a[data-pp-element="brand"]`)
             .addClass("navbar-brand")
+        $(`header nav a[data-pp-element="brand"] img`)
+            .addClass("pull-left")
         $(`header nav a[data-pp-element="brand"]`)
             .wrap($(`<div class="navbar-header"></div`))
         $(`<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -196,17 +198,17 @@ module.exports.engines = {
 
         return $.html({ xmlMode: false });
     },
-    "html5": (markup) => {
+    "none": (markup) => {
         return markup
     }
 }
 
 module.exports.templates = {
-    "html5":(title,content,styles) => `
+    "none":(title,content,styles) => `
     <!DOCTYPE html>
     <html lang="en">
         <head>
-            <title>${title || ""} (HTML5)</title>
+            <title>${title || ""}</title>
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
             <meta name="description" content="" />
