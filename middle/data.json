@@ -3,7 +3,7 @@
     {
       "id": "S1",
       "name": "Site One",
-      "engine": "bootstrap5",
+      "engine": "tailwind",
       "stylesheet": "",
       "pages": [
         {

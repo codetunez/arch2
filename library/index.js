@@ -148,16 +148,25 @@ module.exports.engines = {
         const gridMap = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
 
         let $ = cheerio.load(markup, { xmlMode: true }, false);
-        
-        $(`div[data-pp-element="grid"]`).addClass("container")
-        $(`div[data-pp-element="row"]`).each((_,row) => {
+
+        // semantic html5 mappings
+        $("input").addClass("u-full-width")
+
+        // layout
+        $(`[data-pp-layout="grid"]`).addClass("container")
+        $(`[data-pp-layout="container"]`).addClass("container")
+        $(`div[data-pp-layout="row"]`).each((_,row) => {
             $(row).addClass("row")
-            const cols = $(row).find(`div[data-pp-element="column"]`)
+            const cols = $(row).find(`div[data-pp-layout="column"]`)
             const colspan = Math.floor(12 / cols.length) > 0 ? Math.floor(12 / cols.length) : 1 
             cols.addClass(`${gridMap[colspan-1]} ${colspan === 1?"column":"columns"}`)
         })
-        $("button").addClass("button-primary")
-        $("input").addClass("u-full-width")
+        
+        // styling
+        $(`button[data-pp-style="primary"]`).addClass("button-primary")
+        $(`[data-pp-style="float-left"]`).addClass("u-pull-left")
+        $(`[data-pp-style="float-right"]`).addClass("u-pull-right")
+
         return $.html({ xmlMode: false });
     },
     "tailwind": (markup) => {
@@ -166,38 +175,10 @@ module.exports.engines = {
 
         let $ = cheerio.load(markup, { xmlMode: true }, false);
 
-        $(`div[data-pp-element="grid"]`).addClass("container mx-auto")
-        $(`div[data-pp-element="row"]`).addClass("grid grid-flow-col auto-cols-max")
-
-
-        // $("heading").each(function (i, ele) {
-        //     const headingType = $(this).attr("as").toLowerCase();
-        //     const textOrHtml = $(this).attr("text") || $(ele).html();
-        //     $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
-        // });
-
-        // $(`div[data-pp-element="grid"]`).find(`div[data-pp-element="row"]`)).each(function (i, rows) {
-        //     const columns = $(this).find(`div[data-pp-element="column"]`);
-        //     const gridcolumn = gridMap[columns.length - 1];
-        //     $(this).replaceWith(`<div class="grid ${gridcolumn} gap-4">${$(rows).html()}</div>`);
-        // })
-
-        // $("button").each(function (i, ele) {
-        //     const textOrHtml = $(this).attr("text") || $(ele).html();
-        //     $(this).replaceWith(`
-        //         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        //             ${textOrHtml}
-        //         </button>
-        //     `);
-        // });
-        
-        // $("Form").find("group").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
-        // $("column").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
-        // $(`div[data-pp-element="grid"]`).each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
-        // $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
-
-        // $("label").each(function (i, ele) { $(this).addClass("block text-gray-700 text-sm font-bold mb-2"); });
-        // $("input").each(function (i, ele) { $(this).addClass("appearance-none border rounded w-full py-2 px-3"); });
+        // layout
+        $(`[data-pp-layout="container"]`).addClass("container")
+        $(`[data-pp-layout="grid"]`).addClass("container")
+        $(`[data-pp-layout="row"]`).addClass("grid grid-flow-col auto-cols-max")
 
         return $.html({ xmlMode: false });
     },
@@ -291,3 +272,7 @@ module.exports.templates = {
 </html>    
     `
 }
+// Materialize
+// Foundation
+// Bulma
+// pure?
