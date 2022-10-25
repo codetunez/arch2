@@ -62,66 +62,85 @@ module.exports.serverForms = {
 module.exports.engines = {
     "bootstrap3": (markup) => {
         let $ = cheerio.load(markup, { xmlMode: true }, false);
-        
-        // TODO: what if multiple navs in header 
-        $(`header nav`).addClass("navbar navbar-default")
-        $(`header nav ul`)
-            .addClass("nav navbar-nav navbar-right")
-            .wrap($(`<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"></div>`))
-        $(`header nav a[data-pp-element="brand"]`)
-            .addClass("navbar-brand")
-        $(`header nav a[data-pp-element="brand"] img`)
-            .addClass("pull-left")
-        $(`header nav a[data-pp-element="brand"]`)
-            .wrap($(`<div class="navbar-header"></div`))
-        $(`<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>`)
-            .insertBefore($(`header nav div a[data-pp-element="brand"]`))
-        $(`header nav`).wrapInner($(`<div class="container-fluid"></div>`))
 
+        // semantic html5 mappings
+        $("button").addClass("btn btn-default")
+        $("input").addClass("form-control")
 
-        $(`div[data-pp-element="grid"]`).addClass("container")
-        $(`div[data-pp-element="row"]`).each((_,row) => {
+        // elements
+        $(`nav[data-pp-element="site-nav"]`).addClass("navbar navbar-default")
+        $(`[data-pp-element="site-links"]`).addClass("nav navbar-nav navbar-collapse collapse").attr("id","navbar-collapse") 
+        $(`[data-pp-element="site-brand"]`).addClass("navbar-header")
+        $(`[data-pp-element="site-brand"] a`).addClass("navbar-brand")
+        $(`[data-pp-element="site-burger"]`)
+            .removeClass("btn")
+            .removeClass("btn-default")
+            .addClass("navbar-toggle collapsed")
+            .attr("data-toggle","collapse")
+            .attr("data-target","#navbar-collapse")
+            .append(`<span class="sr-only">Toggle navigation</span>`)
+            .append(`<span class="icon-bar"></span>`)
+            .append(`<span class="icon-bar"></span>`)
+            .append(`<span class="icon-bar"></span>`)
+            .appendTo($(`[data-pp-element="site-brand"]`))
+
+        // layout
+        $(`[data-pp-layout="grid"]`).addClass("container")
+        $(`[data-pp-layout="container"]`).addClass("container")
+        $(`[data-pp-layout="row"]`).each((_,row) => {
             $(row).addClass("row")
-            const cols = $(row).find(`div[data-pp-element="column"]`)
+            const cols = $(row).find(`[data-pp-layout="column"]`)
             const colspan = Math.floor(12 / cols.length) > 0 ? Math.floor(12 / cols.length) : 1 
             cols.addClass(`col-md-${colspan}`)
         })
-        $("button").addClass("btn btn-primary")
-        // TODO: form groups, help blocks ?
-        $("input").addClass("form-control")
+        $(`[data-pp-layout="container"][data-pp-style="fluid"]`).removeClass("container").addClass("container-fluid")
+
+        // styling
+        $(`nav [data-pp-style="justify-end"]`).addClass("navbar-right")
+        $(`nav [data-pp-style="justify-start"]`).addClass("navbar-left")
+        $(`button[data-pp-style="primary"]`).removeClass("btn-default").addClass("btn-primary")
+        $(`[data-pp-style="float-left"]`).addClass("pull-left")
+        $(`[data-pp-style="float-right"]`).addClass("pull-right")
 
         return $.html({ xmlMode: false });
     },
     "bootstrap5": (markup) => {
         let $ = cheerio.load(markup, { xmlMode: true }, false);
 
-        // TODO: what if multiple navs in header 
-        $(`header nav`).addClass("navbar navbar-expand-lg navbar-light bg-light")
-        $(`header nav ul`)
-            .addClass("navbar-nav navbar-right")
-            .wrap($(`<div class="collapse navbar-collapse justify-content-end" id="navbarNav"></div>`))
-        $(`header nav a[data-pp-element="brand"]`)
-            .addClass("navbar-brand")
-        $(`<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>`)
-            .insertAfter($(`header nav a[data-pp-element="brand"]`))
-        $(`header nav`).wrapInner($(`<div class="container-fluid"></div>`))
-        $(`ul.navbar-nav li`).addClass("nav-item")
-        $(`ul.navbar-nav li a`).addClass("nav-link")
-
-        $(`div[data-pp-element="grid"]`).addClass("container")
-        $(`div[data-pp-element="row"]`).addClass("row")
-        $(`div[data-pp-element="column"]`).addClass("col")
-        $("button").addClass("btn btn-primary")
-        // TODO: form groups, help blocks ?
+        // semantic html5 mappings
+        $("button").addClass("btn btn-default")
         $("input").addClass("form-control")
 
+        // elements
+        $(`nav[data-pp-element="site-nav"]`).addClass("navbar navbar-expand-lg")
+        $(`[data-pp-element="site-links"]`).addClass("navbar-nav collapse navbar-collapse").attr("id","navbar-collapse")
+        $(`[data-pp-element="site-links"] li`).addClass("nav-item")
+        $(`[data-pp-element="site-links"] li a`).addClass("nav-link")
+        $(`[data-pp-element="site-brand"] a`).addClass("navbar-brand")
+        $(`[data-pp-element="site-burger"]`)
+            .removeClass("btn")
+            .removeClass("btn-default")
+            .addClass("navbar-toggler")
+            .attr("data-bs-toggle","collapse")
+            .attr("data-bs-target","#navbar-collapse")
+            .append(`<span class="navbar-toggler-icon"></span>`)
+
+        // layout
+        $(`[data-pp-layout="grid"]`).addClass("container")
+        $(`[data-pp-layout="container"]`).addClass("container")
+        $(`[data-pp-layout="row"]`).addClass("row") 
+        $(`[data-pp-layout="column"]`).addClass("col") 
+        $(`[data-pp-layout="container"][data-pp-style="fluid"]`).removeClass("container").addClass("container-fluid")
+
+        // styling
+        $(`[data-pp-style="justify-start"]`).addClass("justify-content-start")
+        $(`[data-pp-style="justify-end"]`).addClass("justify-content-end")
+        $(`button[data-pp-style="primary"]`).removeClass("btn-default").addClass("btn-primary")
+        $(`[data-pp-style="float-left"]`).addClass("pull-left")
+        $(`[data-pp-style="float-right"]`).addClass("pull-right")
+        $(`nav[data-pp-style="light"]`).addClass("nav-light")
+        $(`[data-pp-style="light"]`).addClass("bg-light")
+    
         return $.html({ xmlMode: false });
     },
     "skeleton": (markup) => {
