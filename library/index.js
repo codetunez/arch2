@@ -187,6 +187,16 @@ module.exports.engines = {
     }
 }
 
+module.exports.transformPPToJSX = (markup) => {
+    let $ = cheerio.load(markup, { xmlMode: true }, false);
+    $("div[data-pp-element]").each((i,item) => {
+        const attributeName = item.attribs['data-pp-element'];
+        const newTagName = attributeName.charAt(0).toUpperCase() + attributeName.slice(1)
+        item.tagName = newTagName;
+    });
+    return $.html({ xmlMode: false });  
+}
+
 module.exports.templates = {
     "none":(title,content,styles) => `
     <!DOCTYPE html>
