@@ -2,6 +2,7 @@ import './page.css';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useReducer, useContext, useState } from 'react';
+import * as library from 'library';
 
 import BlocksEditor from 'blocks-ui';
 import * as Blocks from '@blocks/react';
@@ -120,7 +121,7 @@ const Page = () => {
   import React from 'react'
   export default () => (
     <Blocks.Root>
-      ${state.data.markup}
+      ${transformMarkup(state.data.markup)}
     </Blocks.Root>
   )
   `;
@@ -196,3 +197,7 @@ const Page = () => {
 }
 
 export default Page;
+
+function transformMarkup(markup) {
+  return markup ? library.transformPPToJSX(markup) : "";
+}
