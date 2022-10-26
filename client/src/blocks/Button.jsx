@@ -9,8 +9,6 @@ const Button = ({text, ...props}) => {
   
   if(engine === "bootstrap3") {
     frameworkClasses = "btn btn-primary";
-  } else if(engine === "tailwind") {
-    frameworkClasses = `bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`
   } else if(engine === "skeleton") {
     frameworkClasses = "button-primary";
   }

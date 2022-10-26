@@ -9,11 +9,6 @@ const Row = ({rowClasses = '', ...props}) => {
   
     if(engine === "bootstrap3") {
       frameworkClasses = "row";
-    } else if(engine === "tailwind") {
-      const numberOfChildren = props.children.length || 1;
-      console.log(props)
-      console.log(numberOfChildren)
-      frameworkClasses = `grid grid-cols-${numberOfChildren} gap-4`
     } else if(engine === "skeleton") {
         // TODO: The following classes should be sent to children columns 
         // const gridMap = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];

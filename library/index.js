@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 
 module.exports.list = {
-    "engines": ["bootstrap3","bootstrap5", "skeleton", "tailwind","none"],
+    "engines": ["bootstrap3","bootstrap5", "materialize", "skeleton","none"],
     "forms": ["simpleform", "default"]
 };
 
@@ -62,66 +62,168 @@ module.exports.serverForms = {
 module.exports.engines = {
     "bootstrap3": (markup) => {
         let $ = cheerio.load(markup, { xmlMode: true }, false);
-        
-        // TODO: what if multiple navs in header 
-        $(`header nav`).addClass("navbar navbar-default")
-        $(`header nav ul`)
-            .addClass("nav navbar-nav navbar-right")
-            .wrap($(`<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"></div>`))
-        $(`header nav a[data-pp-element="brand"]`)
-            .addClass("navbar-brand")
-        $(`header nav a[data-pp-element="brand"] img`)
-            .addClass("pull-left")
-        $(`header nav a[data-pp-element="brand"]`)
-            .wrap($(`<div class="navbar-header"></div`))
-        $(`<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>`)
-            .insertBefore($(`header nav div a[data-pp-element="brand"]`))
-        $(`header nav`).wrapInner($(`<div class="container-fluid"></div>`))
 
+        // semantic html5 mappings
+        $("button").addClass("btn btn-default")
+        $("input").addClass("form-control")
 
-        $(`div[data-pp-element="grid"]`).addClass("container")
-        $(`div[data-pp-element="row"]`).each((_,row) => {
+        // elements
+        $(`nav[data-pp-element="site-nav"]`).addClass("navbar navbar-default")
+        $(`[data-pp-element="site-links"]`).addClass("nav navbar-nav navbar-collapse collapse").attr("id","navbar-collapse") 
+        $(`[data-pp-element="site-brand"]`).addClass("navbar-header navbar-brand")
+        $(`[data-pp-element="site-burger"]`)
+            .removeClass("btn")
+            .removeClass("btn-default")
+            .addClass("navbar-toggle collapsed")
+            .attr("data-toggle","collapse")
+            .attr("data-target","#navbar-collapse")
+            .append(`<span class="sr-only">Toggle navigation</span>`)
+            .append(`<span class="icon-bar"></span>`)
+            .append(`<span class="icon-bar"></span>`)
+            .append(`<span class="icon-bar"></span>`)
+            .appendTo($(`[data-pp-element="site-brand"]`))
+
+        // layout
+        $(`[data-pp-layout="grid"]`).addClass("container")
+        $(`[data-pp-layout="container"]`).addClass("container")
+        $(`[data-pp-layout="row"]`).each((_,row) => {
             $(row).addClass("row")
-            const cols = $(row).find(`div[data-pp-element="column"]`)
+            const cols = $(row).find(`[data-pp-layout="column"]`)
             const colspan = Math.floor(12 / cols.length) > 0 ? Math.floor(12 / cols.length) : 1 
             cols.addClass(`col-md-${colspan}`)
         })
-        $("button").addClass("btn btn-primary")
-        // TODO: form groups, help blocks ?
-        $("input").addClass("form-control")
+        $(`[data-pp-layout="container"][data-pp-style="fluid"]`).removeClass("container").addClass("container-fluid")
+
+        // styling
+        $(`nav [data-pp-style="justify-end"]`).addClass("navbar-right")
+        $(`nav [data-pp-style="justify-start"]`).addClass("navbar-left")
+        $(`button[data-pp-style="primary"]`).removeClass("btn-default").addClass("btn-primary")
+        $(`[data-pp-style="float-left"]`).addClass("pull-left")
+        $(`[data-pp-style="float-right"]`).addClass("pull-right")
+        $(`[data-pp-style="align-center"]`).addClass("text-center")
+        $(`[data-pp-style="align-right"]`).addClass("text-right")
+        $(`[data-pp-style="align-left"]`).addClass("text-left")
 
         return $.html({ xmlMode: false });
     },
     "bootstrap5": (markup) => {
         let $ = cheerio.load(markup, { xmlMode: true }, false);
 
-        // TODO: what if multiple navs in header 
-        $(`header nav`).addClass("navbar navbar-expand-lg navbar-light bg-light")
-        $(`header nav ul`)
-            .addClass("navbar-nav navbar-right")
-            .wrap($(`<div class="collapse navbar-collapse justify-content-end" id="navbarNav"></div>`))
-        $(`header nav a[data-pp-element="brand"]`)
-            .addClass("navbar-brand")
-        $(`<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>`)
-            .insertAfter($(`header nav a[data-pp-element="brand"]`))
-        $(`header nav`).wrapInner($(`<div class="container-fluid"></div>`))
-        $(`ul.navbar-nav li`).addClass("nav-item")
-        $(`ul.navbar-nav li a`).addClass("nav-link")
-
-        $(`div[data-pp-element="grid"]`).addClass("container")
-        $(`div[data-pp-element="row"]`).addClass("row")
-        $(`div[data-pp-element="column"]`).addClass("col")
-        $("button").addClass("btn btn-primary")
-        // TODO: form groups, help blocks ?
+        // semantic html5 mappings
+        $("button").addClass("btn btn-default")
         $("input").addClass("form-control")
 
+        // elements
+        $(`nav[data-pp-element="site-nav"]`).addClass("navbar navbar-expand-lg")
+        $(`[data-pp-element="site-links"]`).addClass("navbar-nav collapse navbar-collapse").attr("id","navbar-collapse")
+        $(`[data-pp-element="site-links"] li`).addClass("nav-item")
+        $(`[data-pp-element="site-links"] li a`).addClass("nav-link")
+        $(`[data-pp-element="site-brand"]`).addClass("navbar-brand")
+        $(`[data-pp-element="site-burger"]`)
+            .removeClass("btn")
+            .removeClass("btn-default")
+            .addClass("navbar-toggler")
+            .attr("data-bs-toggle","collapse")
+            .attr("data-bs-target","#navbar-collapse")
+            .append(`<span class="navbar-toggler-icon"></span>`)
+
+        // layout
+        $(`[data-pp-layout="grid"]`).addClass("container")
+        $(`[data-pp-layout="container"]`).addClass("container")
+        $(`[data-pp-layout="row"]`).addClass("row") 
+        $(`[data-pp-layout="column"]`).addClass("col") 
+        $(`[data-pp-layout="container"][data-pp-style="fluid"]`).removeClass("container").addClass("container-fluid")
+
+        // styling
+        $(`[data-pp-style="justify-start"]`).addClass("justify-content-start")
+        $(`[data-pp-style="justify-end"]`).addClass("justify-content-end")
+        $(`button[data-pp-style="primary"]`).removeClass("btn-default").addClass("btn-primary")
+        $(`[data-pp-style="float-left"]`).addClass("pull-left")
+        $(`[data-pp-style="float-right"]`).addClass("pull-right")
+        $(`nav[data-pp-style="light"]`).addClass("nav-light")
+        $(`[data-pp-style="light"]`).addClass("bg-light")
+        $(`[data-pp-style="align-center"]`).addClass("text-center")
+        $(`[data-pp-style="align-right"]`).addClass("text-right")
+        $(`[data-pp-style="align-left"]`).addClass("text-left")
+    
+        return $.html({ xmlMode: false });
+    },
+    "materialize": (markup) => {
+        let $ = cheerio.load(markup, { xmlMode: true }, false);
+
+        // semantic html5 mappings
+        $("button").addClass("waves-effect waves-light btn")
+        $("footer").addClass("page-footer")
+
+        
+        // layout
+        $(`[data-pp-layout="grid"]`).addClass("container")
+        $(`[data-pp-layout="container"]`).addClass("container")
+        $(`[data-pp-layout="row"]`).each((_,row) => {
+            $(row).addClass("row")
+            const cols = $(row).find(`[data-pp-layout="column"]`)
+            const colspan = Math.floor(12 / cols.length) > 0 ? Math.floor(12 / cols.length) : 1
+            $(cols).addClass(`col s${colspan}`)
+        })
+       
+        // elements
+        $(`nav[data-pp-element="site-nav"] div`).removeClass("container").addClass("navbar-wrapper")
+        $(`[data-pp-element="site-links"]`).addClass("hide-on-med-and-down").attr("id","nav-mobile")
+        $(`[data-pp-element="site-brand"]`).addClass("brand-logo")
+        $(`[data-pp-element="site-burger"]`).addClass("hide")
+
+        // styling
+        $(`[data-pp-style="justify-start"]`).addClass("left")
+        $(`[data-pp-style="justify-end"]`).addClass("right")
+        $(`[data-pp-style="float-left"]`).addClass("left")
+        $(`[data-pp-style="float-right"]`).addClass("right")
+        $(`[data-pp-style="align-center"]`).addClass("center-align")
+        $(`[data-pp-style="align-right"]`).addClass("left-align")
+        $(`[data-pp-style="align-left"]`).addClass("right-align")
+    
+        return $.html({ xmlMode: false });
+    },
+    "bulma": (markup) => {
+        let $ = cheerio.load(markup, { xmlMode: true }, false);
+
+        // semantic html5 mappings
+        $("button").addClass("button")
+        $("input").addClass("input")
+        $("section").addClass("section")
+        $("footer").addClass("footer")
+        $("h1").addClass("title is-1")
+        $("h2").addClass("title is-2")
+        $("h3").addClass("title is-3")
+        $("h4").addClass("title is-4")
+        $("h5").addClass("title is-5")
+        $("h6").addClass("title is-6")
+        $("p").addClass("content")
+
+        
+        // layout
+        $(`[data-pp-layout="grid"]`).addClass("container")
+        $(`[data-pp-layout="container"]`).addClass("container")
+        $(`div[data-pp-layout="row"]`).addClass("columns")
+        $(`div[data-pp-layout="column"]`).addClass("column")
+       
+        // elements
+        $(`nav[data-pp-element="site-nav"]`).addClass("navbar")
+        $(`[data-pp-element="site-links"]`).addClass("navbar-menu").attr("id","navbarBasicExample")
+        $(`[data-pp-element="site-brand"]`).addClass("navbar-brand")
+        $(`[data-pp-element="site-burger"]`).addClass("navbar-burger").attr("data-target","navbarBasicExample")
+        $(`[data-pp-element="site-links"] li a`).addClass("navbar-item")
+
+        // styling
+        $(`button[data-pp-style="primary"]`).addClass("is-primary")
+        $(`nav [data-pp-style="justify-start"]`).addClass("navbar-start")
+        $(`nav [data-pp-style="justify-end"]`).addClass("navbar-end")
+        
+        $(`[data-pp-style="float-left"]`).addClass("is-pulled-left")
+        $(`[data-pp-style="float-right"]`).addClass("is-pulled-right")
+        $(`[data-pp-style="align-center"]`).addClass("has-text-centered")
+        $(`[data-pp-style="align-right"]`).addClass("has-text-left")
+        $(`[data-pp-style="align-left"]`).addClass("has-text-right")
+    
         return $.html({ xmlMode: false });
     },
     "skeleton": (markup) => {
@@ -129,56 +231,21 @@ module.exports.engines = {
         const gridMap = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
 
         let $ = cheerio.load(markup, { xmlMode: true }, false);
-        
-        $(`div[data-pp-element="grid"]`).addClass("container")
-        $(`div[data-pp-element="row"]`).each((_,row) => {
+
+        // layout
+        $(`[data-pp-layout="grid"]`).addClass("container")
+        $(`[data-pp-layout="container"]`).addClass("container")
+        $(`div[data-pp-layout="row"]`).each((_,row) => {
             $(row).addClass("row")
-            const cols = $(row).find(`div[data-pp-element="column"]`)
+            const cols = $(row).find(`div[data-pp-layout="column"]`)
             const colspan = Math.floor(12 / cols.length) > 0 ? Math.floor(12 / cols.length) : 1 
             cols.addClass(`${gridMap[colspan-1]} ${colspan === 1?"column":"columns"}`)
         })
-        $("button").addClass("button-primary")
-        $("input").addClass("u-full-width")
-        return $.html({ xmlMode: false });
-    },
-    "tailwind": (markup) => {
-
-        const gridMap = ['grid-cols-1', 'grid-cols-2', 'grid-cols-3', 'grid-cols-4', 'grid-cols-5', 'grid-cols-6', 'grid-cols-7', 'grid-cols-8', 'grid-cols-9', 'grid-cols-10', 'grid-cols-11', 'grid-cols-1'];
-
-        let $ = cheerio.load(markup, { xmlMode: true }, false);
-
-        $(`div[data-pp-element="grid"]`).addClass("container mx-auto")
-        $(`div[data-pp-element="row"]`).addClass("grid grid-flow-col auto-cols-max")
-
-
-        // $("heading").each(function (i, ele) {
-        //     const headingType = $(this).attr("as").toLowerCase();
-        //     const textOrHtml = $(this).attr("text") || $(ele).html();
-        //     $(this).replaceWith(`<${headingType}>${textOrHtml}</${headingType}>`) 
-        // });
-
-        // $(`div[data-pp-element="grid"]`).find(`div[data-pp-element="row"]`)).each(function (i, rows) {
-        //     const columns = $(this).find(`div[data-pp-element="column"]`);
-        //     const gridcolumn = gridMap[columns.length - 1];
-        //     $(this).replaceWith(`<div class="grid ${gridcolumn} gap-4">${$(rows).html()}</div>`);
-        // })
-
-        // $("button").each(function (i, ele) {
-        //     const textOrHtml = $(this).attr("text") || $(ele).html();
-        //     $(this).replaceWith(`
-        //         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        //             ${textOrHtml}
-        //         </button>
-        //     `);
-        // });
         
-        // $("Form").find("group").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
-        // $("column").each(function (i, ele) { $(this).replaceWith(`<div>${$(ele).html()}</div>`); })
-        // $(`div[data-pp-element="grid"]`).each(function (i, ele) { $(this).replaceWith(`<div class="container">${$(ele).html()}</div>`); })
-        // $("section").each(function (i, ele) { $(this).replaceWith(`<div class="section">${$(ele).html()}</div>`); })
-
-        // $("label").each(function (i, ele) { $(this).addClass("block text-gray-700 text-sm font-bold mb-2"); });
-        // $("input").each(function (i, ele) { $(this).addClass("appearance-none border rounded w-full py-2 px-3"); });
+        // styling
+        $(`button[data-pp-style="primary"]`).addClass("button-primary")
+        $(`[data-pp-style="float-left"]`).addClass("u-pull-left")
+        $(`[data-pp-style="float-right"]`).addClass("u-pull-right")
 
         return $.html({ xmlMode: false });
     },
@@ -238,19 +305,36 @@ module.exports.templates = {
     </body>
 </html>    
     `,
-    "tailwind": (title, content, styles) => `
+    "materialize": (title, content, styles) => `
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>${title || ""} (Tailwind)</title>
+        <title>${title || ""} (Materialize)</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
-        <script src="https://cdn.tailwindcss.com/"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        ${styles || ""}
     </head>
-    
     <body>
-    ${styles || ""}
+    ${content || ""}
+    </body>
+</html>    
+    `,
+    "bulma": (title, content, styles) => `
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>${title || ""} (Materialize)</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" crossorigin="anonymous"></script>
+        ${styles || ""}
+    </head>
+    <body>
     ${content || ""}
     </body>
 </html>    
