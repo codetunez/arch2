@@ -13,14 +13,12 @@ export namespace serverForms {
 }
 export namespace engines {
     function bootstrap3(markup: any): string;
+    function bootstrap5(markup: any): string;
     function skeleton(markup: any): string;
-    function tailwind(markup: any): string;
 }
 export namespace templates {
     export function bootstrap3_1(title: any, content: any): string;
     export { bootstrap3_1 as bootstrap3 };
-    export function tailwind_1(title: any, content: any): string;
-    export { tailwind_1 as tailwind };
     export function skeleton_1(title: any, content: any): string;
     export { skeleton_1 as skeleton };
 }

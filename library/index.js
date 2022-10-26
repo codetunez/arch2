@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 
 module.exports.list = {
-    "engines": ["bootstrap3","bootstrap5", "skeleton", "tailwind","none"],
+    "engines": ["bootstrap3","bootstrap5", "skeleton","none"],
     "forms": ["simpleform", "default"]
 };
 
@@ -101,6 +101,9 @@ module.exports.engines = {
         $(`button[data-pp-style="primary"]`).removeClass("btn-default").addClass("btn-primary")
         $(`[data-pp-style="float-left"]`).addClass("pull-left")
         $(`[data-pp-style="float-right"]`).addClass("pull-right")
+        $(`[data-pp-style="align-center"]`).addClass("text-center")
+        $(`[data-pp-style="align-right"]`).addClass("text-right")
+        $(`[data-pp-style="align-left"]`).addClass("text-left")
 
         return $.html({ xmlMode: false });
     },
@@ -140,6 +143,9 @@ module.exports.engines = {
         $(`[data-pp-style="float-right"]`).addClass("pull-right")
         $(`nav[data-pp-style="light"]`).addClass("nav-light")
         $(`[data-pp-style="light"]`).addClass("bg-light")
+        $(`[data-pp-style="align-center"]`).addClass("text-center")
+        $(`[data-pp-style="align-right"]`).addClass("text-right")
+        $(`[data-pp-style="align-left"]`).addClass("text-left")
     
         return $.html({ xmlMode: false });
     },
@@ -148,9 +154,6 @@ module.exports.engines = {
         const gridMap = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
 
         let $ = cheerio.load(markup, { xmlMode: true }, false);
-
-        // semantic html5 mappings
-        $("input").addClass("u-full-width")
 
         // layout
         $(`[data-pp-layout="grid"]`).addClass("container")
@@ -166,19 +169,6 @@ module.exports.engines = {
         $(`button[data-pp-style="primary"]`).addClass("button-primary")
         $(`[data-pp-style="float-left"]`).addClass("u-pull-left")
         $(`[data-pp-style="float-right"]`).addClass("u-pull-right")
-
-        return $.html({ xmlMode: false });
-    },
-    "tailwind": (markup) => {
-
-        const gridMap = ['grid-cols-1', 'grid-cols-2', 'grid-cols-3', 'grid-cols-4', 'grid-cols-5', 'grid-cols-6', 'grid-cols-7', 'grid-cols-8', 'grid-cols-9', 'grid-cols-10', 'grid-cols-11', 'grid-cols-1'];
-
-        let $ = cheerio.load(markup, { xmlMode: true }, false);
-
-        // layout
-        $(`[data-pp-layout="container"]`).addClass("container")
-        $(`[data-pp-layout="grid"]`).addClass("container")
-        $(`[data-pp-layout="row"]`).addClass("grid grid-flow-col auto-cols-max")
 
         return $.html({ xmlMode: false });
     },
@@ -234,23 +224,6 @@ module.exports.templates = {
         ${styles || ""}
     </head>
     <body>
-    ${content || ""}
-    </body>
-</html>    
-    `,
-    "tailwind": (title, content, styles) => `
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>${title || ""} (Tailwind)</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <script src="https://cdn.tailwindcss.com/"></script>
-    </head>
-    
-    <body>
-    ${styles || ""}
     ${content || ""}
     </body>
 </html>    

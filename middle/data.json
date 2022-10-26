@@ -3,7 +3,7 @@
     {
       "id": "S1",
       "name": "Site One",
-      "engine": "tailwind",
+      "engine": "bootstrap5",
       "stylesheet": "",
       "pages": [
         {
@@ -58,6 +58,9 @@
             "          <p>Create a short paragraph that shows your target audience a clear benefit to them if they continue past this point and offer direction about the next steps</p>",
             "        </div>",
             "      </div>",
+            "  </section>",
+            "  <section>",
+            "    <div data-pp-layout=\"grid\">",
             "      <div data-pp-layout=\"row\">",
             "        <div data-pp-layout=\"column\">",
             "          <div data-pp-style=\"align-center\">",
