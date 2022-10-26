@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 
 module.exports.list = {
-    "engines": ["bootstrap3","bootstrap5", "skeleton","none"],
+    "engines": ["bootstrap3","bootstrap5", "materialize", "skeleton","none"],
     "forms": ["simpleform", "default"]
 };
 
@@ -149,6 +149,41 @@ module.exports.engines = {
     
         return $.html({ xmlMode: false });
     },
+    "materialize": (markup) => {
+        let $ = cheerio.load(markup, { xmlMode: true }, false);
+
+        // semantic html5 mappings
+        $("button").addClass("waves-effect waves-light btn")
+        $("footer").addClass("page-footer")
+
+        
+        // layout
+        $(`[data-pp-layout="grid"]`).addClass("container")
+        $(`[data-pp-layout="container"]`).addClass("container")
+        $(`[data-pp-layout="row"]`).each((_,row) => {
+            $(row).addClass("row")
+            const cols = $(row).find(`[data-pp-layout="column"]`)
+            const colspan = Math.floor(12 / cols.length) > 0 ? Math.floor(12 / cols.length) : 1
+            $(cols).addClass(`col s${colspan}`)
+        })
+       
+        // elements
+        $(`nav[data-pp-element="site-nav"] div`).removeClass("container").addClass("navbar-wrapper")
+        $(`[data-pp-element="site-links"]`).addClass("hide-on-med-and-down").attr("id","nav-mobile")
+        $(`[data-pp-element="site-brand"]`).addClass("brand-logo")
+        $(`[data-pp-element="site-burger"]`).addClass("hide")
+
+        // styling
+        $(`[data-pp-style="justify-start"]`).addClass("left")
+        $(`[data-pp-style="justify-end"]`).addClass("right")
+        $(`[data-pp-style="float-left"]`).addClass("left")
+        $(`[data-pp-style="float-right"]`).addClass("right")
+        $(`[data-pp-style="align-center"]`).addClass("center-align")
+        $(`[data-pp-style="align-right"]`).addClass("left-align")
+        $(`[data-pp-style="align-left"]`).addClass("right-align")
+    
+        return $.html({ xmlMode: false });
+    },
     "skeleton": (markup) => {
 
         const gridMap = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
@@ -221,6 +256,23 @@ module.exports.templates = {
         <meta name="description" content="" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        ${styles || ""}
+    </head>
+    <body>
+    ${content || ""}
+    </body>
+</html>    
+    `,
+    "materialize": (title, content, styles) => `
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>${title || ""} (Materialize)</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         ${styles || ""}
     </head>
     <body>

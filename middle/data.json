@@ -3,7 +3,7 @@
     {
       "id": "S1",
       "name": "Site One",
-      "engine": "bootstrap5",
+      "engine": "materialize",
       "stylesheet": "",
       "pages": [
         {
@@ -104,7 +104,7 @@
             "              <input id=\"input-subject\" type=\"text\" aria-labelledby=\"input-subject-label\" />",
             "              <label id=\"input-message-label\" for=\"input-message\">Message</label>",
             "              <input id=\"input-message\" type=\"text\" aria-labelledby=\"input-message-label\" /> ",
-            "              <input type=\"submit\" value=\"Submit\"/>",
+            "              <button type=\"submit\" value=\"Submit\">Submit</button>",
             "            </fieldset>",
             "          </form>",
             "        </div>",
