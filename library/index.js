@@ -70,8 +70,7 @@ module.exports.engines = {
         // elements
         $(`nav[data-pp-element="site-nav"]`).addClass("navbar navbar-default")
         $(`[data-pp-element="site-links"]`).addClass("nav navbar-nav navbar-collapse collapse").attr("id","navbar-collapse") 
-        $(`[data-pp-element="site-brand"]`).addClass("navbar-header")
-        $(`[data-pp-element="site-brand"] a`).addClass("navbar-brand")
+        $(`[data-pp-element="site-brand"]`).addClass("navbar-header navbar-brand")
         $(`[data-pp-element="site-burger"]`)
             .removeClass("btn")
             .removeClass("btn-default")
@@ -119,7 +118,7 @@ module.exports.engines = {
         $(`[data-pp-element="site-links"]`).addClass("navbar-nav collapse navbar-collapse").attr("id","navbar-collapse")
         $(`[data-pp-element="site-links"] li`).addClass("nav-item")
         $(`[data-pp-element="site-links"] li a`).addClass("nav-link")
-        $(`[data-pp-element="site-brand"] a`).addClass("navbar-brand")
+        $(`[data-pp-element="site-brand"]`).addClass("navbar-brand")
         $(`[data-pp-element="site-burger"]`)
             .removeClass("btn")
             .removeClass("btn-default")
@@ -181,6 +180,49 @@ module.exports.engines = {
         $(`[data-pp-style="align-center"]`).addClass("center-align")
         $(`[data-pp-style="align-right"]`).addClass("left-align")
         $(`[data-pp-style="align-left"]`).addClass("right-align")
+    
+        return $.html({ xmlMode: false });
+    },
+    "bulma": (markup) => {
+        let $ = cheerio.load(markup, { xmlMode: true }, false);
+
+        // semantic html5 mappings
+        $("button").addClass("button")
+        $("input").addClass("input")
+        $("section").addClass("section")
+        $("footer").addClass("footer")
+        $("h1").addClass("title is-1")
+        $("h2").addClass("title is-2")
+        $("h3").addClass("title is-3")
+        $("h4").addClass("title is-4")
+        $("h5").addClass("title is-5")
+        $("h6").addClass("title is-6")
+        $("p").addClass("content")
+
+        
+        // layout
+        $(`[data-pp-layout="grid"]`).addClass("container")
+        $(`[data-pp-layout="container"]`).addClass("container")
+        $(`div[data-pp-layout="row"]`).addClass("columns")
+        $(`div[data-pp-layout="column"]`).addClass("column")
+       
+        // elements
+        $(`nav[data-pp-element="site-nav"]`).addClass("navbar")
+        $(`[data-pp-element="site-links"]`).addClass("navbar-menu").attr("id","navbarBasicExample")
+        $(`[data-pp-element="site-brand"]`).addClass("navbar-brand")
+        $(`[data-pp-element="site-burger"]`).addClass("navbar-burger").attr("data-target","navbarBasicExample")
+        $(`[data-pp-element="site-links"] li a`).addClass("navbar-item")
+
+        // styling
+        $(`button[data-pp-style="primary"]`).addClass("is-primary")
+        $(`nav [data-pp-style="justify-start"]`).addClass("navbar-start")
+        $(`nav [data-pp-style="justify-end"]`).addClass("navbar-end")
+        
+        $(`[data-pp-style="float-left"]`).addClass("is-pulled-left")
+        $(`[data-pp-style="float-right"]`).addClass("is-pulled-right")
+        $(`[data-pp-style="align-center"]`).addClass("has-text-centered")
+        $(`[data-pp-style="align-right"]`).addClass("has-text-left")
+        $(`[data-pp-style="align-left"]`).addClass("has-text-right")
     
         return $.html({ xmlMode: false });
     },
@@ -280,6 +322,23 @@ module.exports.templates = {
     </body>
 </html>    
     `,
+    "bulma": (title, content, styles) => `
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>${title || ""} (Materialize)</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" crossorigin="anonymous"></script>
+        ${styles || ""}
+    </head>
+    <body>
+    ${content || ""}
+    </body>
+</html>    
+    `,
     "skeleton": (title, content, styles) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -297,7 +356,3 @@ module.exports.templates = {
 </html>    
     `
 }
-// Materialize
-// Foundation
-// Bulma
-// pure?

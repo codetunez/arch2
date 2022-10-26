@@ -3,7 +3,7 @@
     {
       "id": "S1",
       "name": "Site One",
-      "engine": "materialize",
+      "engine": "bulma",
       "stylesheet": "",
       "pages": [
         {
@@ -13,12 +13,10 @@
             "<header data-pp-element=\"site-header\">",
             "  <nav data-pp-element=\"site-nav\" data-pp-style=\"light\"> ",
             "    <div data-pp-layout=\"container\">",
-            "      <div data-pp-element=\"site-brand\" data-pp-style=\"justify-start\">",
-            "        <a href=\"#\">",
-            "          <img src=\"https://samritblobstorage.blob.core.windows.net/public/Logo-sm-64.png\" width=\"24px\" data-pp-element=\"site-logo\" data-pp-style=\"float-left\" />",
-            "          <span data-pp-element=\"site-title\">Company Name</span>",
-            "        </a>",
-            "      </div>",
+            "      <a data-pp-element=\"site-brand\" href=\"#\">",
+            "        <img src=\"https://samritblobstorage.blob.core.windows.net/public/Logo-sm-64.png\" width=\"24px\" data-pp-element=\"site-logo\" data-pp-style=\"float-left\" />",
+            "        <span data-pp-element=\"site-title\">Company Name</span>",
+            "      </a>",
             "      <button type=\"button\" data-pp-element=\"site-burger\" data-pp-style=\"float-right\"></button>",
             "      <ul data-pp-element=\"site-links\" data-pp-style=\"justify-end\">",
             "        <li>",
